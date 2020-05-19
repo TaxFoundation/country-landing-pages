@@ -5,47 +5,43 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import { kebabCase } from 'lodash';
 
-import Header from "./header"
-import "./layout.css"
+import CountryDescription from './ui/CountryDescription';
+import CountrySelector from './ui/CountrySelector';
+import TabbedSections from './ui/TabbedSections';
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
+const Layout = ({ data }) => {
+  const country = { ...data.countriesCsv };
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+    <div>
+      <div>
+        <CountryDescription country={country.name}></CountryDescription>
+        <CountrySelector
+          countries={[]}
+          current={kebabCase(country.name)}
+        ></CountrySelector>
       </div>
-    </>
-  )
-}
+      <TabbedSections></TabbedSections>
+    </div>
+  );
+};
+
+export const query = graphql`
+  query($iso3: String!) {
+    countriesCsv(iso3: { eq: $iso3 }) {
+      iso2
+      iso3
+      name
+    }
+  }
+`;
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+  data: PropTypes.object.isRequired,
+};
 
-export default Layout
+export default Layout;

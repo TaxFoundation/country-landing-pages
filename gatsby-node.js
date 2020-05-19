@@ -1,7 +1,28 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const path = require('path');
+const _ = require('lodash');
 
-// You can delete this file if you're not using it
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const result = await graphql(`
+    query countries {
+      allCountriesCsv {
+        edges {
+          node {
+            name
+            iso2
+            iso3
+          }
+        }
+      }
+    }
+  `);
+  result.data.allCountriesCsv.edges.forEach(({ node }) => {
+    createPage({
+      path: _.kebabCase(node.name),
+      component: path.resolve('./src/components/layout.js'),
+      context: {
+        iso3: node.iso3,
+      },
+    });
+  });
+};
