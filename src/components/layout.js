@@ -11,6 +11,10 @@ import TabbedSections from './ui/TabbedSections';
 const Container = styled.div`
   max-width: 960px;
   margin: 0 auto;
+
+  * {
+    font-family: 'Lato', sans-serif;
+  }
 `;
 
 const TopSection = styled.div`
@@ -19,6 +23,7 @@ const TopSection = styled.div`
   grid-template: repeat(2, auto) / 1fr;
 
   @media (min-width: 600px) {
+    grid-gap: 2rem;
     grid-template: auto / 5fr 2fr;
   }
 `;
