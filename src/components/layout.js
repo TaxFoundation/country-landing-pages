@@ -6,7 +6,7 @@ import { kebabCase } from 'lodash';
 
 import CountryDescription from './ui/CountryDescription';
 import CountrySelector from './ui/CountrySelector';
-import TabbedSections from './ui/TabbedSections';
+import Sections from './ui/Sections';
 
 const Container = styled.div`
   max-width: 960px;
@@ -53,9 +53,9 @@ const Layout = ({ data }) => {
           current={kebabCase(country.name)}
         ></CountrySelector>
       </TopSection>
-      <TabbedSections>
+      <Sections>
         <p>{JSON.stringify(country, null, 2)}</p>
-      </TabbedSections>
+      </Sections>
     </Container>
   );
 };
