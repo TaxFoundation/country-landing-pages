@@ -40,6 +40,19 @@ function downloadRawData() {
       url:
         'capital-cost-recovery/master/final-outputs/npv_weighted_timeseries.csv',
     },
+    {
+      name: 'CountryCorporateNPVAllYears',
+      url: 'capital-cost-recovery/master/final-data/npv_all_years.csv',
+    },
+    {
+      name: 'TaxBurdenOnLabor',
+      url: 'tax-burden-on-labor/master/final-outputs/Table1.csv',
+    },
+    {
+      name: 'IndexRawData',
+      url:
+        'international-tax-competitiveness-index/master/final_outputs/raw_data_2019.csv',
+    },
   ];
 
   files.forEach(f => {
