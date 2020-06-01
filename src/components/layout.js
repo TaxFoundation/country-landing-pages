@@ -7,6 +7,7 @@ import { kebabCase } from 'lodash';
 import CountryDescription from './ui/CountryDescription';
 import CountrySelector from './ui/CountrySelector';
 import Sections from './ui/Sections';
+import ITCI from './charts/ITCI';
 
 const Container = styled.div`
   max-width: 960px;
@@ -55,6 +56,14 @@ const Layout = ({ data }) => {
       </TopSection>
       <Sections>
         <p>{JSON.stringify(country, null, 2)}</p>
+        <ITCI
+          data={country.data
+            .filter(entry => entry.itci_final !== undefined)
+            .map(entry => {
+              return { year: +entry.year, score: entry.itci_final };
+            })
+            .sort((a, b) => a.year - b.year)}
+        />
       </Sections>
     </Container>
   );
@@ -124,8 +133,8 @@ export const query = graphql`
       edges {
         node {
           year
-          final
-          final_rank
+          itci_final: final
+          itci_final_rank: final_rank
           property
           property_rank
           consumption
