@@ -7,7 +7,7 @@ import { kebabCase } from 'lodash';
 import CountryDescription from './ui/CountryDescription';
 import CountrySelector from './ui/CountrySelector';
 import Sections from './ui/Sections';
-import ITCI from './charts/ITCI';
+import ITCI from './sections/ITCI';
 
 const Container = styled.div`
   max-width: 960px;
@@ -36,15 +36,10 @@ const TopSection = styled.div`
 `;
 
 const Layout = ({ data }) => {
-  let country = { ...data.countriesCsv, data: [] };
-  const tables = [
-    'allIndexRanksCsv',
-    'allIndexSubranksCsv',
-    'allIndexRawDataCsv',
-    'allCountryCorporateNpvAllYearsCsv',
-    'allCountryCorporateTaxRatesCsv',
-  ];
-  tables.forEach(table => mergeData(data[table].edges, country));
+  let country = { ...data.countriesCsv, data: {} };
+  const itciData = data.allIndexRanksCsv.edges.map(edge => edge.node);
+  country.data['itci'] = itciData;
+  console.log(country);
   return (
     <Container>
       <TopSection>
@@ -55,41 +50,11 @@ const Layout = ({ data }) => {
         ></CountrySelector>
       </TopSection>
       <Sections>
-        <p>{JSON.stringify(country, null, 2)}</p>
-        <ITCI
-          data={country.data
-            .filter(entry => entry.itci_final !== undefined)
-            .map(entry => {
-              return { year: +entry.year, score: entry.itci_final };
-            })
-            .sort((a, b) => a.year - b.year)}
-        />
+        <ITCI countryName={country.name} data={country.data.itci} />
       </Sections>
     </Container>
   );
 };
-
-function mergeData(source, mergedData) {
-  let newData = mergedData;
-  for (let edge of source) {
-    if (newData.data[0]) {
-      const currentYear = newData.data.findIndex(
-        d => d.year === edge.node.year
-      );
-      if (currentYear > -1) {
-        newData.data[currentYear] = {
-          ...newData.data[currentYear],
-          ...edge.node,
-        };
-      } else {
-        newData.data.push(edge.node);
-      }
-    } else {
-      newData.data.push(edge.node);
-    }
-  }
-  return newData;
-}
 
 export const query = graphql`
   query($iso3: String!) {

@@ -5,7 +5,7 @@ const ITCI = ({ data }) => {
   return (
     <div>
       {data.map(entry => (
-        <div>
+        <div key={`year-${entry.year}`}>
           <p>{entry.year}</p>
           <p>{entry.score}</p>
         </div>
