@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
+import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import ITCIChart from '../charts/ITCI';
 
 const ITCI = ({ countryName, data }) => {
@@ -57,15 +59,18 @@ const ITCI = ({ countryName, data }) => {
         The {countryName} Tax System Ranks {currentYear.itci_final_rank} in the
         OECD
       </h3>
-      <ul>
+      <ChartTabs>
         {rankChoices.map(choice => (
-          <li key={`rank-choice-${choice.id}`}>
+          <ChartTab
+            key={`rank-choice-${choice.id}`}
+            active={activeRank === choice.id}
+          >
             <button onClick={() => setActiveRank(choice.id)}>
               {choice.name}
             </button>
-          </li>
+          </ChartTab>
         ))}
-      </ul>
+      </ChartTabs>
       <ITCIChart
         data={data
           .map(entry => {
