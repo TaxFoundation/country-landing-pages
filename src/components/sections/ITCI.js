@@ -72,6 +72,9 @@ const ITCI = ({ countryName, data }) => {
         ))}
       </ChartTabs>
       <ITCIChart
+        title={`${countryName}'s ${
+          rankChoices.find(c => c.id === activeRank).name
+        } (out of 100)`}
         data={data
           .map(entry => {
             return { year: +entry.year, score: +entry[activeRank] };
