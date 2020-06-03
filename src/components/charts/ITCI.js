@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { scaleLinear } from 'd3-scale';
 import { line } from 'd3-shape';
 
+import XAxis from './XAxis';
+import YAxis from './YAxis';
+
 const Container = styled.div`
   border: 1px solid #999;
   border-top: 0;
@@ -37,108 +40,26 @@ const ITCI = ({ data, title }) => {
         <text x={width / 2} y='16' textAnchor='middle' fontSize={16}>
           {title}
         </text>
-        <g
-          id='itci-axis-left'
-          role='graphics-axis'
-          aria-orientation='vertical'
-          aria-datatype='count'
-          aria-valuemin='0'
-          aria-valuemax='100'
-        >
-          <text
-            textAnchor='middle'
-            y={13}
-            x={-(height - margin.top - margin.bottom) / 2}
-            fontSzie='10'
-            transform='rotate(-90)'
-          >
-            Score
-          </text>
-          <g id='itci-y-axis-ticks'>
-            {yScale.ticks(10).map(value => (
-              <g key={`y-tick-${value}`}>
-                <rect
-                  x={margin.left}
-                  width={width - margin.right}
-                  y={yScale(value)}
-                  height={1}
-                  fill='#ccc'
-                  shapeRendering='crispEdges'
-                ></rect>
-                <rect
-                  x={margin.left - 5}
-                  width={5}
-                  y={yScale(value)}
-                  height={1}
-                  fill='#333'
-                  shapeRendering='crispEdges'
-                ></rect>
-                <text
-                  x={margin.left - 8}
-                  y={yScale(value) + 3}
-                  textAnchor='end'
-                  fontSize='10'
-                >
-                  {value}
-                </text>
-              </g>
-            ))}
-          </g>
-          <rect
-            x={margin.left}
-            width={1}
-            y={margin.top}
-            height={height - margin.bottom - margin.top}
-            fill='#333'
-            shapeRendering='crispEdges'
-          ></rect>
-        </g>
-        <g
-          id='itci-axis-bottom'
-          role='graphics-axis'
-          aria-orientation='horizontal'
-          aria-datatype='datetime'
-          aria-valuemin={minYear}
-          aria-valuemax={maxYear}
-        >
-          <text
-            x={margin.left + (width - margin.left - margin.right) / 2}
-            y={height}
-            textAnchor='middle'
-          >
-            Year
-          </text>
-          <rect
-            x={margin.left}
-            width={width - margin.right}
-            y={height - margin.bottom}
-            height={1}
-            fill='#333'
-            shapeRendering='crispEdges'
-          ></rect>
-          <g id='itci-x-axis-ticks'>
-            {xScale.ticks(maxYear - minYear).map(value => (
-              <g key={`x-tick-${value}`}>
-                <rect
-                  x={xScale(value)}
-                  width={1}
-                  y={height - margin.bottom}
-                  height={5}
-                  fill='#333'
-                  shapeRendering='crispEdges'
-                ></rect>
-                <text
-                  x={xScale(value)}
-                  y={height - margin.bottom + 15}
-                  textAnchor='middle'
-                  fontSize='10'
-                >
-                  {value}
-                </text>
-              </g>
-            ))}
-          </g>
-        </g>
+        <YAxis
+          yScale={yScale}
+          min={0}
+          max={100}
+          numTicks={10}
+          height={height}
+          width={width}
+          margin={margin}
+          label='Score'
+        />
+        <XAxis
+          height={height}
+          label='Year'
+          margin={margin}
+          max={maxYear}
+          min={minYear}
+          numTicks={maxYear - minYear}
+          width={width}
+          xScale={xScale}
+        />
         <g id='itci-chart-body' aria-label='line chart'>
           <Line
             role='img'
