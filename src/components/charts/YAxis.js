@@ -31,22 +31,26 @@ const YAxis = ({
       <g id='itci-y-axis-ticks'>
         {yScale.ticks(numTicks).map(value => (
           <g key={`y-tick-${value}`}>
-            <rect
-              x={margin.left}
-              width={width - margin.right}
-              y={yScale(value)}
-              height={1}
-              fill='#ccc'
+            <line
+              x1={margin.left}
+              x2={width - margin.right}
+              y1={yScale(value)}
+              y2={yScale(value)}
+              stroke='#ccc'
+              strokeWidth='1'
               shapeRendering='crispEdges'
-            ></rect>
-            <rect
-              x={margin.left - 5}
-              width={5}
-              y={yScale(value)}
-              height={1}
-              fill='#333'
+              vectorEffect='non-scaling-stroke'
+            />
+            <line
+              x1={margin.left - 5}
+              x2={margin.left}
+              y1={yScale(value)}
+              y2={yScale(value)}
+              stroke='#333'
+              strokeWidth='1'
               shapeRendering='crispEdges'
-            ></rect>
+              vectorEffect='non-scaling-stroke'
+            />
             <text
               x={margin.left - 8}
               y={yScale(value) + 3}

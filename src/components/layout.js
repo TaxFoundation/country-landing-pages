@@ -22,6 +22,10 @@ const Container = styled.div`
   h2 {
     font-weight: 300;
   }
+
+  p {
+    line-height: 1.4;
+  }
 `;
 
 const TopSection = styled.div`
@@ -39,7 +43,6 @@ const Layout = ({ data }) => {
   let country = { ...data.countriesCsv, data: {} };
   const itciData = data.allIndexRanksCsv.edges.map(edge => edge.node);
   country.data['itci'] = itciData;
-  console.log(country);
   return (
     <Container>
       <TopSection>

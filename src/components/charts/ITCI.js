@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { scaleLinear } from 'd3-scale';
@@ -21,8 +21,9 @@ const Line = styled.path`
 `;
 
 const ITCI = ({ data, title }) => {
-  const height = 500;
-  const width = 800;
+  const containerElement = useRef(null);
+  const [width, setWidth] = useState(800);
+  const [height, setHeight] = useState(500);
   const minYear = Math.min(...data.map(d => d.year));
   const maxYear = Math.max(...data.map(d => d.year));
   const margin = { top: 30, left: 50, bottom: 30, right: 10 };
@@ -33,8 +34,24 @@ const ITCI = ({ data, title }) => {
     .domain([0, 100])
     .range([height - margin.bottom, margin.top]);
 
+  useEffect(() => {
+    function handleResize() {
+      setWidth(containerElement.current.clientWidth);
+      setHeight(containerElement.current.clientWidth * (5 / 8));
+    }
+
+    if (!containerElement) {
+      return false;
+    }
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <Container>
+    <Container ref={containerElement}>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
         <text x={width / 2} y='16' textAnchor='middle' fontSize={16}>
@@ -63,7 +80,6 @@ const ITCI = ({ data, title }) => {
         <g id='itci-chart-body' aria-label='line chart'>
           <Line
             role='img'
-            aria-roledecription='line showing change in score'
             d={line()(data.map(d => [xScale(+d.year), yScale(+d.score)]))}
           />
           {data.map(d => (

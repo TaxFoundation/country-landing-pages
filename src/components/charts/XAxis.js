@@ -26,25 +26,29 @@ const XAxis = ({
       >
         {label}
       </text>
-      <rect
-        x={margin.left}
-        width={width - margin.right}
-        y={height - margin.bottom}
-        height={1}
-        fill='#333'
+      <line
+        x1={margin.left}
+        x2={width - margin.right}
+        y1={height - margin.bottom}
+        y2={height - margin.bottom}
+        stroke='#333'
+        strokeWidth='1'
         shapeRendering='crispEdges'
-      ></rect>
+        vectorEffect='non-scaling-stroke'
+      />
       <g id='itci-x-axis-ticks'>
         {xScale.ticks(numTicks).map(value => (
           <g key={`x-tick-${value}`}>
-            <rect
-              x={xScale(value)}
-              width={1}
-              y={height - margin.bottom}
-              height={5}
-              fill='#333'
+            <line
+              x1={xScale(value)}
+              x2={xScale(value)}
+              y1={height - margin.bottom}
+              y2={height - margin.bottom + 5}
+              stroke='#333'
+              strokeWidth='1'
               shapeRendering='crispEdges'
-            ></rect>
+              vectorEffect='non-scaling-stroke'
+            />
             <text
               x={xScale(value)}
               y={height - margin.bottom + 15}
