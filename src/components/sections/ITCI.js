@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { capitalize } from 'lodash';
 
 import { numberRankString } from '../../utilities';
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import ITCIChart from '../charts/ITCI';
 
-const ITCI = ({ countryName, countryAdjective, data }) => {
+const ITCI = ({ countryName, countryAdjective, countryArticle, data }) => {
   const [activeRank, setActiveRank] = useState('itci_final');
   const currentYear = data.reduce((prev, curr) => {
     if (+curr.year > +prev.year) {
@@ -80,7 +81,9 @@ const ITCI = ({ countryName, countryAdjective, data }) => {
         ))}
       </ChartTabs>
       <ITCIChart
-        title={`${countryName}'s ${
+        title={`${
+          countryArticle ? capitalize(countryArticle) + ' ' : ''
+        }${countryName}'s ${
           rankChoices.find(c => c.id === activeRank).name
         } (out of 100)`}
         data={data
@@ -97,6 +100,7 @@ const ITCI = ({ countryName, countryAdjective, data }) => {
 ITCI.propTypes = {
   countryName: PropTypes.string,
   countryAdjective: PropTypes.string,
+  countryArticle: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       year: PropTypes.string,

@@ -1,37 +1,37 @@
-iso2,iso3,name,adjective
-AU,AUS,Australia,Australian
-AT,AUT,Austria,Austrian
-BE,BEL,Belgium,Belgian
-CA,CAN,Canada,Canadian
-CL,CHL,Chile,Chilean
-CZ,CZE,Czech Republic,Czech
-DK,DNK,Denmark,Danish
-EE,EST,Estonia,Estonian
-FI,FIN,Finland,Finnish
-FR,FRA,France,French
-DE,DEU,Germany,German
-GR,GRC,Greece,Greek
-HU,HUN,Hungary,Hungarian
-IS,ISL,Iceland,Icelandic
-IE,IRL,Ireland,Irish
-IL,ISR,Israel,Israeli
-IT,ITA,Italy,Italian
-JP,JPN,Japan,Japanese
-KR,KOR,Korea,Korean
-LV,LVA,Latvia,Latvian
-LT,LTU,Lithuania,Lithuanian
-LU,LUX,Luxembourg,Luxembourgish
-MX,MEX,Mexico,Mexican
-NL,NLD,Netherlands,Netherlandic
-NZ,NZL,New Zealand,New Zealand
-NO,NOR,Norway,Norwegian
-PL,POL,Poland,Polish
-PT,PRT,Portugal,Portuguese
-SK,SVK,Slovak Republic,Slovakian
-SI,SVN,Slovenia,Slovenian
-ES,ESP,Spain,Spanish
-SE,SWE,Sweden,Swedish
-CH,CHE,Switzerland,Swiss
-TR,TUR,Turkey,Turkish
-GB,GBR,United Kingdom,British
-US,USA,United States,American
+iso2,iso3,name,adjective,article
+AU,AUS,Australia,Australian,
+AT,AUT,Austria,Austrian,
+BE,BEL,Belgium,Belgian,
+CA,CAN,Canada,Canadian,
+CL,CHL,Chile,Chilean,
+CZ,CZE,Czech Republic,Czech,the
+DK,DNK,Denmark,Danish,
+EE,EST,Estonia,Estonian,
+FI,FIN,Finland,Finnish,
+FR,FRA,France,French,
+DE,DEU,Germany,German,
+GR,GRC,Greece,Greek,
+HU,HUN,Hungary,Hungarian,
+IS,ISL,Iceland,Icelandic,
+IE,IRL,Ireland,Irish,
+IL,ISR,Israel,Israeli,
+IT,ITA,Italy,Italian,
+JP,JPN,Japan,Japanese,
+KR,KOR,Korea,Korean,
+LV,LVA,Latvia,Latvian,
+LT,LTU,Lithuania,Lithuanian,
+LU,LUX,Luxembourg,Luxembourgish,
+MX,MEX,Mexico,Mexican,
+NL,NLD,Netherlands,Netherlandic,the
+NZ,NZL,New Zealand,New Zealand,
+NO,NOR,Norway,Norwegian,
+PL,POL,Poland,Polish,
+PT,PRT,Portugal,Portuguese,
+SK,SVK,Slovak Republic,Slovakian,the
+SI,SVN,Slovenia,Slovenian,
+ES,ESP,Spain,Spanish,
+SE,SWE,Sweden,Swedish,
+CH,CHE,Switzerland,Swiss,
+TR,TUR,Turkey,Turkish,
+GB,GBR,United Kingdom,British,the
+US,USA,United States,American,the

@@ -63,6 +63,7 @@ const Layout = ({ data }) => {
         <ITCI
           countryName={country.name}
           countryAdjective={country.adjective}
+          countryArticle={country.article}
           data={country.data.itciMain}
           subdata={country.data.itciSubdata}
         />
@@ -78,6 +79,7 @@ export const query = graphql`
       iso3
       name
       adjective
+      article
     }
     allCountryCorporateNpvAllYearsCsv(
       filter: { iso_3: { eq: $iso3 } }
