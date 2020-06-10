@@ -41,8 +41,15 @@ const TopSection = styled.div`
 
 const Layout = ({ data }) => {
   let country = { ...data.countriesCsv, data: {} };
-  const itciData = data.allIndexRanksCsv.edges.map(edge => edge.node);
-  country.data['itci'] = itciData;
+  country.data['itciMain'] = data.allIndexRanksCsv.edges.map(edge => edge.node);
+  country.data['itciSubdata'] = data.allIndexSubranksCsv.edges.map(
+    edge => edge.node
+  );
+  country.data[
+    'sourcesOfRevenue'
+  ] = data.allSourceRevenueByCountryCsv.edges.map(edge => edge.node);
+  country.data['oecdSources'] = data.allSourceRevenueOecdAverageCsv;
+
   return (
     <Container>
       <TopSection>
@@ -53,7 +60,12 @@ const Layout = ({ data }) => {
         ></CountrySelector>
       </TopSection>
       <Sections>
-        <ITCI countryName={country.name} data={country.data.itci} />
+        <ITCI
+          countryName={country.name}
+          countryAdjective={country.adjective}
+          data={country.data.itciMain}
+          subdata={country.data.itciSubdata}
+        />
       </Sections>
     </Container>
   );
@@ -65,6 +77,7 @@ export const query = graphql`
       iso2
       iso3
       name
+      adjective
     }
     allCountryCorporateNpvAllYearsCsv(
       filter: { iso_3: { eq: $iso3 } }
@@ -165,6 +178,15 @@ export const query = graphql`
           Property_Taxes
           Social_Insurance_Taxes
           Other
+        }
+      }
+    }
+    allSourceRevenueOecdAverageCsv {
+      edges {
+        node {
+          id
+          Tax_Category
+          Average_Share
         }
       }
     }

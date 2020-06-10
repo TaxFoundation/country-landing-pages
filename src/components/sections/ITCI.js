@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { numberRankString } from '../../utilities';
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import ITCIChart from '../charts/ITCI';
 
-const ITCI = ({ countryName, data }) => {
+const ITCI = ({ countryName, countryAdjective, data }) => {
   const [activeRank, setActiveRank] = useState('itci_final');
-  const currentYear = data.reduce((prev, curr) => curr.year > prev.year);
+  const currentYear = data.reduce((prev, curr) => {
+    if (+curr.year > +prev.year) {
+      return curr;
+    } else {
+      return prev;
+    }
+  });
+  console.log(currentYear);
   const rankChoices = [
     {
       name: 'Overall Score',
@@ -56,8 +64,8 @@ const ITCI = ({ countryName, data }) => {
         start and grow a business.{' '}
       </p>
       <h3>
-        The {countryName} Tax System Ranks {currentYear.itci_final_rank} in the
-        OECD
+        The {countryAdjective} Tax System Ranks{' '}
+        {numberRankString(+currentYear.itci_final_rank)} in the OECD
       </h3>
       <ChartTabs>
         {rankChoices.map(choice => (
@@ -81,12 +89,14 @@ const ITCI = ({ countryName, data }) => {
           })
           .sort((a, b) => a.year - b.year)}
       />
+      {/* TODO add top and bottom ranked categories. Will require rearranging data. */}
     </div>
   );
 };
 
 ITCI.propTypes = {
   countryName: PropTypes.string,
+  countryAdjective: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       year: PropTypes.string,
