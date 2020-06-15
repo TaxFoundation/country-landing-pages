@@ -16,7 +16,6 @@ const ITCI = ({ countryName, countryAdjective, countryArticle, data }) => {
       return prev;
     }
   });
-  console.log(currentYear);
   const rankChoices = [
     {
       name: 'Overall Score',

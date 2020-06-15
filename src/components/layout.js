@@ -8,6 +8,8 @@ import CountryDescription from './ui/CountryDescription';
 import CountrySelector from './ui/CountrySelector';
 import Sections from './ui/Sections';
 import ITCI from './sections/ITCI';
+import SourcesOfRevenue from './sections/SourcesOfRevenue';
+import CorporateTax from './sections/CorporateTax';
 
 const Container = styled.div`
   max-width: 960px;
@@ -49,6 +51,15 @@ const Layout = ({ data }) => {
     'sourcesOfRevenue'
   ] = data.allSourceRevenueByCountryCsv.edges.map(edge => edge.node);
   country.data['oecdSources'] = data.allSourceRevenueOecdAverageCsv;
+  country.data['corporateTax'] = data.allCountryCorporateTaxRatesCsv.edges
+    .filter(edge => !Number.isNaN(+edge.node.rate))
+    .map(edge => ({
+      year: +edge.node.year,
+      rate: +edge.node.rate,
+    }));
+  country.data[
+    'worldwideCorpTax'
+  ] = data.allWorldwideCorporateTaxRatesCsv.edges.map(edge => edge.node);
 
   return (
     <Container>
@@ -67,6 +78,14 @@ const Layout = ({ data }) => {
           data={country.data.itciMain}
           subdata={country.data.itciSubdata}
         />
+        <SourcesOfRevenue></SourcesOfRevenue>
+        <CorporateTax
+          countryName={country.name}
+          countryAdjective={country.adjective}
+          countryArticle={country.article}
+          data={country.data.corporateTax}
+          worldwide={country.data.worldwideCorpTax}
+        ></CorporateTax>
       </Sections>
     </Container>
   );
@@ -100,6 +119,7 @@ export const query = graphql`
       edges {
         node {
           year
+          rate
           gdp
           oecd
           eu
@@ -189,6 +209,17 @@ export const query = graphql`
           id
           Tax_Category
           Average_Share
+        }
+      }
+    }
+    allWorldwideCorporateTaxRatesCsv {
+      edges {
+        node {
+          average
+          year
+          weighted {
+            average
+          }
         }
       }
     }

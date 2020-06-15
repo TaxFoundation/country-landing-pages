@@ -12,16 +12,9 @@ const CorporateTax = ({
   countryAdjective,
   countryArticle,
   data,
+  worldwide,
 }) => {
   const [activeTab, setActiveTab] = useState('corp-time-series');
-  const currentYear = data.reduce((prev, curr) => {
-    if (+curr.year > +prev.year) {
-      return curr;
-    } else {
-      return prev;
-    }
-  });
-  console.log(currentYear);
   const tabOptions = [
     {
       name: 'Corporate Tax Time Series',
@@ -58,15 +51,11 @@ const CorporateTax = ({
         table might be hard to understand for someone not familiar with the
         concept).
       </p>
-      <h3>
-        The {countryAdjective} Tax System Ranks{' '}
-        {numberRankString(+currentYear.itci_final_rank)} in the OECD
-      </h3>
       <ChartTabs>
         {tabOptions.map(choice => (
           <ChartTab
             key={`rank-choice-${choice.id}`}
-            active={setActiveTab === choice.id}
+            active={activeTab === choice.id}
           >
             <button onClick={() => setActiveTab(choice.id)}>
               {choice.name}
@@ -74,20 +63,19 @@ const CorporateTax = ({
           </ChartTab>
         ))}
       </ChartTabs>
-      {activeTab === 'corp-tax-time-series' && (
+      {activeTab === 'corp-time-series' && (
         <CorpTaxChart
           title={`${
             countryArticle ? capitalize(countryArticle) + ' ' : ''
           }${countryName}'s Top Corporate Tax Rate`}
           data={data
             .map(entry => {
-              return { year: +entry.year, score: +entry[activeTab] };
+              return { year: +entry.year, rate: +entry.rate };
             })
             .sort((a, b) => a.year - b.year)}
+          worldwide={worldwide}
         />
       )}
-
-      {/* TODO add top and bottom ranked categories. Will require rearranging data. */}
     </div>
   );
 };
@@ -96,23 +84,8 @@ CorporateTax.propTypes = {
   countryName: PropTypes.string,
   countryAdjective: PropTypes.string,
   countryArticle: PropTypes.string,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      year: PropTypes.string,
-      itci_final: PropTypes.string,
-      itci_final_rank: PropTypes.string,
-      property: PropTypes.string,
-      property_rank: PropTypes.string,
-      consumption: PropTypes.string,
-      consumption_rank: PropTypes.string,
-      corporate: PropTypes.string,
-      corporate_rank: PropTypes.string,
-      income: PropTypes.string,
-      income_rank: PropTypes.string,
-      international: PropTypes.string,
-      international_rank: PropTypes.string,
-    })
-  ),
+  data: PropTypes.arrayOf(PropTypes.object),
+  worldwide: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default CorporateTax;
