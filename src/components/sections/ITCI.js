@@ -45,7 +45,7 @@ const ITCI = ({ countryName, countryAdjective, countryArticle, data }) => {
   ];
   return (
     <div>
-      <h2> International Tax Competitiveness Index </h2>{' '}
+      <h2>International Tax Competitiveness Index</h2>
       <p>
         The Tax Foundation’ s{' '}
         <a
