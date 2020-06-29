@@ -92,7 +92,7 @@ const ITCI = ({ data, title }) => {
                 fill='#0094ff'
                 cx={xScale(+d.year)}
                 cy={yScale(+d.score)}
-                r='3'
+                r='4'
               />
             </g>
           ))}

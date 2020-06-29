@@ -89,14 +89,14 @@ const CorpTax = ({ data, worldwide, title }) => {
               key={`corp-tax-data-point-${d.year}-${d.rate}`}
               role='graphics-data'
             >
-              <title>{`Top Corporate Tax Rate of ${Math.round(d.rate)} in ${
+              <title>{`Top Corporate Tax Rate of ${Math.round(d.rate)}% in ${
                 d.year
               }`}</title>
               <circle
                 fill='#0094ff'
                 cx={xScale(+d.year)}
                 cy={yScale(+d.rate)}
-                r='3'
+                r='4'
               />
             </g>
           ))}
