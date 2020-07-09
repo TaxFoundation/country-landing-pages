@@ -35,7 +35,9 @@ const CorporateTax = ({
   ];
   return (
     <div>
-      <h2>Corporate Taxation in the UK</h2>
+      <h2>{`Corporate Taxation in${
+        countryArticle ? ' ' + countryArticle : ''
+      } ${countryName}`}</h2>
       <p>
         Share of revenue statistic in descriptive text and comment about income
         taxes needing to be designed to allow businesses to deduct relevant
