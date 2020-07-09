@@ -16,11 +16,12 @@ const Container = styled.div`
 
 const Line = styled.path`
   fill: none;
-  stroke: #0094ff;
+  stroke: ${props => (props.color ? props.color : '#0094ff')};
   stroke-width: 3px;
 `;
 
 const CorpTax = ({ data, worldwide, title }) => {
+  console.log(worldwide);
   const containerElement = useRef(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);
@@ -79,6 +80,54 @@ const CorpTax = ({ data, worldwide, title }) => {
           width={width}
           xScale={xScale}
         />
+        <g id='corp-tax-chart-worldwide' aria-label='line chart'>
+          <Line
+            role='img'
+            d={line()(
+              worldwide.map(d => [xScale(+d.year), yScale(+d.average)])
+            )}
+            color='#ff0000'
+          />
+          <Line
+            role='img'
+            d={line()(
+              worldwide.map(d => [xScale(+d.year), yScale(+d.weighted.average)])
+            )}
+            color='#00ff00'
+          />
+          {worldwide.map(d => (
+            <>
+              <g
+                key={`corp-tax-data-worldwide-average-${d.year}-${d.average}`}
+                role='graphics-data'
+              >
+                <title>{`Average Worldwide Corporate Tax Rate of ${Math.round(
+                  d.average
+                )}% in ${d.year}`}</title>
+                <circle
+                  fill='#ff0000'
+                  cx={xScale(+d.year)}
+                  cy={yScale(+d.average)}
+                  r='4'
+                />
+              </g>
+              <g
+                key={`corp-tax-data-worldwide-weighted-average-${d.year}-${d.weighted.average}`}
+                role='graphics-data'
+              >
+                <title>{`Weighted Average Worldwide Corporate Tax Rate of ${Math.round(
+                  d.weighted.average
+                )}% in ${d.year}`}</title>
+                <circle
+                  fill='#00ff00'
+                  cx={xScale(+d.year)}
+                  cy={yScale(+d.weighted.average)}
+                  r='4'
+                />
+              </g>
+            </>
+          ))}
+        </g>
         <g id='corp-tax-chart-body' aria-label='line chart'>
           <Line
             role='img'
