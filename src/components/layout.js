@@ -22,11 +22,24 @@ const Container = styled.div`
 
   h1,
   h2 {
+    font-size: 2.4rem;
     font-weight: 300;
+  }
+
+  h2 {
+    font-style: italic;
   }
 
   p {
     line-height: 1.4;
+  }
+
+  hr {
+    background-color: #ccc;
+    border: 0;
+    color: #ccc;
+    height: 1px;
+    margin: 1.5rem 0;
   }
 `;
 
@@ -70,6 +83,7 @@ const Layout = ({ data }) => {
           current={kebabCase(country.name)}
         ></CountrySelector>
       </TopSection>
+      <hr />
       <Sections>
         <ITCI
           countryName={country.name}

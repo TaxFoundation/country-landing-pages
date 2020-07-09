@@ -11,6 +11,12 @@ const StyledCountrySelector = styled.div`
   grid-template: repeat(4, auto) / auto;
   padding: 1rem;
 
+  h2 {
+    font-size: 1.6rem !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+  }
+
   h2,
   p {
     margin: 0;
