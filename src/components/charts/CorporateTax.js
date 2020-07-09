@@ -21,7 +21,6 @@ const Line = styled.path`
 `;
 
 const CorpTax = ({ data, worldwide, title }) => {
-  console.log(worldwide);
   const containerElement = useRef(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);
@@ -96,11 +95,10 @@ const CorpTax = ({ data, worldwide, title }) => {
             color='#00ff00'
           />
           {worldwide.map(d => (
-            <>
-              <g
-                key={`corp-tax-data-worldwide-average-${d.year}-${d.average}`}
-                role='graphics-data'
-              >
+            <React.Fragment
+              key={`corp-tax-data-worldwide-average-${d.year}-${d.average}`}
+            >
+              <g role='graphics-data'>
                 <title>{`Average Worldwide Corporate Tax Rate of ${Math.round(
                   d.average
                 )}% in ${d.year}`}</title>
@@ -111,10 +109,7 @@ const CorpTax = ({ data, worldwide, title }) => {
                   r='4'
                 />
               </g>
-              <g
-                key={`corp-tax-data-worldwide-weighted-average-${d.year}-${d.weighted.average}`}
-                role='graphics-data'
-              >
+              <g role='graphics-data'>
                 <title>{`Weighted Average Worldwide Corporate Tax Rate of ${Math.round(
                   d.weighted.average
                 )}% in ${d.year}`}</title>
@@ -125,7 +120,7 @@ const CorpTax = ({ data, worldwide, title }) => {
                   r='4'
                 />
               </g>
-            </>
+            </React.Fragment>
           ))}
         </g>
         <g id='corp-tax-chart-body' aria-label='line chart'>

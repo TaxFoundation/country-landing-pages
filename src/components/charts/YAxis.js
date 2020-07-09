@@ -15,7 +15,6 @@ const YAxis = ({
     <g
       role='graphics-axis'
       aria-orientation='vertical'
-      aria-datatype='count'
       aria-valuemin={min}
       aria-valuemax={max}
     >
