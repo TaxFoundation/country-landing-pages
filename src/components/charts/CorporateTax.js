@@ -28,7 +28,7 @@ const CorpTax = ({ data, worldwide, title }) => {
   const maxYear = Math.max(...data.map(d => +d.year));
   const minRate = Math.min(...data.map(d => +d.rate));
   const maxRate = Math.min(100, Math.max(...data.map(d => +d.rate)) + 5);
-  const margin = { top: 30, left: 50, bottom: 30, right: 10 };
+  const margin = { top: 30, left: 50, bottom: 40, right: 10 };
   const xScale = scaleLinear()
     .domain([minYear, maxYear])
     .range([20 + margin.left, width - margin.right - 20]);

@@ -21,7 +21,8 @@ const XAxis = ({
     >
       <text
         x={margin.left + (width - margin.left - margin.right) / 2}
-        y={height}
+        y={height - 4}
+        fontSize='16'
         textAnchor='middle'
       >
         {label}

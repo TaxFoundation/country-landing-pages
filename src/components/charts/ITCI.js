@@ -26,7 +26,7 @@ const ITCI = ({ data, title }) => {
   const [height, setHeight] = useState(500);
   const minYear = Math.min(...data.map(d => d.year));
   const maxYear = Math.max(...data.map(d => d.year));
-  const margin = { top: 30, left: 50, bottom: 30, right: 10 };
+  const margin = { top: 30, left: 50, bottom: 40, right: 10 };
   const xScale = scaleLinear()
     .domain([minYear, maxYear])
     .range([20 + margin.left, width - margin.right - 20]);
