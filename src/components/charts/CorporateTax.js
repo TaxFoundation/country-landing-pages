@@ -4,20 +4,15 @@ import styled from 'styled-components';
 import { scaleLinear } from 'd3-scale';
 import { line } from 'd3-shape';
 
-import XAxis from './XAxis';
-import YAxis from './YAxis';
+import Line from '../ui/Line';
+import XAxis from '../ui/XAxis';
+import YAxis from '../ui/YAxis';
 
 const Container = styled.div`
   border: 1px solid #999;
   border-top: 0;
   margin: 0;
   padding: 1rem;
-`;
-
-const Line = styled.path`
-  fill: none;
-  stroke: ${props => (props.color ? props.color : '#0094ff')};
-  stroke-width: 3px;
 `;
 
 const CorpTax = ({ data, worldwide, title }) => {
