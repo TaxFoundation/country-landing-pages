@@ -10,6 +10,7 @@ import Sections from './ui/Sections';
 import ITCI from './sections/ITCI';
 import SourcesOfRevenue from './sections/SourcesOfRevenue';
 import CorporateTax from './sections/CorporateTax';
+import TaxBurdenOnLabor from './sections/TaxBurdenOnLabor';
 
 const Container = styled.div`
   max-width: 960px;
@@ -73,6 +74,7 @@ const Layout = ({ data }) => {
   country.data[
     'worldwideCorpTax'
   ] = data.allWorldwideCorporateTaxRatesCsv.edges.map(edge => edge.node);
+  country.data['taxBurdenOnLabor'] = data.allTaxBurdenOnLaborCsv.edges[0].node;
 
   return (
     <Container>
@@ -100,13 +102,19 @@ const Layout = ({ data }) => {
           data={country.data.corporateTax}
           worldwide={country.data.worldwideCorpTax}
         ></CorporateTax>
+        <TaxBurdenOnLabor
+          countryName={country.name}
+          countryAdjective={country.adjective}
+          countryArticle={country.article}
+          data={country.data.taxBurdenOnLabor}
+        />
       </Sections>
     </Container>
   );
 };
 
 export const query = graphql`
-  query($iso3: String!) {
+  query($iso3: String!, $name: String) {
     countriesCsv(iso3: { eq: $iso3 }) {
       iso2
       iso3
@@ -285,6 +293,19 @@ export const query = graphql`
           vat_base
           vat_rate
           vat_threshold
+        }
+      }
+    }
+    allTaxBurdenOnLaborCsv(filter: { Country: { eq: $name } }) {
+      edges {
+        node {
+          Country
+          Employee_Payroll_Taxes_in__
+          Employer_Payroll_Taxes_in__
+          Income_Tax_in__
+          Rank
+          Tax_Wedge_in____As_a_Share_of_Labor_Cost_
+          Total_Average_Annual_Labor_Cost_per_Employee_in__
         }
       }
     }

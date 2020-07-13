@@ -22,6 +22,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve('./src/components/layout.js'),
       context: {
         iso3: node.iso3,
+        name: node.name,
       },
     });
   });
