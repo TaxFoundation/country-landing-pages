@@ -31,6 +31,10 @@ const CorpTax = ({ data, worldwide, title }) => {
     .domain([0, maxRate])
     .range([height - margin.bottom, margin.top]);
 
+  const countryColor = 'rgb(92, 158, 170)';
+  const worldwideColor = 'rgb(47, 129, 212)';
+  const worldwideWeightedColor = 'rgb(75, 104, 171)';
+
   useEffect(() => {
     function handleResize() {
       setWidth(containerElement.current.clientWidth);
@@ -80,14 +84,14 @@ const CorpTax = ({ data, worldwide, title }) => {
             d={line()(
               worldwide.map(d => [xScale(+d.year), yScale(+d.average)])
             )}
-            color='#ff0000'
+            color={worldwideColor}
           />
           <Line
             role='img'
             d={line()(
               worldwide.map(d => [xScale(+d.year), yScale(+d.weighted.average)])
             )}
-            color='#00ff00'
+            color={worldwideWeightedColor}
           />
           {worldwide.map(d => (
             <React.Fragment
@@ -98,7 +102,7 @@ const CorpTax = ({ data, worldwide, title }) => {
                   d.average
                 )}% in ${d.year}`}</title>
                 <circle
-                  fill='#ff0000'
+                  fill={worldwideColor}
                   cx={xScale(+d.year)}
                   cy={yScale(+d.average)}
                   r='4'
@@ -109,7 +113,7 @@ const CorpTax = ({ data, worldwide, title }) => {
                   d.weighted.average
                 )}% in ${d.year}`}</title>
                 <circle
-                  fill='#00ff00'
+                  fill={worldwideWeightedColor}
                   cx={xScale(+d.year)}
                   cy={yScale(+d.weighted.average)}
                   r='4'
@@ -122,6 +126,7 @@ const CorpTax = ({ data, worldwide, title }) => {
           <Line
             role='img'
             d={line()(data.map(d => [xScale(+d.year), yScale(+d.rate)]))}
+            color={countryColor}
           />
           {data.map(d => (
             <g
@@ -132,7 +137,7 @@ const CorpTax = ({ data, worldwide, title }) => {
                 d.year
               }`}</title>
               <circle
-                fill='#0094ff'
+                fill={countryColor}
                 cx={xScale(+d.year)}
                 cy={yScale(+d.rate)}
                 r='4'
