@@ -24,6 +24,84 @@ const TaxBurdenChart = ({ data, title }) => {
     .domain([0, maxDollars])
     .range([height - margin.bottom, margin.top]);
 
+  const rectCoords = [
+    yScale(data.Total_Average_Annual_Labor_Cost_per_Employee_in__),
+    yScale(
+      data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
+        (1 - data.Employer_Payroll_Taxes_in__ / 100)
+    ),
+    yScale(
+      data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
+        (1 -
+          data.Employer_Payroll_Taxes_in__ / 100 -
+          data.Employee_Payroll_Taxes_in__ / 100)
+    ),
+    yScale(
+      data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
+        (1 -
+          data.Employer_Payroll_Taxes_in__ / 100 -
+          data.Employee_Payroll_Taxes_in__ / 100 -
+          data.Income_Tax_in__ / 100)
+    ),
+  ];
+
+  const heights = [
+    rectCoords[1] - rectCoords[0],
+    rectCoords[2] - rectCoords[1],
+    rectCoords[3] - rectCoords[2],
+    height - margin.bottom - rectCoords[3],
+  ];
+
+  const sections = [
+    {
+      title: 'Employer Share of Payroll Taxes',
+      y: rectCoords[0],
+      height: heights[0],
+      fill: '#ff0000',
+      percent: data.Employer_Payroll_Taxes_in__,
+      value:
+        data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
+        (data.Employer_Payroll_Taxes_in__ / 100),
+    },
+    {
+      title: 'Employee Share of Payroll Taxes',
+      y: rectCoords[1],
+      height: heights[1],
+      fill: '#0000ff',
+      percent: data.Employee_Payroll_Taxes_in__,
+      value:
+        data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
+        (data.Employee_Payroll_Taxes_in__ / 100),
+    },
+    {
+      title: 'Income Tax',
+      y: rectCoords[2],
+      height: heights[2],
+      fill: '#00ff00',
+      percent: data.Income_Tax_in__,
+      value:
+        data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
+        (data.Income_Tax_in__ / 100),
+    },
+    {
+      title: 'After-Tax Income',
+      y: rectCoords[3],
+      height: heights[3],
+      fill: '#ff00ff',
+      percent:
+        100 -
+        data.Employer_Payroll_Taxes_in__ -
+        data.Employee_Payroll_Taxes_in__ -
+        data.Income_Tax_in__,
+      value:
+        data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
+        (1 -
+          data.Employer_Payroll_Taxes_in__ / 100 -
+          data.Employee_Payroll_Taxes_in__ / 100 -
+          data.Income_Tax_in__ / 100),
+    },
+  ];
+
   useEffect(() => {
     function handleResize() {
       setWidth(containerElement.current.clientWidth);
@@ -58,17 +136,21 @@ const TaxBurdenChart = ({ data, title }) => {
           label='US Dollars'
         />
         <g id='tax-burden-bar-chart'>
-          <rect
-            x={(width - margin.left - margin.right) / 4 + margin.left}
-            y={yScale(data.Total_Average_Annual_Labor_Cost_per_Employee_in__)}
-            width={(width - margin.left - margin.right) / 2}
-            height={
-              height -
-              yScale(data.Total_Average_Annual_Labor_Cost_per_Employee_in__) -
-              margin.bottom
-            }
-            fill='#ff0000'
-          ></rect>
+          {/* Employee */}
+          {sections.map(section => (
+            <g key={`income-tax-section-${section.title}`}>
+              <title>{`${section.title}: ${Number.parseFloat(
+                section.percent
+              ).toFixed(1)}%`}</title>
+              <rect
+                x={(width - margin.left - margin.right) / 4 + margin.left}
+                y={section.y}
+                width={(width - margin.left - margin.right) / 2}
+                height={section.height}
+                fill={section.fill}
+              />
+            </g>
+          ))}
         </g>
         <line
           x1={margin.left}
