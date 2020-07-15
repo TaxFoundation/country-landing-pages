@@ -87,6 +87,10 @@ const Layout = ({ data }) => {
     capital_duties: data.allIndexRawDataCsv.edges[0].node.capital_duties,
     financial_transaction_tax:
       data.allIndexRawDataCsv.edges[0].node.financial_transaction_tax,
+    property_tax_collections:
+      data.allIndexRawDataCsv.edges[0].node.property_tax_collections,
+    property_tax_share_of_revenue:
+      data.allSourceRevenueByCountryCsv.edges[0].node.Property_Taxes,
   };
 
   return (

@@ -32,6 +32,24 @@ const PropTaxTable = styled.table`
   }
 `;
 
+const KeyFigures = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  grid-template: auto / 1fr;
+
+  @media (min-width: 800px) {
+    grid-template: auto / repeat(2, 1fr);
+  }
+
+  & > div > div {
+    border: 1px solid #333;
+    font-size: 2.4rem;
+    font-weight: 300;
+    padding: 2rem;
+    text-align: center;
+  }
+`;
+
 const PropertyTax = ({ countryName, countryArticle, data }) => {
   const rows = [
     {
@@ -106,6 +124,18 @@ const PropertyTax = ({ countryName, countryArticle, data }) => {
           ))}
         </tbody>
       </PropTaxTable>
+      <KeyFigures>
+        <div>
+          <h3>Share of Revenue from Property Taxes</h3>
+          <div>{`${data.property_tax_share_of_revenue}%`}</div>
+        </div>
+        <div>
+          <h3>Property Tax Revenue as a Share of Capital Stock</h3>
+          <div>{`${
+            Math.round(+data.property_tax_collections * 100) / 100
+          }%`}</div>
+        </div>
+      </KeyFigures>
     </div>
   );
 };
