@@ -78,6 +78,16 @@ const Layout = ({ data }) => {
     'worldwideCorpTax'
   ] = data.allWorldwideCorporateTaxRatesCsv.edges.map(edge => edge.node);
   country.data['taxBurdenOnLabor'] = data.allTaxBurdenOnLaborCsv.edges[0].node;
+  country.data['propertyTaxes'] = {
+    net_wealth: data.allIndexRawDataCsv.edges[0].node.net_wealth,
+    estate_or_inheritance_tax:
+      data.allIndexRawDataCsv.edges[0].node.estate_or_inheritance_tax,
+    transfer_tax: data.allIndexRawDataCsv.edges[0].node.transfer_tax,
+    asset_tax: data.allIndexRawDataCsv.edges[0].node.asset_tax,
+    capital_duties: data.allIndexRawDataCsv.edges[0].node.capital_duties,
+    financial_transaction_tax:
+      data.allIndexRawDataCsv.edges[0].node.financial_transaction_tax,
+  };
 
   return (
     <>
