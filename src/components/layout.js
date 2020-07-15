@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { graphql } from 'gatsby';
 import { kebabCase } from 'lodash';
 
@@ -11,11 +11,9 @@ import ITCI from './sections/ITCI';
 import SourcesOfRevenue from './sections/SourcesOfRevenue';
 import CorporateTax from './sections/CorporateTax';
 import TaxBurdenOnLabor from './sections/TaxBurdenOnLabor';
+import PropertyTax from './sections/PropertyTax';
 
-const Container = styled.div`
-  max-width: 960px;
-  margin: 0 auto;
-
+const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
@@ -42,6 +40,11 @@ const Container = styled.div`
     height: 1px;
     margin: 1.5rem 0;
   }
+`;
+
+const Container = styled.div`
+  max-width: 960px;
+  margin: 0 auto;
 `;
 
 const TopSection = styled.div`
@@ -77,39 +80,48 @@ const Layout = ({ data }) => {
   country.data['taxBurdenOnLabor'] = data.allTaxBurdenOnLaborCsv.edges[0].node;
 
   return (
-    <Container>
-      <TopSection>
-        <CountryDescription country={country.name}></CountryDescription>
-        <CountrySelector
-          countries={[]}
-          current={kebabCase(country.name)}
-        ></CountrySelector>
-      </TopSection>
-      <hr />
-      <Sections>
-        <ITCI
-          countryName={country.name}
-          countryAdjective={country.adjective}
-          countryArticle={country.article}
-          data={country.data.itciMain}
-          subdata={country.data.itciSubdata}
-        />
-        <SourcesOfRevenue></SourcesOfRevenue>
-        <CorporateTax
-          countryName={country.name}
-          countryAdjective={country.adjective}
-          countryArticle={country.article}
-          data={country.data.corporateTax}
-          worldwide={country.data.worldwideCorpTax}
-        ></CorporateTax>
-        <TaxBurdenOnLabor
-          countryName={country.name}
-          countryAdjective={country.adjective}
-          countryArticle={country.article}
-          data={country.data.taxBurdenOnLabor}
-        />
-      </Sections>
-    </Container>
+    <>
+      <GlobalStyle />
+      <Container>
+        <TopSection>
+          <CountryDescription country={country.name}></CountryDescription>
+          <CountrySelector
+            countries={[]}
+            current={kebabCase(country.name)}
+          ></CountrySelector>
+        </TopSection>
+        <hr />
+        <Sections>
+          <ITCI
+            countryName={country.name}
+            countryAdjective={country.adjective}
+            countryArticle={country.article}
+            data={country.data.itciMain}
+            subdata={country.data.itciSubdata}
+          />
+          <SourcesOfRevenue></SourcesOfRevenue>
+          <CorporateTax
+            countryName={country.name}
+            countryAdjective={country.adjective}
+            countryArticle={country.article}
+            data={country.data.corporateTax}
+            worldwide={country.data.worldwideCorpTax}
+          ></CorporateTax>
+          <TaxBurdenOnLabor
+            countryName={country.name}
+            countryAdjective={country.adjective}
+            countryArticle={country.article}
+            data={country.data.taxBurdenOnLabor}
+          />
+          <PropertyTax
+            countryName={country.name}
+            countryAdjective={country.adjective}
+            countryArticle={country.article}
+            data={country.data.propertyTaxes}
+          />
+        </Sections>
+      </Container>
+    </>
   );
 };
 
