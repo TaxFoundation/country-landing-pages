@@ -12,7 +12,7 @@ const TaxBurdenOnLabor = ({ countryName, countryArticle, data }) => {
       id: 'tax-burden-on-labor',
     },
     {
-      name: 'Income Tax Tax',
+      name: 'Income Tax Map',
       id: 'income-tax-map',
     },
   ];

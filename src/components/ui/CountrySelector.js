@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
@@ -29,16 +29,27 @@ const StyledCountrySelector = styled.div`
     width: 100%;
   }
 
-  button {
+  .button {
+    align-content: center;
     background-color: #0094ff;
     border: 1px solid #0094ff;
     font-size: 1rem;
     color: white;
+    display: grid;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
     width: 100%;
+
+    &:hover {
+      background-color: #00aaff;
+      border: 1px solid #00aaff;
+    }
   }
 `;
 
 const CountrySelector = ({ current }) => {
+  const [selectedCountry, setSelectedCountry] = useState(current);
   const data = useStaticQuery(graphql`
     query {
       allCountriesCsv {
@@ -59,7 +70,10 @@ const CountrySelector = ({ current }) => {
     <StyledCountrySelector>
       <h2>Choose a Country</h2>
       <p>Get facts about taxes in your country and around the world.</p>
-      <select value={current}>
+      <select
+        value={selectedCountry}
+        onChange={e => setSelectedCountry(e.target.value)}
+      >
         {countries.map(country => (
           <option
             key={`country-option-${kebabCase(country.name)}`}
@@ -69,9 +83,12 @@ const CountrySelector = ({ current }) => {
           </option>
         ))}
       </select>
-      <button onClick={e => console.log(e.target.value)}>
+      <a
+        className='button'
+        href={`https://taxfoundation.org/countries/${selectedCountry}`}
+      >
         Launch Data Explorer
-      </button>
+      </a>
     </StyledCountrySelector>
   );
 };
