@@ -25,7 +25,10 @@ const PropTaxTable = styled.table`
   td {
     font-family: 'Roboto Mono', monospace;
     padding: 0.8rem;
-    text-align: center;
+
+    &:nth-of-type(3) {
+      text-align: center;
+    }
   }
 `;
 
