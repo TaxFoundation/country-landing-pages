@@ -20,6 +20,7 @@ const SourcesOfRevenue = ({ countryName, countryArticle, data }) => {
       </p>
 
       <SourcesOfRevenueChart
+        country={countryName}
         title={`How Does${
           countryArticle ? ' ' + countryArticle : ''
         } ${countryName} Raise Revenue?`}

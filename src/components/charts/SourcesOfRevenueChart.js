@@ -32,7 +32,7 @@ const Chunk = ({ coordinates, y, data, section }) => {
         x={coordinates.x + coordinates.width / 2}
         y={y + 100 / 2 + 6}
         height={100}
-      >{`${section.title}: ${Number.parseFloat(data).toFixed(1)}%`}</text>
+      >{`${Number.parseFloat(data).toFixed(1)}%`}</text>
     </g>
   );
 };
@@ -44,13 +44,13 @@ Chunk.propTypes = {
   section: PropTypes.object,
 };
 
-const SourcesOfRevenueChart = ({ data, title }) => {
+const SourcesOfRevenueChart = ({ country, data, title }) => {
   const containerElement = useRef(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);
   const margin = { top: 30, left: 90, bottom: 40, right: 10 };
   const yScale = scaleBand()
-    .domain(['OECD Average', 'Country'])
+    .domain(['OECD Average', country])
     .range([height - margin.bottom, margin.top])
     .align(0.5);
   const xScale = scaleLinear()
@@ -143,7 +143,7 @@ const SourcesOfRevenueChart = ({ data, title }) => {
           margin={margin}
           label='Cumulative Percentage'
         />
-        <g id='tax-burden-bar-chart'>
+        <g id='sources-of-revenue-bar-chart'>
           {/* Employee */}
           {sections.map(section => (
             <>
@@ -153,7 +153,7 @@ const SourcesOfRevenueChart = ({ data, title }) => {
                 section={section}
                 width={width}
                 coordinates={countryRectCoords[section.id]}
-                y={yScale('Country')}
+                y={yScale(country)}
               ></Chunk>
               <Chunk
                 data={data.oecd[section.id]}
@@ -166,22 +166,13 @@ const SourcesOfRevenueChart = ({ data, title }) => {
             </>
           ))}
         </g>
-        <line
-          x1={margin.left}
-          x2={width - margin.right}
-          y1={height - margin.bottom}
-          y2={height - margin.bottom}
-          stroke='#333'
-          strokeWidth='1'
-          shapeRendering='crispEdges'
-          vectorEffect='non-scaling-stroke'
-        />
       </svg>
     </Container>
   );
 };
 
 SourcesOfRevenueChart.propTypes = {
+  country: PropTypes.string,
   title: PropTypes.string,
   data: PropTypes.shape({
     country: {
