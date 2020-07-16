@@ -64,9 +64,10 @@ const Layout = ({ data }) => {
   country.data['itciSubdata'] = data.allIndexSubranksCsv.edges.map(
     edge => edge.node
   );
-  country.data[
-    'sourcesOfRevenue'
-  ] = data.allSourceRevenueByCountryCsv.edges.map(edge => edge.node);
+  country.data['sourcesOfRevenue'] = {
+    country: data.allSourceRevenueByCountryCsv.edges.map(edge => edge.node),
+    oecd: data.sourceRevenueByCountryCsv,
+  };
   country.data['oecdSources'] = data.allSourceRevenueOecdAverageCsv;
   country.data['corporateTax'] = data.allCountryCorporateTaxRatesCsv.edges
     .filter(edge => !Number.isNaN(+edge.node.rate))
@@ -113,20 +114,29 @@ const Layout = ({ data }) => {
             data={country.data.itciMain}
             subdata={country.data.itciSubdata}
           />
-          <SourcesOfRevenue></SourcesOfRevenue>
+          <hr />
+          <SourcesOfRevenue
+            countryName={country.name}
+            countryAdjective={country.adjective}
+            countryArticle={country.article}
+            data={country.data.sourcesOfRevenue}
+          />
+          <hr />
           <CorporateTax
             countryName={country.name}
             countryAdjective={country.adjective}
             countryArticle={country.article}
             data={country.data.corporateTax}
             worldwide={country.data.worldwideCorpTax}
-          ></CorporateTax>
+          />
+          <hr />
           <TaxBurdenOnLabor
             countryName={country.name}
             countryAdjective={country.adjective}
             countryArticle={country.article}
             data={country.data.taxBurdenOnLabor}
           />
+          <hr />
           <PropertyTax
             countryName={country.name}
             countryAdjective={country.adjective}
@@ -251,14 +261,13 @@ export const query = graphql`
         }
       }
     }
-    allSourceRevenueOecdAverageCsv {
-      edges {
-        node {
-          id
-          Tax_Category
-          Average_Share
-        }
-      }
+    sourceRevenueByCountryCsv(iso_3: { eq: "NA" }) {
+      Consumption_Taxes
+      Corporate_Taxes
+      Individual_Taxes
+      Property_Taxes
+      Social_Insurance_Taxes
+      Other
     }
     allWorldwideCorporateTaxRatesCsv {
       edges {
