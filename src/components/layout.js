@@ -65,7 +65,7 @@ const Layout = ({ data }) => {
     edge => edge.node
   );
   country.data['sourcesOfRevenue'] = {
-    country: data.allSourceRevenueByCountryCsv.edges.map(edge => edge.node),
+    country: data.allSourceRevenueByCountryCsv.edges[0].node,
     oecd: data.sourceRevenueByCountryCsv,
   };
   country.data['oecdSources'] = data.allSourceRevenueOecdAverageCsv;
