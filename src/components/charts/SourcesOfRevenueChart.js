@@ -49,13 +49,13 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
   const containerElement = useRef(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);
-  const margin = { top: 30, left: 90, bottom: 40, right: 10 };
+  const margin = { top: 30, left: 50, bottom: 40, right: 20 };
   const yScale = scaleBand()
     .domain(['OECD Average', country])
     .range([height - margin.bottom, margin.top])
     .align(0.5)
-    .paddingOuter(0.3)
-    .paddingInner(0.3);
+    .paddingOuter(0.35)
+    .paddingInner(0.35);
   const xScale = scaleLinear()
     .domain([0, 100])
     .range([20 + margin.left, width - margin.right - 20]);
@@ -133,7 +133,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
     <Container ref={containerElement}>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
-        <text x={width / 2} y='16' textAnchor='middle' fontSize={16}>
+        <text x={width / 2} y='16' textAnchor='middle' fontSize={20}>
           {title}
         </text>
         <XAxis
@@ -146,8 +146,27 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
           margin={margin}
           label='Cumulative Percentage'
         />
+        <g>
+          <text
+            transform={`translate(30, ${
+              yScale(country) + yScale.bandwidth() / 2
+            }) rotate(-90)`}
+            textAnchor='middle'
+            fontSize={18}
+          >
+            {country}
+          </text>
+          <text
+            transform={`translate(30, ${
+              yScale('OECD Average') + yScale.bandwidth() / 2
+            }) rotate(-90)`}
+            textAnchor='middle'
+            fontSize={18}
+          >
+            OECD Average
+          </text>
+        </g>
         <g id='sources-of-revenue-bar-chart'>
-          {/* Employee */}
           {sections.map(section => (
             <>
               <Chunk
