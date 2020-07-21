@@ -12,7 +12,7 @@ const Container = styled.div`
   padding: 1rem;
 `;
 
-const Chunk = ({ coordinates, y, data, section }) => {
+const Chunk = ({ coordinates, y, height, data, section }) => {
   return (
     <g key={`income-tax-section-${section.title}`}>
       <title>{`${section.title}: ${Number.parseFloat(data).toFixed(
@@ -22,7 +22,7 @@ const Chunk = ({ coordinates, y, data, section }) => {
         x={coordinates.x}
         y={y}
         width={coordinates.width}
-        height={100}
+        height={height}
         fill={section.fill}
       />
       <text
@@ -30,8 +30,8 @@ const Chunk = ({ coordinates, y, data, section }) => {
         alignmentBaseline='middle'
         style={{ fill: '#fff', fontSize: '14px;', fontWeight: 700 }}
         x={coordinates.x + coordinates.width / 2}
-        y={y + 100 / 2 + 6}
-        height={100}
+        y={y + height / 2 + 6}
+        height={height}
       >{`${Number.parseFloat(data).toFixed(1)}%`}</text>
     </g>
   );
@@ -40,6 +40,7 @@ const Chunk = ({ coordinates, y, data, section }) => {
 Chunk.propTypes = {
   coordinates: PropTypes.number,
   y: PropTypes.number,
+  height: PropTypes.number,
   data: PropTypes.number,
   section: PropTypes.object,
 };
@@ -52,7 +53,9 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
   const yScale = scaleBand()
     .domain(['OECD Average', country])
     .range([height - margin.bottom, margin.top])
-    .align(0.5);
+    .align(0.5)
+    .paddingOuter(0.3)
+    .paddingInner(0.3);
   const xScale = scaleLinear()
     .domain([0, 100])
     .range([20 + margin.left, width - margin.right - 20]);
@@ -154,6 +157,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
                 width={width}
                 coordinates={countryRectCoords[section.id]}
                 y={yScale(country)}
+                height={yScale.bandwidth()}
               ></Chunk>
               <Chunk
                 data={data.oecd[section.id]}
@@ -162,6 +166,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
                 width={width}
                 coordinates={oecdRectCoords[section.id]}
                 y={yScale('OECD Average')}
+                height={yScale.bandwidth()}
               ></Chunk>
             </>
           ))}
