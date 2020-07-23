@@ -99,7 +99,7 @@ const Layout = ({ data }) => {
       <GlobalStyle />
       <Container>
         <TopSection>
-          <CountryDescription country={country.name}></CountryDescription>
+          <CountryDescription country={country}></CountryDescription>
           <CountrySelector
             countries={[]}
             current={kebabCase(country.name)}

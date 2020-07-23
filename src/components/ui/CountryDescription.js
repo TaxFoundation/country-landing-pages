@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const CountryDescription = ({ country }) => {
   return (
     <div>
-      <h1>Taxes in {country}</h1>
+      <h1>{`Taxes in ${country.article ? 'the ' : ''}${country.name}`}</h1>
       <p>
         I&apos;m baby next level migas cray, chia cold-pressed leggings ethical
         90&apos;s. Marfa selvage brooklyn raclette, edison bulb live-edge squid.
@@ -27,7 +27,7 @@ const CountryDescription = ({ country }) => {
 };
 
 CountryDescription.propTypes = {
-  country: PropTypes.string,
+  country: PropTypes.object,
 };
 
 export default CountryDescription;
