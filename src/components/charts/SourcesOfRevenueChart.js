@@ -181,7 +181,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
         <title>{title}</title>
         <text
           x={width / 2}
-          y='16'
+          y='20'
           textAnchor='middle'
           fontSize={20 * Math.max(width / 800, 0.7)}
         >
@@ -199,7 +199,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
         />
         <g>
           <text
-            transform={`translate(30, ${
+            transform={`translate(35, ${
               yScale(country) + yScale.bandwidth() / 2
             }) rotate(-90)`}
             textAnchor='middle'
@@ -208,7 +208,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
             {country}
           </text>
           <text
-            transform={`translate(30, ${
+            transform={`translate(35, ${
               yScale('OECD Average') + yScale.bandwidth() / 2
             }) rotate(-90)`}
             textAnchor='middle'
