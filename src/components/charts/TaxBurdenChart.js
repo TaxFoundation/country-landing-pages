@@ -189,12 +189,24 @@ TaxBurdenChart.propTypes = {
   title: PropTypes.string,
   data: PropTypes.shape({
     Country: PropTypes.string,
-    Employee_Payroll_Taxes_in__: PropTypes.number,
-    Employer_Payroll_Taxes_in__: PropTypes.number,
-    Income_Tax_in__: PropTypes.number,
-    Rank: PropTypes.number,
-    Tax_Wedge_in____As_a_Share_of_Labor_Cost_: PropTypes.number,
-    Total_Average_Annual_Labor_Cost_per_Employee_in__: PropTypes.number,
+    Employee_Payroll_Taxes_in__: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    Employer_Payroll_Taxes_in__: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    Income_Tax_in__: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    Rank: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    Tax_Wedge_in____As_a_Share_of_Labor_Cost_: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    Total_Average_Annual_Labor_Cost_per_Employee_in__: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }),
 };
 

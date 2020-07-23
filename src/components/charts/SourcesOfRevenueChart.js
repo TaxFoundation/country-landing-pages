@@ -40,7 +40,7 @@ const Chunk = ({ coordinates, y, width, height, data, section }) => {
   }, [rectRef, textRef, width]);
 
   return (
-    <svg key={`income-tax-section-${section.title}`}>
+    <svg>
       <title>{`${section.title}: ${Number.parseFloat(data).toFixed(
         1
       )}%`}</title>
@@ -82,10 +82,10 @@ const Chunk = ({ coordinates, y, width, height, data, section }) => {
 };
 
 Chunk.propTypes = {
-  coordinates: PropTypes.number,
+  coordinates: PropTypes.object,
   y: PropTypes.number,
   height: PropTypes.number,
-  data: PropTypes.number,
+  data: PropTypes.string,
   section: PropTypes.object,
   width: PropTypes.number,
 };
@@ -218,7 +218,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
         </g>
         <g id='sources-of-revenue-bar-chart'>
           {sections.map(section => (
-            <>
+            <React.Fragment key={`income-tax-section-${section.title}`}>
               <Chunk
                 data={data.country[section.id]}
                 margin={margin}
@@ -237,7 +237,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
                 y={yScale('OECD Average')}
                 height={yScale.bandwidth()}
               ></Chunk>
-            </>
+            </React.Fragment>
           ))}
         </g>
       </svg>
@@ -249,22 +249,46 @@ SourcesOfRevenueChart.propTypes = {
   country: PropTypes.string,
   title: PropTypes.string,
   data: PropTypes.shape({
-    country: {
-      Consumption_Taxes: PropTypes.number,
-      Corporate_Taxes: PropTypes.number,
-      Individual_Taxes: PropTypes.number,
-      Property_Taxes: PropTypes.number,
-      Social_Insurance_Taxes: PropTypes.number,
-      Other: PropTypes.number,
-    },
-    oecd: {
-      Consumption_Taxes: PropTypes.number,
-      Corporate_Taxes: PropTypes.number,
-      Individual_Taxes: PropTypes.number,
-      Property_Taxes: PropTypes.number,
-      Social_Insurance_Taxes: PropTypes.number,
-      Other: PropTypes.number,
-    },
+    country: PropTypes.shape({
+      Consumption_Taxes: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      Corporate_Taxes: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      Individual_Taxes: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      Property_Taxes: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      Social_Insurance_Taxes: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      Other: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    }),
+    oecd: PropTypes.shape({
+      Consumption_Taxes: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      Corporate_Taxes: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      Individual_Taxes: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      Property_Taxes: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      Social_Insurance_Taxes: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      Other: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    }),
   }),
 };
 

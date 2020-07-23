@@ -57,7 +57,7 @@ const TaxBurdenOnLabor = ({ countryName, countryArticle, data }) => {
 TaxBurdenOnLabor.propTypes = {
   countryName: PropTypes.string,
   countryArticle: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.object,
 };
 
 export default TaxBurdenOnLabor;

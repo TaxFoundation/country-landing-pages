@@ -16,7 +16,6 @@ const Container = styled.div`
 `;
 
 const CorpTax = ({ data, worldwide, title }) => {
-  console.log(data, worldwide);
   const containerElement = useRef(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);

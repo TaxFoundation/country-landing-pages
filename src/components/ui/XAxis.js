@@ -15,7 +15,6 @@ const XAxis = ({
     <g
       role='graphics-axis'
       aria-orientation='horizontal'
-      aria-datatype='datetime'
       aria-valuemin={min}
       aria-valuemax={max}
     >
