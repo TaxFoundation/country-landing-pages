@@ -16,13 +16,31 @@ const Container = styled.div`
 `;
 
 const CorpTax = ({ data, worldwide, title }) => {
+  console.log(data, worldwide);
   const containerElement = useRef(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);
-  const minYear = Math.min(...data.map(d => +d.year));
-  const maxYear = Math.max(...data.map(d => +d.year));
-  const minRate = Math.min(...data.map(d => +d.rate));
-  const maxRate = Math.min(100, Math.max(...data.map(d => +d.rate)) + 5);
+  const minYear = Math.min(
+    ...data.map(d => +d.year),
+    ...worldwide.map(d => +d.year)
+  );
+  const maxYear = Math.max(
+    ...data.map(d => +d.year),
+    ...worldwide.map(d => +d.year)
+  );
+  const minRate = Math.min(
+    ...data.map(d => +d.rate),
+    ...worldwide.map(d => +d.average),
+    ...worldwide.map(d => +d.weighted.average)
+  );
+  const maxRate = Math.min(
+    100,
+    Math.max(
+      ...data.map(d => +d.rate),
+      ...worldwide.map(d => +d.average),
+      ...worldwide.map(d => +d.weighted.average)
+    ) + 5
+  );
   const margin = { top: 30, left: 50, bottom: 40, right: 10 };
   const xScale = scaleLinear()
     .domain([minYear, maxYear])
