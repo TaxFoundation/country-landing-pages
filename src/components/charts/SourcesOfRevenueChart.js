@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const Chunk = ({ coordinates, y, width, height, data, section }) => {
-  const [textHeight, setTextHeight] = useState(y + height / 2 + 6);
+  const [textHeight, setTextHeight] = useState(y + height / 2 + 10);
   const [textColor, setTextColor] = useState('#fff');
   const rectRef = useRef(null);
   const textRef = useRef(null);
@@ -41,7 +41,7 @@ const Chunk = ({ coordinates, y, width, height, data, section }) => {
   }, [rectRef, textRef, width]);
 
   return (
-    <g key={`income-tax-section-${section.title}`}>
+    <svg key={`income-tax-section-${section.title}`}>
       <title>{`${section.title}: ${Number.parseFloat(data).toFixed(
         1
       )}%`}</title>
@@ -76,7 +76,7 @@ const Chunk = ({ coordinates, y, width, height, data, section }) => {
           vectorEffect='non-scaling-stroke'
         />
       )}
-    </g>
+    </svg>
   );
 };
 
