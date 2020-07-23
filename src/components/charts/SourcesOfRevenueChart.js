@@ -12,7 +12,34 @@ const Container = styled.div`
   padding: 1rem;
 `;
 
-const Chunk = ({ coordinates, y, height, data, section }) => {
+const Chunk = ({ coordinates, y, width, height, data, section }) => {
+  const [textHeight, setTextHeight] = useState(y + height / 2 + 6);
+  const [textColor, setTextColor] = useState('#fff');
+  const rectRef = useRef(null);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    function adjustLabel(rect, text) {
+      const rectWidth = rect.current.getBBox().width;
+      const textWidth = text.current.getBBox().width;
+
+      if (textWidth > rectWidth) {
+        console.log(y, height);
+        setTextHeight(y - 20);
+        setTextColor(section.fill);
+      } else if (textHeight !== height || textColor !== '#fff') {
+        setTextHeight(y + height / 2 + 6);
+        setTextColor('#fff');
+      }
+    }
+
+    if (!rectRef || !textRef) {
+      return false;
+    }
+
+    adjustLabel(rectRef, textRef);
+  }, [rectRef, textRef, width]);
+
   return (
     <g key={`income-tax-section-${section.title}`}>
       <title>{`${section.title}: ${Number.parseFloat(data).toFixed(
@@ -24,15 +51,31 @@ const Chunk = ({ coordinates, y, height, data, section }) => {
         width={coordinates.width}
         height={height}
         fill={section.fill}
+        ref={rectRef}
+        shapeRendering='crispEdges'
+        vectorEffect='non-scaling-stroke'
       />
       <text
         textAnchor='middle'
         alignmentBaseline='middle'
-        style={{ fill: '#fff', fontSize: '14px;', fontWeight: 700 }}
+        style={{ fill: textColor, fontSize: '14px;', fontWeight: 700 }}
         x={coordinates.x + coordinates.width / 2}
-        y={y + height / 2 + 6}
+        y={textHeight}
         height={height}
+        ref={textRef}
       >{`${Number.parseFloat(data).toFixed(1)}%`}</text>
+      {textColor !== '#fff' && (
+        <line
+          x1={coordinates.x + coordinates.width / 2}
+          x2={coordinates.x + coordinates.width / 2}
+          y1={y - 15}
+          y2={y}
+          stroke={section.fill}
+          strokeWidth={2}
+          shapeRendering='crispEdges'
+          vectorEffect='non-scaling-stroke'
+        />
+      )}
     </g>
   );
 };
@@ -43,6 +86,7 @@ Chunk.propTypes = {
   height: PropTypes.number,
   data: PropTypes.number,
   section: PropTypes.object,
+  width: PropTypes.number,
 };
 
 const SourcesOfRevenueChart = ({ country, data, title }) => {
