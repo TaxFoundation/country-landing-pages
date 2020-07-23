@@ -25,7 +25,7 @@ const Chunk = ({ coordinates, y, width, height, data, section }) => {
 
       if (textWidth > rectWidth) {
         console.log(y, height);
-        setTextHeight(y - 20);
+        setTextHeight(y - Math.min(20, (width / 800) * 20));
         setTextColor(section.fill);
       } else if (textHeight !== height || textColor !== '#fff') {
         setTextHeight(y + height / 2 + 6);
@@ -58,7 +58,9 @@ const Chunk = ({ coordinates, y, width, height, data, section }) => {
       <text
         textAnchor='middle'
         alignmentBaseline='middle'
-        style={{ fill: textColor, fontSize: '14px;', fontWeight: 700 }}
+        fill={textColor}
+        fontSize={14 * Math.max(width / 800, 0.7)}
+        style={{ fontWeight: 700 }}
         x={coordinates.x + coordinates.width / 2}
         y={textHeight}
         height={height}
@@ -68,7 +70,7 @@ const Chunk = ({ coordinates, y, width, height, data, section }) => {
         <line
           x1={coordinates.x + coordinates.width / 2}
           x2={coordinates.x + coordinates.width / 2}
-          y1={y - 15}
+          y1={y - Math.min(15, (width / 800) * 15)}
           y2={y}
           stroke={section.fill}
           strokeWidth={2}
@@ -177,7 +179,12 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
     <Container ref={containerElement}>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
-        <text x={width / 2} y='16' textAnchor='middle' fontSize={20}>
+        <text
+          x={width / 2}
+          y='16'
+          textAnchor='middle'
+          fontSize={20 * Math.max(width / 800, 0.7)}
+        >
           {title}
         </text>
         <XAxis
@@ -196,7 +203,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
               yScale(country) + yScale.bandwidth() / 2
             }) rotate(-90)`}
             textAnchor='middle'
-            fontSize={18}
+            fontSize={18 * Math.max(width / 800, 0.3)}
           >
             {country}
           </text>
@@ -205,7 +212,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
               yScale('OECD Average') + yScale.bandwidth() / 2
             }) rotate(-90)`}
             textAnchor='middle'
-            fontSize={18}
+            fontSize={18 * Math.max(width / 800, 0.3)}
           >
             OECD Average
           </text>
