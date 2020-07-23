@@ -24,7 +24,6 @@ const Chunk = ({ coordinates, y, width, height, data, section }) => {
       const textWidth = text.current.getBBox().width;
 
       if (textWidth > rectWidth) {
-        console.log(y, height);
         setTextHeight(y - Math.min(20, (width / 800) * 20));
         setTextColor(section.fill);
       } else if (textHeight !== height || textColor !== '#fff') {

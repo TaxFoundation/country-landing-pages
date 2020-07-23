@@ -122,7 +122,12 @@ const TaxBurdenChart = ({ data, title }) => {
     <Container ref={containerElement}>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
-        <text x={width / 2} y='16' textAnchor='middle' fontSize={16}>
+        <text
+          x={width / 2}
+          y='16'
+          textAnchor='middle'
+          fontSize={16 * Math.max(width / 800, 0.7)}
+        >
           {title}
         </text>
         <YAxis
@@ -149,16 +154,19 @@ const TaxBurdenChart = ({ data, title }) => {
                 height={section.height}
                 fill={section.fill}
               />
-              <text
-                textAnchor='middle'
-                alignmentBaseline='middle'
-                style={{ fill: '#fff', fontSize: '14px;', fontWeight: 700 }}
-                x={(width - margin.left - margin.right) / 2 + margin.left}
-                y={section.y + section.height / 2 + 6}
-                height={section.height}
-              >{`${section.title}: ${Number.parseFloat(section.percent).toFixed(
-                1
-              )}%`}</text>
+              {width >= 600 && (
+                <text
+                  textAnchor='middle'
+                  alignmentBaseline='middle'
+                  style={{ fill: '#fff', fontWeight: 700 }}
+                  fontSize={14 * Math.max(width / 800, 0.3)}
+                  x={(width - margin.left - margin.right) / 2 + margin.left}
+                  y={section.y + section.height / 2 + 6}
+                  height={section.height}
+                >{`${section.title}: ${Number.parseFloat(
+                  section.percent
+                ).toFixed(1)}%`}</text>
+              )}
             </g>
           ))}
         </g>
