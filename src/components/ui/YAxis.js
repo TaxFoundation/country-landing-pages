@@ -10,6 +10,7 @@ const YAxis = ({
   numTicks,
   width,
   yScale,
+  format = value => value,
 }) => {
   return (
     <g
@@ -56,7 +57,7 @@ const YAxis = ({
               textAnchor='end'
               fontSize='10'
             >
-              {value}
+              {format(value)}
             </text>
           </g>
         ))}
@@ -87,6 +88,7 @@ YAxis.propTypes = {
   numTicks: PropTypes.number,
   yScale: PropTypes.func,
   width: PropTypes.number,
+  format: PropTypes.func,
 };
 
 export default YAxis;

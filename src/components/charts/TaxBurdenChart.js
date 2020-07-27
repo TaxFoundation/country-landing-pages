@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { scaleLinear } from 'd3-scale';
 import { line } from 'd3-shape';
+import { format } from 'd3-format';
 
 import YAxis from '../ui/YAxis';
 
@@ -139,6 +140,7 @@ const TaxBurdenChart = ({ data, title }) => {
           width={width}
           margin={margin}
           label='US Dollars'
+          format={format('$,')}
         />
         <g id='tax-burden-bar-chart'>
           {/* Employee */}
