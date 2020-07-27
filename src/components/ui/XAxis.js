@@ -10,6 +10,7 @@ const XAxis = ({
   height,
   width,
   margin,
+  format = value => value,
 }) => {
   return (
     <g
@@ -55,7 +56,7 @@ const XAxis = ({
               textAnchor='middle'
               fontSize='10'
             >
-              {value}
+              {format(value)}
             </text>
           </g>
         ))}
@@ -78,6 +79,7 @@ XAxis.propTypes = {
     right: PropTypes.number,
     top: PropTypes.number,
   }),
+  format: PropTypes.func,
 };
 
 export default XAxis;

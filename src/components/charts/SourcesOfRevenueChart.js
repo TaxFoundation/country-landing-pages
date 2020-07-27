@@ -195,6 +195,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
           width={width}
           margin={margin}
           label='Cumulative Percentage'
+          format={value => `${value}%`}
         />
         <g>
           <text
