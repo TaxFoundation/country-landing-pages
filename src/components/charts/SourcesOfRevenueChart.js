@@ -187,7 +187,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
         <title>{title}</title>
         <text
           x={initialWidth / 2}
-          y='20'
+          y='30'
           textAnchor='middle'
           fontSize={20 * Math.max(initialWidth / 800, 0.7)}
         >
