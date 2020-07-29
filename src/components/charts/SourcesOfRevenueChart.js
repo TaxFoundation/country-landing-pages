@@ -94,7 +94,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
   const containerElement = useRef(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);
-  const margin = { top: 30, left: 50, bottom: 40, right: 20 };
+  const margin = { top: 30, left: 50, bottom: 100, right: 20 };
   const yScale = scaleBand()
     .domain(['OECD Average', country])
     .range([height - margin.bottom, margin.top])
@@ -240,6 +240,35 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
               ></Chunk>
             </React.Fragment>
           ))}
+        </g>
+        <g
+          id='sources-of-reveneue-legend'
+          transform={`translate(0, ${height - margin.bottom / 2})`}
+        >
+          {sections.map((section, i) => {
+            const spacer = 155;
+            return (
+              <React.Fragment key={`sources-legend-${section.title}`}>
+                <rect
+                  x={margin.left + i * spacer}
+                  width={25}
+                  height={25}
+                  fill={section.fill}
+                ></rect>
+                {section.title.split(' ').map((word, j) => (
+                  <text
+                    key={`${section.title}-word-${word}`}
+                    x={margin.left + 35 + i * spacer}
+                    fill={section.fill}
+                    y={10 + j * 14}
+                    fontSize={14}
+                  >
+                    {word}
+                  </text>
+                ))}
+              </React.Fragment>
+            );
+          })}
         </g>
       </svg>
     </Container>
