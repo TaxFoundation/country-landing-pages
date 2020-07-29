@@ -10,13 +10,13 @@ const SourcesOfRevenue = ({ countryName, countryArticle, data }) => {
         countryArticle ? ' ' + countryArticle : ''
       } ${countryName}`}</h2>
       <p>
-        I'm baby unicorn pork belly VHS vape street art bicycle rights YOLO
-        flannel venmo 90's lomo gastropub. Man bun squid succulents semiotics.
-        Air plant authentic hell of gastropub next level pabst lo-fi banh mi
-        kale chips beard listicle keytar tofu echo park vice. Pabst waistcoat
-        butcher actually palo santo stumptown sartorial wayfarers. Tattooed
-        taiyaki portland migas. Ugh beard craft beer poutine PBR&B fam chambray
-        portland hell of readymade chartreuse organic kitsch cornhole.
+        Countries raise tax revenue through a mix of individual income taxes,
+        corporate income taxes, social insurance taxes, taxes on goods and
+        services, and property taxes. The mix of tax policies can influence how
+        distortionary or neutral a tax system is. Taxes on income can create
+        more economic harm than taxes on consumption and property. However, the
+        extent to which an individual country relies on any of these taxes can
+        differ substantially.
       </p>
 
       <SourcesOfRevenueChart

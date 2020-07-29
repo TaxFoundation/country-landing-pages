@@ -39,19 +39,22 @@ const CorporateTax = ({
         countryArticle ? ' ' + countryArticle : ''
       } ${countryName}`}</h2>
       <p>
-        Share of revenue statistic in descriptive text and comment about income
-        taxes needing to be designed to allow businesses to deduct relevant
-        costs at the time they are incurred. Share of revenue statistic in
-        descriptive text and comment about income taxes needing to be designed
-        to allow businesses to deduct relevant costs at the time they are
-        incurred. Share of revenue statistic in descriptive text and comment
-        about income taxes needing.
+        The corporate income tax is a tax on the profits of corporations. All
+        OECD countries levy a tax on corporate profits, but the rates and bases
+        vary widely from country to country. Corporate income taxes are the most
+        harmful tax for economic growth, but countries can mitigate those harms
+        with lower corporate tax rates and generous capital allowances.
       </p>
       <p>
-        Descriptive text about why capital allowances matter and how they can be
-        measured and compared by calculating NPVs (I think otherwise the next
-        table might be hard to understand for someone not familiar with the
-        concept).
+        Capital allowances directly impact business incentives for new
+        investments. In most countries, businesses are generally not allowed to
+        immediately deduct the cost of capital investments. Instead, they are
+        required to deduct these costs over several years, increasing the tax
+        burden on new investments. This can be measured by calculating the
+        percent of the present value cost that a business can deduct over the
+        life of an asset. Countries with more generous capital allowances have
+        tax systems that are more supportive to business investment, which
+        underpins economic growth.
       </p>
       <ChartTabs>
         {tabOptions.map(choice => (

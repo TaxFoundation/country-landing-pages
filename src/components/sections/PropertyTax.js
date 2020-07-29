@@ -55,37 +55,37 @@ const PropertyTax = ({ countryName, countryArticle, data }) => {
     {
       category: 'Net Wealth Tax',
       description:
-        "I'm baby man bun irony chambray umami. Vaporware lumbersexual snackwave leggings paleo twee messenger bag try-hard wolf echo park subway tile helvetica street art yuccie.",
+        'Net wealth taxes are taxes on an individual’s or family’s net assets levied on an annual basis.',
       id: 'net_wealth',
     },
     {
-      category: 'Estate or Inheritance Tax',
+      category: 'Estate, Inheritance, or Gift Tax',
       description:
-        'Poke tbh vaporware health goth. Asymmetrical distillery venmo keytar williamsburg beard, adaptogen +1 locavore green juice enamel pin.',
+        'Estate taxes are levied on the property of the deceased and are paid by the estate itself. Inheritance taxes are only levied on the value of assets transferred and are paid by the heirs. Gift taxes are levied when property is transferred by a living individual.',
       id: 'estate_or_inheritance_tax',
     },
     {
-      category: 'Transfer Tax',
+      category: 'Property Transfer Tax',
       description:
-        'Pickled succulents shoreditch kickstarter. Scenester fixie adaptogen edison bulb DIY keffiyeh tumblr gluten-free farm-to-table knausgaard paleo distillery hot chicken.',
+        'Property transfer taxes are taxes on the transfer of real property (real estate, land improvements, machinery) from one person or business to another.',
       id: 'transfer_tax',
     },
     {
-      category: 'Asset Tax',
+      category: 'Corporate Asset Tax',
       description:
-        'Tofu food truck edison bulb, art party raclette mustache vape tote bag etsy selvage.',
+        'Similar to a net wealth tax, asset taxes are levied on the wealth, or assets, of a business. Most countries with corporate asset taxes levy these taxes exclusively on bank assets.',
       id: 'asset_tax',
     },
     {
       category: 'Capital Duties',
       description:
-        '+1 microdosing cray everyday carry la croix tbh. Enamel pin viral four loko photo booth.',
+        'Capital duties are taxes on the issuance of shares of stock, typically levied at very low rates or as a small, flat fee.',
       id: 'capital_duties',
     },
     {
       category: 'Financial Transaction Tax',
       description:
-        "I'm baby master cleanse chicharrones messenger bag fanny pack kale chips pickled. Jean shorts thundercats kinfolk everyday carry stumptown lomo air plant viral leggings.",
+        'A financial transaction tax is a levy on the sale or purchase of a financial asset.',
       id: 'financial_transaction_tax',
     },
   ];
@@ -95,16 +95,26 @@ const PropertyTax = ({ countryName, countryArticle, data }) => {
         countryArticle ? ' ' + countryArticle : ''
       } ${countryName}`}</h2>
       <p>
-        I'm baby actually asymmetrical tacos, snackwave mlkshk squid kale chips
-        mumblecore. Biodiesel tote bag semiotics, single-origin coffee vice
-        sartorial next level vexillologist raw denim freegan disrupt ennui
-        mlkshk kinfolk. Swag seitan craft beer vexillologist, williamsburg
-        taxidermy meditation fixie letterpress iPhone air plant. Hot chicken
-        actually unicorn cold-pressed plaid tofu green juice. Leggings forage
-        portland PBR&B cornhole, tattooed everyday carry tumeric you probably
-        haven't heard of them. Four dollar toast synth wolf woke marfa drinking
-        vinegar hot chicken keytar humblebrag, pitchfork fam. Franzen PBR&B
-        truffaut shoreditch meggings vegan hashtag disrupt.
+        Property taxes apply to assets of an individual or a business. Estate
+        and inheritance taxes, for example, are due upon the death of an
+        individual and the passing of his or her estate to an heir,
+        respectively. Taxes on real property, on the other hand, are paid at set
+        intervals—often annually—on the value of taxable property such as land
+        and houses.
+      </p>
+      <p>
+        Many property taxes are highly distortive and add significant complexity
+        to the life of a taxpayer or business. Estate and inheritance taxes
+        create disincentives against additional work and saving, which damages
+        productivity and output. Financial transaction taxes increase the cost
+        of capital, which limits the flow of investment capital to its most
+        efficient allocations. Taxes on wealth limit the capital available in
+        the economy, which damages long-term economic growth and innovation.
+      </p>
+      <p>
+        Sound tax policy minimizes economic distortions. With the exception of
+        taxes on land, most property taxes increase economic distortions and
+        have long-term negative effects on an economy and its productivity.
       </p>
       <PropTaxTable>
         <thead>
