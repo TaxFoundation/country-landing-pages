@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { scaleLinear, scaleBand } from 'd3-scale';
-import { line } from 'd3-shape';
 
 import XAxis from '../ui/XAxis';
 
@@ -245,30 +244,31 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
           id='sources-of-reveneue-legend'
           transform={`translate(0, ${height - margin.bottom / 2})`}
         >
-          {sections.map((section, i) => {
-            const spacer = 155;
-            return (
-              <React.Fragment key={`sources-legend-${section.title}`}>
-                <rect
-                  x={margin.left + i * spacer}
-                  width={25}
-                  height={25}
-                  fill={section.fill}
-                ></rect>
-                {section.title.split(' ').map((word, j) => (
-                  <text
-                    key={`${section.title}-word-${word}`}
-                    x={margin.left + 35 + i * spacer}
+          {width > 600 &&
+            sections.map((section, i) => {
+              const spacer = 155;
+              return (
+                <React.Fragment key={`sources-legend-${section.title}`}>
+                  <rect
+                    x={margin.left + i * spacer}
+                    width={25}
+                    height={25}
                     fill={section.fill}
-                    y={10 + j * 14}
-                    fontSize={14}
-                  >
-                    {word}
-                  </text>
-                ))}
-              </React.Fragment>
-            );
-          })}
+                  ></rect>
+                  {section.title.split(' ').map((word, j) => (
+                    <text
+                      key={`${section.title}-word-${word}`}
+                      x={margin.left + 35 + i * spacer}
+                      fill={section.fill}
+                      y={10 + j * 14}
+                      fontSize={14}
+                    >
+                      {word}
+                    </text>
+                  ))}
+                </React.Fragment>
+              );
+            })}
         </g>
       </svg>
     </Container>
