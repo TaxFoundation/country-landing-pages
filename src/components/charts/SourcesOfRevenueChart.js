@@ -8,7 +8,6 @@ import XAxis from '../ui/XAxis';
 const Container = styled.div`
   border: 1px solid #999;
   margin: 0;
-  padding: 1rem;
 `;
 
 const Chunk = ({ coordinates, y, width, height, data, section }) => {
@@ -91,18 +90,20 @@ Chunk.propTypes = {
 
 const SourcesOfRevenueChart = ({ country, data, title }) => {
   const containerElement = useRef(null);
+  const initialWidth = 800;
+  const initialHeight = 500;
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);
   const margin = { top: 30, left: 50, bottom: 100, right: 20 };
   const yScale = scaleBand()
     .domain(['OECD Average', country])
-    .range([height - margin.bottom, margin.top])
+    .range([initialHeight - margin.bottom, margin.top])
     .align(0.5)
     .paddingOuter(0.35)
     .paddingInner(0.35);
   const xScale = scaleLinear()
     .domain([0, 100])
-    .range([20 + margin.left, width - margin.right - 20]);
+    .range([20 + margin.left, initialWidth - margin.right - 20]);
 
   const sections = [
     {
@@ -160,7 +161,9 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
   useEffect(() => {
     function handleResize() {
       setWidth(containerElement.current.clientWidth);
-      setHeight(containerElement.current.clientWidth * (5 / 8));
+      setHeight(
+        containerElement.current.clientWidth * (initialHeight / initialWidth)
+      );
     }
 
     if (!containerElement) {
@@ -175,13 +178,18 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
 
   return (
     <Container ref={containerElement}>
-      <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
+      <svg
+        viewBox={`0 0 ${initialWidth} ${initialHeight}`}
+        width={width}
+        height={height}
+        role='graphics-document'
+      >
         <title>{title}</title>
         <text
-          x={width / 2}
+          x={initialWidth / 2}
           y='20'
           textAnchor='middle'
-          fontSize={20 * Math.max(width / 800, 0.7)}
+          fontSize={20 * Math.max(initialWidth / 800, 0.7)}
         >
           {title}
         </text>
@@ -190,8 +198,8 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
           min={0}
           max={100}
           numTicks={11}
-          height={height}
-          width={width}
+          height={initialHeight}
+          width={initialWidth}
           margin={margin}
           label='Cumulative Percentage'
           format={value => `${value}%`}
@@ -202,7 +210,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
               yScale(country) + yScale.bandwidth() / 2
             }) rotate(-90)`}
             textAnchor='middle'
-            fontSize={18 * Math.max(width / 800, 0.3)}
+            fontSize={18 * Math.max(initialWidth / 800, 0.3)}
           >
             {country}
           </text>
@@ -211,7 +219,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
               yScale('OECD Average') + yScale.bandwidth() / 2
             }) rotate(-90)`}
             textAnchor='middle'
-            fontSize={18 * Math.max(width / 800, 0.3)}
+            fontSize={18 * Math.max(initialWidth / 800, 0.3)}
           >
             OECD Average
           </text>
@@ -223,7 +231,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
                 data={data.country[section.id]}
                 margin={margin}
                 section={section}
-                width={width}
+                width={initialWidth}
                 coordinates={countryRectCoords[section.id]}
                 y={yScale(country)}
                 height={yScale.bandwidth()}
@@ -232,7 +240,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
                 data={data.oecd[section.id]}
                 margin={margin}
                 section={section}
-                width={width}
+                width={initialWidth}
                 coordinates={oecdRectCoords[section.id]}
                 y={yScale('OECD Average')}
                 height={yScale.bandwidth()}
@@ -240,36 +248,36 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
             </React.Fragment>
           ))}
         </g>
-        <g
+        <svg
           id='sources-of-reveneue-legend'
-          transform={`translate(0, ${height - margin.bottom / 2})`}
+          viewBox={`0 0 ${initialWidth} ${initialHeight}`}
+          transform={`translate(0, ${initialHeight - margin.bottom / 2})`}
         >
-          {width > 600 &&
-            sections.map((section, i) => {
-              const spacer = 155;
-              return (
-                <React.Fragment key={`sources-legend-${section.title}`}>
-                  <rect
-                    x={margin.left + i * spacer}
-                    width={25}
-                    height={25}
+          {sections.map((section, i) => {
+            const spacer = initialWidth / 6;
+            return (
+              <React.Fragment key={`sources-legend-${section.title}`}>
+                <rect
+                  x={margin.left + i * spacer}
+                  width={25}
+                  height={25}
+                  fill={section.fill}
+                ></rect>
+                {section.title.split(' ').map((word, j) => (
+                  <text
+                    key={`${section.title}-word-${word}`}
+                    x={margin.left + 35 + i * spacer}
                     fill={section.fill}
-                  ></rect>
-                  {section.title.split(' ').map((word, j) => (
-                    <text
-                      key={`${section.title}-word-${word}`}
-                      x={margin.left + 35 + i * spacer}
-                      fill={section.fill}
-                      y={10 + j * 14}
-                      fontSize={14}
-                    >
-                      {word}
-                    </text>
-                  ))}
-                </React.Fragment>
-              );
-            })}
-        </g>
+                    y={10 + j * 14}
+                    fontSize={14}
+                  >
+                    {word}
+                  </text>
+                ))}
+              </React.Fragment>
+            );
+          })}
+        </svg>
       </svg>
     </Container>
   );

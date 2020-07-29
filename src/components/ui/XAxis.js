@@ -18,10 +18,11 @@ const XAxis = ({
       aria-orientation='horizontal'
       aria-valuemin={min}
       aria-valuemax={max}
+      transform={`translate(0, ${height - margin.bottom})`}
     >
       <text
         x={margin.left + (width - margin.left - margin.right) / 2}
-        y={height - margin.bottom + 35}
+        y={+35}
         fontSize='16'
         textAnchor='middle'
       >
@@ -30,8 +31,8 @@ const XAxis = ({
       <line
         x1={margin.left}
         x2={width - margin.right}
-        y1={height - margin.bottom}
-        y2={height - margin.bottom}
+        y1={0}
+        y2={0}
         stroke='#333'
         strokeWidth='1'
         shapeRendering='crispEdges'
@@ -43,19 +44,14 @@ const XAxis = ({
             <line
               x1={xScale(value)}
               x2={xScale(value)}
-              y1={height - margin.bottom}
-              y2={height - margin.bottom + 5}
+              y1={0}
+              y2={5}
               stroke='#333'
               strokeWidth='1'
               shapeRendering='crispEdges'
               vectorEffect='non-scaling-stroke'
             />
-            <text
-              x={xScale(value)}
-              y={height - margin.bottom + 15}
-              textAnchor='middle'
-              fontSize='10'
-            >
+            <text x={xScale(value)} y={15} textAnchor='middle' fontSize='10'>
               {format(value)}
             </text>
           </g>
