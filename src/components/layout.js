@@ -58,6 +58,14 @@ const TopSection = styled.div`
   }
 `;
 
+const SectionsAndTOC = styled.div`
+  @media (min-width: 800px) {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template: auto / auto 250px;
+  }
+`;
+
 const Layout = ({ data }) => {
   let country = { ...data.countriesCsv, data: {} };
   country.data['itciMain'] = data.allIndexRanksCsv.edges.map(edge => edge.node);
@@ -106,44 +114,55 @@ const Layout = ({ data }) => {
           ></CountrySelector>
         </TopSection>
         <hr />
-        <Sections>
-          <ITCI
-            countryName={country.name}
-            countryAdjective={country.adjective}
-            countryArticle={country.article}
-            data={country.data.itciMain}
-            subdata={country.data.itciSubdata}
-          />
-          <hr />
-          <SourcesOfRevenue
-            countryName={country.name}
-            countryAdjective={country.adjective}
-            countryArticle={country.article}
-            data={country.data.sourcesOfRevenue}
-          />
-          <hr />
-          <CorporateTax
-            countryName={country.name}
-            countryAdjective={country.adjective}
-            countryArticle={country.article}
-            data={country.data.corporateTax}
-            worldwide={country.data.worldwideCorpTax}
-          />
-          <hr />
-          <TaxBurdenOnLabor
-            countryName={country.name}
-            countryAdjective={country.adjective}
-            countryArticle={country.article}
-            data={country.data.taxBurdenOnLabor}
-          />
-          <hr />
-          <PropertyTax
-            countryName={country.name}
-            countryAdjective={country.adjective}
-            countryArticle={country.article}
-            data={country.data.propertyTaxes}
-          />
-        </Sections>
+        <SectionsAndTOC>
+          <div>
+            <ITCI
+              countryName={country.name}
+              countryAdjective={country.adjective}
+              countryArticle={country.article}
+              data={country.data.itciMain}
+              subdata={country.data.itciSubdata}
+            />
+            <hr />
+            <SourcesOfRevenue
+              countryName={country.name}
+              countryAdjective={country.adjective}
+              countryArticle={country.article}
+              data={country.data.sourcesOfRevenue}
+            />
+            <hr />
+            <CorporateTax
+              countryName={country.name}
+              countryAdjective={country.adjective}
+              countryArticle={country.article}
+              data={country.data.corporateTax}
+              worldwide={country.data.worldwideCorpTax}
+            />
+            <hr />
+            <TaxBurdenOnLabor
+              countryName={country.name}
+              countryAdjective={country.adjective}
+              countryArticle={country.article}
+              data={country.data.taxBurdenOnLabor}
+            />
+            <hr />
+            <PropertyTax
+              countryName={country.name}
+              countryAdjective={country.adjective}
+              countryArticle={country.article}
+              data={country.data.propertyTaxes}
+            />
+          </div>
+          <div>
+            <ul>
+              <li>Stuff</li>
+              <li>Things</li>
+              <li>Test test test test test</li>
+              <li>Blah</li>
+              <li>Whooooo!!!</li>
+            </ul>
+          </div>
+        </SectionsAndTOC>
       </Container>
     </>
   );
