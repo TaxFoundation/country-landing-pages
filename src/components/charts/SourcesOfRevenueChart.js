@@ -92,8 +92,6 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
   const containerElement = useRef(null);
   const initialWidth = 800;
   const initialHeight = 500;
-  const [width, setWidth] = useState(800);
-  const [height, setHeight] = useState(500);
   const margin = { top: 30, left: 50, bottom: 100, right: 20 };
   const yScale = scaleBand()
     .domain(['OECD Average', country])
@@ -158,30 +156,10 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
     oecdAcc += oecdValue - xScale(0);
   });
 
-  useEffect(() => {
-    function handleResize() {
-      setWidth(containerElement.current.clientWidth);
-      setHeight(
-        containerElement.current.clientWidth * (initialHeight / initialWidth)
-      );
-    }
-
-    if (!containerElement) {
-      return false;
-    }
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <Container ref={containerElement}>
       <svg
         viewBox={`0 0 ${initialWidth} ${initialHeight}`}
-        width={width}
-        height={height}
         role='graphics-document'
       >
         <title>{title}</title>

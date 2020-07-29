@@ -6,7 +6,6 @@ import { kebabCase } from 'lodash';
 
 import CountryDescription from './ui/CountryDescription';
 import CountrySelector from './ui/CountrySelector';
-import Sections from './ui/Sections';
 import ITCI from './sections/ITCI';
 import SourcesOfRevenue from './sections/SourcesOfRevenue';
 import CorporateTax from './sections/CorporateTax';
