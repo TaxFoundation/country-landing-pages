@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import TaxBurdenChart from '../charts/TaxBurdenChart';
 
-const TaxBurdenOnLabor = ({ countryName, countryArticle, data }) => {
+const TaxBurdenOnLabor = ({ countryName, countryArticle, data, id }) => {
   const [activeTab, setActiveTab] = useState('tax-burden-on-labor');
   const tabOptions = [
     {
@@ -17,7 +17,7 @@ const TaxBurdenOnLabor = ({ countryName, countryArticle, data }) => {
     },
   ];
   return (
-    <div>
+    <div id={id}>
       <h2>{`Individual Taxation in${
         countryArticle ? ' ' + countryArticle : ''
       } ${countryName}`}</h2>
@@ -74,6 +74,7 @@ TaxBurdenOnLabor.propTypes = {
   countryName: PropTypes.string,
   countryArticle: PropTypes.string,
   data: PropTypes.object,
+  id: PropTypes.string,
 };
 
 export default TaxBurdenOnLabor;

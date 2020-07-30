@@ -13,6 +13,7 @@ const CorporateTax = ({
   countryArticle,
   data,
   worldwide,
+  id,
 }) => {
   const [activeTab, setActiveTab] = useState('corp-time-series');
   const tabOptions = [
@@ -34,7 +35,7 @@ const CorporateTax = ({
     },
   ];
   return (
-    <div>
+    <div id={id}>
       <h2>{`Corporate Taxation in${
         countryArticle ? ' ' + countryArticle : ''
       } ${countryName}`}</h2>
@@ -91,6 +92,7 @@ CorporateTax.propTypes = {
   countryArticle: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
   worldwide: PropTypes.arrayOf(PropTypes.object),
+  id: PropTypes.id,
 };
 
 export default CorporateTax;

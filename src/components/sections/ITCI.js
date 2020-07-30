@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { capitalize } from 'lodash';
 
 import { numberRankString } from '../../utilities';
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import ITCIChart from '../charts/ITCI';
 
-const ITCI = ({ countryName, countryAdjective, countryArticle, data }) => {
+const ITCI = ({ countryName, countryAdjective, countryArticle, data, id }) => {
   const [activeRank, setActiveRank] = useState('itci_final');
   const currentYear = data.reduce((prev, curr) => {
     if (+curr.year > +prev.year) {
@@ -43,7 +42,7 @@ const ITCI = ({ countryName, countryAdjective, countryArticle, data }) => {
     },
   ];
   return (
-    <div>
+    <div id={id}>
       <h2>International Tax Competitiveness Index</h2>
       <p>
         The Tax Foundation’ s{' '}
@@ -52,13 +51,14 @@ const ITCI = ({ countryName, countryAdjective, countryArticle, data }) => {
           target='_blank'
           rel='noopener noreferrer'
         >
-          International Tax Competitiveness Index(ITCI){' '}
+          International Tax Competitiveness Index (ITCI){' '}
         </a>{' '}
         measures the degree to which the 36 OECD countries’ tax systems promote
         competitiveness through low tax burdens on business investment and
-        neutrality through a well-structured tax code. The ITCI considers more
-        than 40 variables across five categories: Corporate Taxes, Individual
-        Taxes, Consumption Taxes, Property Taxes, and International Tax Rules.
+        neutrality through a well-structured tax code. The <em>ITCI</em>{' '}
+        considers more than 40 variables across five categories: Corporate
+        Taxes, Individual Taxes, Consumption Taxes, Property Taxes, and
+        International Tax Rules.
       </p>
       <p>
         The <em>ITCI</em> attempts to display not only which countries provide
@@ -119,6 +119,7 @@ ITCI.propTypes = {
       international_rank: PropTypes.string,
     })
   ),
+  id: PropTypes.id,
 };
 
 export default ITCI;

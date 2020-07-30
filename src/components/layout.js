@@ -59,10 +59,16 @@ const TopSection = styled.div`
 
 const SectionsAndTOC = styled.div`
   @media (min-width: 800px) {
+    align-items: start;
     display: grid;
     grid-gap: 1rem;
     grid-template: auto / auto 250px;
   }
+`;
+
+const TOC = styled.nav`
+  position: sticky;
+  top: 1rem;
 `;
 
 const Layout = ({ data }) => {
@@ -116,6 +122,7 @@ const Layout = ({ data }) => {
         <SectionsAndTOC>
           <div>
             <ITCI
+              id='itci'
               countryName={country.name}
               countryAdjective={country.adjective}
               countryArticle={country.article}
@@ -124,6 +131,7 @@ const Layout = ({ data }) => {
             />
             <hr />
             <SourcesOfRevenue
+              id='sources'
               countryName={country.name}
               countryAdjective={country.adjective}
               countryArticle={country.article}
@@ -131,6 +139,7 @@ const Layout = ({ data }) => {
             />
             <hr />
             <CorporateTax
+              id='corporate'
               countryName={country.name}
               countryAdjective={country.adjective}
               countryArticle={country.article}
@@ -139,6 +148,7 @@ const Layout = ({ data }) => {
             />
             <hr />
             <TaxBurdenOnLabor
+              id='personal'
               countryName={country.name}
               countryAdjective={country.adjective}
               countryArticle={country.article}
@@ -146,21 +156,38 @@ const Layout = ({ data }) => {
             />
             <hr />
             <PropertyTax
+              id='property'
               countryName={country.name}
               countryAdjective={country.adjective}
               countryArticle={country.article}
               data={country.data.propertyTaxes}
             />
           </div>
-          <div>
+          <TOC>
             <ul>
-              <li>Stuff</li>
-              <li>Things</li>
-              <li>Test test test test test</li>
-              <li>Blah</li>
-              <li>Whooooo!!!</li>
+              <li>
+                <a href='#itci'>International Tax Competitiveness Index</a>
+              </li>
+              <li>
+                <a href='#sources'>Sources of Tax Revenue</a>
+              </li>
+              <li>
+                <a href='#corporate'>Corporate Taxation</a>
+              </li>
+              <li>
+                <a href='#personal'>Personal Income Taxes</a>
+              </li>
+              <li>
+                <a href='#consumption'>Consumption Taxes</a>
+              </li>
+              <li>
+                <a href='#property'>Property Taxes</a>
+              </li>
+              <li>
+                <a href='#international'>International Tax Rules</a>
+              </li>
             </ul>
-          </div>
+          </TOC>
         </SectionsAndTOC>
       </Container>
     </>

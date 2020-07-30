@@ -50,7 +50,7 @@ const KeyFigures = styled.div`
   }
 `;
 
-const PropertyTax = ({ countryName, countryArticle, data }) => {
+const PropertyTax = ({ countryName, countryArticle, data, id }) => {
   const rows = [
     {
       category: 'Net Wealth Tax',
@@ -90,7 +90,7 @@ const PropertyTax = ({ countryName, countryArticle, data }) => {
     },
   ];
   return (
-    <div>
+    <div id={id}>
       <h2>{`Property Taxes in${
         countryArticle ? ' ' + countryArticle : ''
       } ${countryName}`}</h2>
@@ -154,6 +154,7 @@ PropertyTax.propTypes = {
   countryName: PropTypes.string,
   countryArticle: PropTypes.string,
   data: PropTypes.object,
+  id: PropTypes.string,
 };
 
 export default PropertyTax;

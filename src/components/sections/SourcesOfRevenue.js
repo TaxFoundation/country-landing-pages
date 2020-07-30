@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import SourcesOfRevenueChart from '../charts/SourcesOfRevenueChart';
 
-const SourcesOfRevenue = ({ countryName, countryArticle, data }) => {
+const SourcesOfRevenue = ({ countryName, countryArticle, data, id }) => {
   return (
-    <div>
+    <div id={id}>
       <h2>{`Sources of Revenue in${
         countryArticle ? ' ' + countryArticle : ''
       } ${countryName}`}</h2>
@@ -34,6 +34,7 @@ SourcesOfRevenue.propTypes = {
   countryName: PropTypes.string,
   countryArticle: PropTypes.string,
   data: PropTypes.object,
+  id: PropTypes.string,
 };
 
 export default SourcesOfRevenue;
