@@ -181,7 +181,9 @@ const CorpTax = ({ data, worldwide, title }) => {
           ].map((section, i) => {
             const spacer = 800 / 3;
             return (
-              <React.Fragment key={`sources-legend-${section.title}`}>
+              <React.Fragment
+                key={`corporate-legend-${section.words.join('-')}`}
+              >
                 <rect
                   x={margin.left + i * spacer}
                   width={25}

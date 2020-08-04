@@ -92,7 +92,7 @@ CorporateTax.propTypes = {
   countryArticle: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
   worldwide: PropTypes.arrayOf(PropTypes.object),
-  id: PropTypes.id,
+  id: PropTypes.string,
 };
 
 export default CorporateTax;

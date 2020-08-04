@@ -119,7 +119,7 @@ ITCI.propTypes = {
       international_rank: PropTypes.string,
     })
   ),
-  id: PropTypes.id,
+  id: PropTypes.string,
 };
 
 export default ITCI;
