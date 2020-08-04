@@ -21,10 +21,10 @@ const YAxis = ({
     >
       <text
         textAnchor='middle'
-        y={13}
-        x={-(height - margin.top - margin.bottom) / 2}
-        fontSize='10'
-        transform='rotate(-90)'
+        fontSize='14'
+        transform={`translate(13 ${
+          (height - margin.top - margin.bottom) / 2 + margin.top
+        }) rotate(-90)`}
       >
         {label}
       </text>
