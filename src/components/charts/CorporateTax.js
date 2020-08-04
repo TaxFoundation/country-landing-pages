@@ -40,7 +40,7 @@ const CorpTax = ({ data, worldwide, title }) => {
       ...worldwide.map(d => +d.weighted.average)
     ) + 5
   );
-  const margin = { top: 30, left: 50, bottom: 40, right: 10 };
+  const margin = { top: 30, left: 50, bottom: 90, right: 10 };
   const xScale = scaleLinear()
     .domain([minYear, maxYear])
     .range([20 + margin.left, width - margin.right - 20]);
@@ -73,7 +73,7 @@ const CorpTax = ({ data, worldwide, title }) => {
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
         <text x={width / 2} y='16' textAnchor='middle' fontSize={16}>
-          {title}
+          {`${title} 's Top Corporate Tax Rate`}
         </text>
         <YAxis
           yScale={yScale}
@@ -83,7 +83,8 @@ const CorpTax = ({ data, worldwide, title }) => {
           height={height}
           width={width}
           margin={margin}
-          label='Score'
+          label='Rate'
+          format={value => `${value}%`}
         />
         <XAxis
           height={height}
@@ -162,6 +163,46 @@ const CorpTax = ({ data, worldwide, title }) => {
             </g>
           ))}
         </g>
+        <svg
+          id='corporate-legend'
+          viewBox={`0 0 800 500`}
+          transform={`translate(0, ${height - margin.bottom / 2})`}
+        >
+          {[
+            {
+              words: ['Worldwide Weighted', 'Average'],
+              fill: worldwideWeightedColor,
+            },
+            { words: ['Wordlwide Average'], fill: worldwideColor },
+            {
+              words: [`${title}`, `Top Marginal`, `Corporate Tax Rate`],
+              fill: countryColor,
+            },
+          ].map((section, i) => {
+            const spacer = 800 / 3;
+            return (
+              <React.Fragment key={`sources-legend-${section.title}`}>
+                <rect
+                  x={margin.left + i * spacer}
+                  width={25}
+                  height={25}
+                  fill={section.fill}
+                ></rect>
+                {section.words.map((word, j) => (
+                  <text
+                    key={`${section.title}-word-${word}`}
+                    x={margin.left + 35 + i * spacer}
+                    fill={section.fill}
+                    y={13 + j * 14}
+                    fontSize={16}
+                  >
+                    {word}
+                  </text>
+                ))}
+              </React.Fragment>
+            );
+          })}
+        </svg>
       </svg>
     </Container>
   );

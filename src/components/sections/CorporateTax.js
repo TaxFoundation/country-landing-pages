@@ -73,7 +73,7 @@ const CorporateTax = ({
         <CorpTaxChart
           title={`${
             countryArticle ? capitalize(countryArticle) + ' ' : ''
-          }${countryName}'s Top Corporate Tax Rate`}
+          }${countryName}`}
           data={data
             .map(entry => {
               return { year: +entry.year, rate: +entry.rate };
