@@ -10,6 +10,7 @@ import ITCI from './sections/ITCI';
 import SourcesOfRevenue from './sections/SourcesOfRevenue';
 import CorporateTax from './sections/CorporateTax';
 import TaxBurdenOnLabor from './sections/TaxBurdenOnLabor';
+import Consumption from './sections/Consumption';
 import PropertyTax from './sections/PropertyTax';
 
 const GlobalStyle = createGlobalStyle`
@@ -92,6 +93,7 @@ const Layout = ({ data }) => {
     'worldwideCorpTax'
   ] = data.allWorldwideCorporateTaxRatesCsv.edges.map(edge => edge.node);
   country.data['taxBurdenOnLabor'] = data.allTaxBurdenOnLaborCsv.edges[0].node;
+  country.data['consumptionData'];
   country.data['propertyTaxes'] = {
     net_wealth: data.allIndexRawDataCsv.edges[0].node.net_wealth,
     estate_or_inheritance_tax:
@@ -153,6 +155,14 @@ const Layout = ({ data }) => {
               countryAdjective={country.adjective}
               countryArticle={country.article}
               data={country.data.taxBurdenOnLabor}
+            />
+            <hr />
+            <Consumption
+              id='consumption'
+              countryID={country.iso3}
+              countryName={country.name}
+              countryArticle={country.article}
+              countryData={country.data.consumptionData}
             />
             <hr />
             <PropertyTax
