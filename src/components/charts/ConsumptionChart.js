@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { scaleLinear } from 'd3-scale';
-import { line } from 'd3-shape';
+import { scaleLinear, scaleBand } from 'd3-scale';
 import { format } from 'd3-format';
 
+import XAxisBanded from '../ui/XAxisBanded';
 import YAxis from '../ui/YAxis';
 
 const Container = styled.div`
@@ -18,10 +18,15 @@ const ConsumptionChart = ({ data, title }) => {
   const containerElement = useRef(null);
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(500);
-  const margin = { top: 30, left: 90, bottom: 40, right: 10 };
+  const margin = { top: 30, left: 70, bottom: 40, right: 10 };
+  const countries = data.map(country => country.iso3).sort();
   const yScale = scaleLinear()
-    .domain([0, 100])
+    .domain([0, 1])
     .range([height - margin.bottom, margin.top]);
+  const xScale = scaleBand()
+    .domain(countries)
+    .range([margin.left, width - margin.right])
+    .padding(0.2);
 
   useEffect(() => {
     function handleResize() {
@@ -38,6 +43,8 @@ const ConsumptionChart = ({ data, title }) => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  console.log(data);
 
   return (
     <Container ref={containerElement}>
@@ -59,10 +66,37 @@ const ConsumptionChart = ({ data, title }) => {
           height={height}
           width={width}
           margin={margin}
-          label='Percent'
-          format={format('%')}
+          label='Tax Collections / Potential Collections with Broadest Base'
+          format={format('.0%')}
         />
-        <g id='consumption-bar-chart'></g>
+        <XAxisBanded
+          xScale={xScale}
+          band={countries}
+          height={height}
+          width={width}
+          margin={margin}
+          label='Countries'
+        />
+        <g id='consumption-bar-chart'>
+          {data.map(country => {
+            return (
+              <g key={`vat-base-${country.iso3}`}>
+                <title>{`${format('.0%')(
+                  country.vatBreadth
+                )} of All Consumption is Taxed at the Rate of ${
+                  country.vatRate
+                }%`}</title>
+                <rect
+                  fill={'#0094ff'}
+                  x={xScale(country.iso3)}
+                  width={xScale.bandwidth()}
+                  y={yScale(country.vatBreadth)}
+                  height={yScale(0) - yScale(country.vatBreadth)}
+                ></rect>
+              </g>
+            );
+          })}
+        </g>
         <line
           x1={margin.left}
           x2={width - margin.right}
@@ -80,7 +114,14 @@ const ConsumptionChart = ({ data, title }) => {
 
 ConsumptionChart.propTypes = {
   title: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      iso3: PropTypes.string,
+      vatBreadth: PropTypes.number,
+      vatRate: PropTypes.number,
+      vatThreshold: PropTypes.number,
+    })
+  ),
 };
 
 export default ConsumptionChart;

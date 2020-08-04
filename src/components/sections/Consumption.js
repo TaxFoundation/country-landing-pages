@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
-import CorpTaxChart from '../charts/ConsumptionChart';
+import ConsumptionChart from '../charts/ConsumptionChart';
 
 const Consumption = ({ countryID, countryName, countryArticle, data, id }) => {
   const [activeTab, setActiveTab] = useState('corp-time-series');
   const tabOptionsFunc = countryID => [
     {
-      name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Breadth`,
-      id: 'vat-breadth',
+      name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Base`,
+      id: 'vat-base',
     },
     {
       name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Rates Map`,
@@ -60,10 +60,10 @@ const Consumption = ({ countryID, countryName, countryArticle, data, id }) => {
         ))}
       </ChartTabs>
       {activeTab === 'corp-time-series' && (
-        <CorpTaxChart
+        <ConsumptionChart
           title={`${
-            countryArticle ? capitalize(countryArticle) + ' ' : ''
-          }${countryName}`}
+            countryID === 'USA' ? 'Sales Tax Base in ' : 'VAT Tax Base in '
+          } ${countryArticle ? countryArticle + ' ' : ''}${countryName}`}
           data={data}
         />
       )}
@@ -75,7 +75,14 @@ Consumption.propTypes = {
   countryName: PropTypes.string,
   countryID: PropTypes.string,
   countryArticle: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      iso3: PropTypes.string,
+      vatBreadth: PropTypes.number,
+      vatRate: PropTypes.number,
+      vatThreshold: PropTypes.number,
+    })
+  ),
   id: PropTypes.string,
 };
 

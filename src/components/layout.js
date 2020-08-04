@@ -74,6 +74,9 @@ const TOC = styled.nav`
 
 const Layout = ({ data }) => {
   let country = { ...data.countriesCsv, data: {} };
+  const countryRawIndex = data.allIndexRawDataCsv.edges.find(
+    edge => edge.node.ISO_3 === country.iso3
+  );
   country.data['itciMain'] = data.allIndexRanksCsv.edges.map(edge => edge.node);
   country.data['itciSubdata'] = data.allIndexSubranksCsv.edges.map(
     edge => edge.node
@@ -93,18 +96,27 @@ const Layout = ({ data }) => {
     'worldwideCorpTax'
   ] = data.allWorldwideCorporateTaxRatesCsv.edges.map(edge => edge.node);
   country.data['taxBurdenOnLabor'] = data.allTaxBurdenOnLaborCsv.edges[0].node;
-  country.data['consumptionData'];
+  const vatYear = Math.max(
+    ...data.allIndexRawDataCsv.edges.map(edge => +edge.node.year)
+  );
+  country.data['consumptionData'] = data.allIndexRawDataCsv.edges
+    .filter(edge => +edge.node.year === vatYear)
+    .map(edge => {
+      return {
+        iso3: edge.node.ISO_3,
+        vatBreadth: +edge.node.vat_base,
+        vatRate: +edge.node.vat_rate,
+        vatThreshold: +edge.node.vat_threshold,
+      };
+    });
   country.data['propertyTaxes'] = {
-    net_wealth: data.allIndexRawDataCsv.edges[0].node.net_wealth,
-    estate_or_inheritance_tax:
-      data.allIndexRawDataCsv.edges[0].node.estate_or_inheritance_tax,
-    transfer_tax: data.allIndexRawDataCsv.edges[0].node.transfer_tax,
-    asset_tax: data.allIndexRawDataCsv.edges[0].node.asset_tax,
-    capital_duties: data.allIndexRawDataCsv.edges[0].node.capital_duties,
-    financial_transaction_tax:
-      data.allIndexRawDataCsv.edges[0].node.financial_transaction_tax,
-    property_tax_collections:
-      data.allIndexRawDataCsv.edges[0].node.property_tax_collections,
+    net_wealth: countryRawIndex.node.net_wealth,
+    estate_or_inheritance_tax: countryRawIndex.node.estate_or_inheritance_tax,
+    transfer_tax: countryRawIndex.node.transfer_tax,
+    asset_tax: countryRawIndex.node.asset_tax,
+    capital_duties: countryRawIndex.node.capital_duties,
+    financial_transaction_tax: countryRawIndex.node.financial_transaction_tax,
+    property_tax_collections: countryRawIndex.node.property_tax_collections,
     property_tax_share_of_revenue:
       data.allSourceRevenueByCountryCsv.edges[0].node.Property_Taxes,
   };
@@ -163,6 +175,7 @@ const Layout = ({ data }) => {
               countryName={country.name}
               countryArticle={country.article}
               countryData={country.data.consumptionData}
+              data={country.data.consumptionData}
             />
             <hr />
             <PropertyTax
@@ -335,12 +348,10 @@ export const query = graphql`
         }
       }
     }
-    allIndexRawDataCsv(
-      sort: { fields: year, order: ASC }
-      filter: { ISO_3: { eq: $iso3 } }
-    ) {
+    allIndexRawDataCsv {
       edges {
         node {
+          ISO_3
           year
           asset_tax
           buildings_cost_recovery
