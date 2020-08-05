@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { capitalize } from 'lodash';
 
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import VATRatesChart from '../charts/VATRatesChart';

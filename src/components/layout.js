@@ -12,6 +12,7 @@ import CorporateTax from './sections/CorporateTax';
 import TaxBurdenOnLabor from './sections/TaxBurdenOnLabor';
 import Consumption from './sections/Consumption';
 import PropertyTax from './sections/PropertyTax';
+import International from './sections/International';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -96,11 +97,11 @@ const Layout = ({ data }) => {
     'worldwideCorpTax'
   ] = data.allWorldwideCorporateTaxRatesCsv.edges.map(edge => edge.node);
   country.data['taxBurdenOnLabor'] = data.allTaxBurdenOnLaborCsv.edges[0].node;
-  const vatYear = Math.max(
+  const itciMaxYear = Math.max(
     ...data.allIndexRawDataCsv.edges.map(edge => +edge.node.year)
   );
   country.data['consumptionData'] = data.allIndexRawDataCsv.edges
-    .filter(edge => +edge.node.year === vatYear)
+    .filter(edge => +edge.node.year === itciMaxYear)
     .map(edge => {
       return {
         iso3: edge.node.ISO_3,
@@ -120,6 +121,14 @@ const Layout = ({ data }) => {
     property_tax_share_of_revenue:
       data.allSourceRevenueByCountryCsv.edges[0].node.Property_Taxes,
   };
+  country.data['international'] = data.allIndexRawDataCsv.edges
+    .filter(edge => +edge.node.year === itciMaxYear)
+    .map(edge => {
+      return {
+        iso3: edge.node.ISO_3,
+        taxTreaties: +edge.node.tax_treaties,
+      };
+    });
 
   return (
     <>
@@ -174,7 +183,6 @@ const Layout = ({ data }) => {
               countryID={country.iso3}
               countryName={country.name}
               countryArticle={country.article}
-              countryData={country.data.consumptionData}
               data={country.data.consumptionData}
             />
             <hr />
@@ -184,6 +192,14 @@ const Layout = ({ data }) => {
               countryAdjective={country.adjective}
               countryArticle={country.article}
               data={country.data.propertyTaxes}
+            />
+            <hr />
+            <International
+              id='international'
+              countryID={country.iso3}
+              countryName={country.name}
+              countryArticle={country.article}
+              data={country.data.international}
             />
           </div>
           <TOC>
