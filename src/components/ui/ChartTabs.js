@@ -31,6 +31,10 @@ const ChartTab = styled.li`
     cursor: pointer;
     padding: 0.5rem;
     width: 100%;
+
+    &:focus {
+      outline: none;
+    }
   }
 `;
 
