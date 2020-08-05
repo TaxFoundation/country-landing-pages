@@ -10,7 +10,7 @@ const ChartTabs = styled.ul`
 
 const ChartTab = styled.li`
   border-top: ${props =>
-    props.active ? '2px solid #0094ff' : '2px solid transparent'};
+    props.active ? '2px solid #e0592a' : '2px solid transparent'};
   border-left: ${props =>
     props.active ? '1px solid #999' : '1px solid transparent'};
   border-right: ${props =>

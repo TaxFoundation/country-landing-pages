@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { kebabCase } from 'lodash';
 
 const StyledCountrySelector = styled.div`
-  border: 3px solid #0094ff;
+  border: 3px solid #e0592a;
   display: grid;
   grid-gap: 1rem;
   grid-template: repeat(4, auto) / auto;
@@ -31,8 +31,8 @@ const StyledCountrySelector = styled.div`
 
   .button {
     align-content: center;
-    background-color: #0094ff;
-    border: 1px solid #0094ff;
+    background-color: #e0592a;
+    border: 1px solid #e0592a;
     font-size: 1rem;
     color: white;
     display: grid;
@@ -42,8 +42,8 @@ const StyledCountrySelector = styled.div`
     width: 100%;
 
     &:hover {
-      background-color: #00aaff;
-      border: 1px solid #00aaff;
+      background-color: #f0795a;
+      border: 1px solid #f0795a;
     }
   }
 `;
