@@ -163,48 +163,46 @@ const CorpTax = ({ data, worldwide, title }) => {
             </g>
           ))}
         </g>
-        <svg
-          id='corporate-legend'
-          viewBox={`0 0 800 500`}
-          transform={`translate(0, ${height - margin.bottom / 2})`}
-        >
-          {[
-            {
-              words: ['Worldwide Weighted', 'Average'],
-              fill: worldwideWeightedColor,
-            },
-            { words: ['Wordlwide Average'], fill: worldwideColor },
-            {
-              words: [`${title}`, `Top Marginal`, `Corporate Tax Rate`],
-              fill: countryColor,
-            },
-          ].map((section, i) => {
-            const spacer = 800 / 3;
-            return (
-              <React.Fragment
-                key={`corporate-legend-${section.words.join('-')}`}
-              >
-                <rect
-                  x={margin.left + i * spacer}
-                  width={25}
-                  height={25}
-                  fill={section.fill}
-                ></rect>
-                {section.words.map((word, j) => (
-                  <text
-                    key={`${section.title}-word-${word}`}
-                    x={margin.left + 35 + i * spacer}
+        <g transform={`translate(0, ${height - margin.bottom / 2})`}>
+          <svg id='corporate-legend' viewBox={`0 0 800 500`}>
+            {[
+              {
+                words: ['Worldwide Weighted', 'Average'],
+                fill: worldwideWeightedColor,
+              },
+              { words: ['Wordlwide Average'], fill: worldwideColor },
+              {
+                words: [`${title}`, `Top Marginal`, `Corporate Tax Rate`],
+                fill: countryColor,
+              },
+            ].map((section, i) => {
+              const spacer = 800 / 3;
+              return (
+                <React.Fragment
+                  key={`corporate-legend-${section.words.join('-')}`}
+                >
+                  <rect
+                    x={margin.left + i * spacer}
+                    width={25}
+                    height={25}
                     fill={section.fill}
-                    y={13 + j * 14}
-                    fontSize={16}
-                  >
-                    {word}
-                  </text>
-                ))}
-              </React.Fragment>
-            );
-          })}
-        </svg>
+                  ></rect>
+                  {section.words.map((word, j) => (
+                    <text
+                      key={`${section.title}-word-${word}`}
+                      x={margin.left + 35 + i * spacer}
+                      fill={section.fill}
+                      y={13 + j * 14}
+                      fontSize={16}
+                    >
+                      {word}
+                    </text>
+                  ))}
+                </React.Fragment>
+              );
+            })}
+          </svg>
+        </g>
       </svg>
     </Container>
   );

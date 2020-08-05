@@ -226,36 +226,38 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
             </React.Fragment>
           ))}
         </g>
-        <svg
-          id='sources-of-reveneue-legend'
-          viewBox={`0 0 ${initialWidth} ${initialHeight}`}
-          transform={`translate(0, ${initialHeight - margin.bottom / 2})`}
-        >
-          {sections.map((section, i) => {
-            const spacer = initialWidth / 6;
-            return (
-              <React.Fragment key={`sources-legend-${section.title}`}>
-                <rect
-                  x={margin.left + i * spacer}
-                  width={25}
-                  height={25}
-                  fill={section.fill}
-                ></rect>
-                {section.title.split(' ').map((word, j) => (
-                  <text
-                    key={`${section.title}-word-${word}`}
-                    x={margin.left + 35 + i * spacer}
+        <g transform={`translate(0, ${initialHeight - margin.bottom / 2})`}>
+          <svg
+            id='sources-of-reveneue-legend'
+            viewBox={`0 0 ${initialWidth} ${initialHeight}`}
+            transform={`translate(0, ${initialHeight - margin.bottom / 2})`}
+          >
+            {sections.map((section, i) => {
+              const spacer = initialWidth / 6;
+              return (
+                <React.Fragment key={`sources-legend-${section.title}`}>
+                  <rect
+                    x={margin.left + i * spacer}
+                    width={25}
+                    height={25}
                     fill={section.fill}
-                    y={10 + j * 14}
-                    fontSize={14}
-                  >
-                    {word}
-                  </text>
-                ))}
-              </React.Fragment>
-            );
-          })}
-        </svg>
+                  ></rect>
+                  {section.title.split(' ').map((word, j) => (
+                    <text
+                      key={`${section.title}-word-${word}`}
+                      x={margin.left + 35 + i * spacer}
+                      fill={section.fill}
+                      y={10 + j * 14}
+                      fontSize={14}
+                    >
+                      {word}
+                    </text>
+                  ))}
+                </React.Fragment>
+              );
+            })}
+          </svg>
+        </g>
       </svg>
     </Container>
   );
