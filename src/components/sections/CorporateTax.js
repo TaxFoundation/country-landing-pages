@@ -70,17 +70,27 @@ const CorporateTax = ({
         ))}
       </ChartTabs>
       {activeTab === 'corp-time-series' && (
-        <CorpTaxChart
-          title={`${
-            countryArticle ? capitalize(countryArticle) + ' ' : ''
-          }${countryName}`}
-          data={data
-            .map(entry => {
-              return { year: +entry.year, rate: +entry.rate };
-            })
-            .sort((a, b) => a.year - b.year)}
-          worldwide={worldwide}
-        />
+        <React.Fragment>
+          <CorpTaxChart
+            title={`${
+              countryArticle ? capitalize(countryArticle) + ' ' : ''
+            }${countryName}`}
+            data={data
+              .map(entry => {
+                return { year: +entry.year, rate: +entry.rate };
+              })
+              .sort((a, b) => a.year - b.year)}
+            worldwide={worldwide}
+          />
+          <p>
+            Note: Data is unavailable for any years not graphed above. For more
+            information, including original data sources, see our{' '}
+            <a href='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'>
+              detailed report
+            </a>
+            .
+          </p>
+        </React.Fragment>
       )}
     </div>
   );
