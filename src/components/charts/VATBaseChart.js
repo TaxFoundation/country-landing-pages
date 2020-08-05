@@ -14,10 +14,10 @@ const Container = styled.div`
   padding: 1rem;
 `;
 
-const ConsumptionChart = ({ data, title }) => {
+const ConsumptionChart = ({ data, countryID, title }) => {
   const containerElement = useRef(null);
-  const [width, setWidth] = useState(800);
-  const [height, setHeight] = useState(500);
+  const width = 800;
+  const height = 500;
   const margin = { top: 30, left: 70, bottom: 40, right: 10 };
   const countries = data.map(country => country.iso3).sort();
   const yScale = scaleLinear()
@@ -28,31 +28,13 @@ const ConsumptionChart = ({ data, title }) => {
     .range([margin.left, width - margin.right])
     .padding(0.2);
 
-  useEffect(() => {
-    function handleResize() {
-      setWidth(containerElement.current.clientWidth);
-      setHeight(containerElement.current.clientWidth * (5 / 8));
-    }
-
-    if (!containerElement) {
-      return false;
-    }
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  console.log(data);
-
   return (
     <Container ref={containerElement}>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
         <text
           x={width / 2}
-          y='16'
+          y='18'
           textAnchor='middle'
           fontSize={16 * Math.max(width / 800, 0.7)}
         >
@@ -87,7 +69,11 @@ const ConsumptionChart = ({ data, title }) => {
                   country.vatRate
                 }%`}</title>
                 <rect
-                  fill={'#0094ff'}
+                  fill={
+                    country.iso3 === countryID
+                      ? 'rgb(73, 193, 255)'
+                      : 'rgb(103, 148, 253)'
+                  }
                   x={xScale(country.iso3)}
                   width={xScale.bandwidth()}
                   y={yScale(country.vatBreadth)}
@@ -122,6 +108,7 @@ ConsumptionChart.propTypes = {
       vatThreshold: PropTypes.number,
     })
   ),
+  countryID: PropTypes.string,
 };
 
 export default ConsumptionChart;

@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
-import ConsumptionChart from '../charts/ConsumptionChart';
+import VATRatesChart from '../charts/VATRatesChart';
+import VATBaseChart from '../charts/VATBaseChart';
 
 const Consumption = ({ countryID, countryName, countryArticle, data, id }) => {
-  const [activeTab, setActiveTab] = useState('corp-time-series');
+  const [activeTab, setActiveTab] = useState('vat-rates');
   const tabOptionsFunc = countryID => [
+    {
+      name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Rates`,
+      id: 'vat-rates',
+    },
     {
       name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Base`,
       id: 'vat-base',
-    },
-    {
-      name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Rates Map`,
-      id: 'vat-tax-map',
     },
     {
       name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Complexity Map`,
@@ -59,12 +60,26 @@ const Consumption = ({ countryID, countryName, countryArticle, data, id }) => {
           </ChartTab>
         ))}
       </ChartTabs>
-      {activeTab === 'corp-time-series' && (
-        <ConsumptionChart
+      {activeTab === 'vat-rates' && (
+        <VATRatesChart
           title={`${
-            countryID === 'USA' ? 'Sales Tax Base in ' : 'VAT Tax Base in '
-          } ${countryArticle ? countryArticle + ' ' : ''}${countryName}`}
+            countryID === 'USA' ? 'Sales Tax Rate in ' : 'VAT Rates in '
+          } ${countryArticle ? countryArticle + ' ' : ''}${countryName} vs. ${
+            countryID === 'USA' ? 'VAT Rates in ' : ''
+          }the OECD`}
           data={data}
+          countryID={countryID}
+        />
+      )}
+      {activeTab === 'vat-base' && (
+        <VATBaseChart
+          title={`${
+            countryID === 'USA' ? 'Sales Tax Base in ' : 'VAT Base in '
+          } ${
+            countryArticle ? countryArticle + ' ' : ''
+          }${countryName} vs. the OECD`}
+          data={data}
+          countryID={countryID}
         />
       )}
     </div>
