@@ -70,7 +70,7 @@ const SectionsAndTOC = styled.div`
 
 const TOC = styled.nav`
   position: sticky;
-  top: 1rem;
+  top: 4rem;
 `;
 
 const Layout = ({ data }) => {

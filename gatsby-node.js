@@ -18,7 +18,7 @@ exports.createPages = async ({ graphql, actions }) => {
   `);
   result.data.allCountriesCsv.edges.forEach(({ node }) => {
     createPage({
-      path: _.kebabCase(node.name),
+      path: path.join('country', _.kebabCase(node.name)),
       component: path.resolve('./src/components/layout.js'),
       context: {
         iso3: node.iso3,
