@@ -83,10 +83,7 @@ const CountrySelector = ({ current }) => {
           </option>
         ))}
       </select>
-      <a
-        className='button'
-        href={`https://taxfoundation.org/countries/${selectedCountry}`}
-      >
+      <a className='button' href={`/country/${selectedCountry}`}>
         Launch Data Explorer
       </a>
     </StyledCountrySelector>
