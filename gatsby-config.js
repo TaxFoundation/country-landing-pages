@@ -24,6 +24,7 @@ module.exports = {
     // `gatsby-plugin-offline`,
   ],
   assetPrefix:
-    'http://localhost/wp-content/themes/tf-wp-theme/templates/country-landing-pages',
-  // 'https://taxfoundation.org/wp-content/themes/tf-wp-theme/templates/country-landing-pages',
+    // 'http://localhost/wp-content/themes/tf-wp-theme/templates/country-landing-pages',
+    // 'https://taxfoundation.org/wp-content/themes/tf-wp-theme/templates/country-landing-pages',
+    'https://tf-country-landing-pages.netlify.app',
 };
