@@ -18,6 +18,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-csv`,
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-remove-fingerprints`,
     'gatsby-plugin-no-sourcemaps',
     // this (optional) plugin enables Progressive Web App + Offline functionality

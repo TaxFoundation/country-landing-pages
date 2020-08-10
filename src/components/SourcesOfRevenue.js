@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
-import SourcesOfRevenueChart from '../charts/SourcesOfRevenueChart';
+import SourcesOfRevenueChart from './charts/SourcesOfRevenueChart';
 
 const SourcesOfRevenue = ({ data }) => {
   const country = { ...data.countriesCsv };

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import { capitalize } from 'lodash';
 
-import { ChartTabs, ChartTab } from '../ui/ChartTabs';
-import CorpTaxChart from '../charts/CorporateTax';
+import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import CorpTaxChart from './charts/CorporateTax';
 
 const CorporateTax = ({ data }) => {
   const [activeTab, setActiveTab] = useState('corp-time-series');

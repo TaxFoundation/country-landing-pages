@@ -3,9 +3,9 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 
-import { numberRankString } from '../../utilities';
-import { ChartTabs, ChartTab } from '../ui/ChartTabs';
-import ITCIChart from '../charts/ITCI';
+import { numberRankString } from '../utilities';
+import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import ITCIChart from './charts/ITCI';
 
 const ITCI = ({ data }) => {
   const country = { ...data.countriesCsv };

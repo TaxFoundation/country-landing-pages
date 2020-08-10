@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
-import { ChartTabs, ChartTab } from '../ui/ChartTabs';
-import TaxTreatiesChart from '../charts/TaxTreatiesChart';
+import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import TaxTreatiesChart from './charts/TaxTreatiesChart';
 
 const International = ({ data }) => {
   const [activeTab, setActiveTab] = useState('tax-treaties');

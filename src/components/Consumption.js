@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
-import { ChartTabs, ChartTab } from '../ui/ChartTabs';
-import VATRatesChart from '../charts/VATRatesChart';
-import VATBaseChart from '../charts/VATBaseChart';
+import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import VATRatesChart from './charts/VATRatesChart';
+import VATBaseChart from './charts/VATBaseChart';
 
 const Consumption = ({ data }) => {
   const [activeTab, setActiveTab] = useState('vat-rates');

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
-import { ChartTabs, ChartTab } from '../ui/ChartTabs';
-import TaxBurdenChart from '../charts/TaxBurdenChart';
+import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import TaxBurdenChart from './charts/TaxBurdenChart';
 
 const TaxBurdenOnLabor = ({ data }) => {
   const [activeTab, setActiveTab] = useState('tax-burden-on-labor');
