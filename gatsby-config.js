@@ -24,8 +24,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-  assetPrefix:
-    // 'http://localhost/wp-content/themes/tf-wp-theme/templates/country-landing-pages',
-    // 'https://taxfoundation.org/wp-content/themes/tf-wp-theme/templates/country-landing-pages',
-    'https://tf-country-landing-pages.netlify.app',
 };
