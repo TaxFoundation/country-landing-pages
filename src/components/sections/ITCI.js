@@ -8,7 +8,7 @@ import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import ITCIChart from '../charts/ITCI';
 
 const ITCI = ({ data }) => {
-  let country = { ...data.countriesCsv, data: {} };
+  const country = { ...data.countriesCsv };
   const theData = data.allIndexRanksCsv.edges.map(edge => edge.node);
   const [activeRank, setActiveRank] = useState('itci_final');
   const currentYear = data.reduce((prev, curr) => {
@@ -157,6 +157,7 @@ export const query = graphql`
         }
       }
     }
+  }
 `;
 
 ITCI.propTypes = {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
 
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import VATRatesChart from '../charts/VATRatesChart';

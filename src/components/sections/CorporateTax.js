@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { graphql } from 'gatsby';
 import { capitalize } from 'lodash';
 
-import { numberRankString } from '../../utilities';
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import CorpTaxChart from '../charts/CorporateTax';
 
-const CorporateTax = ({
-  countryName,
-  countryAdjective,
-  countryArticle,
-  data,
-  worldwide,
-  id,
-}) => {
+const CorporateTax = ({ data }) => {
   const [activeTab, setActiveTab] = useState('corp-time-series');
+  const country = { ...data.countriesCsv };
+  const theData = data.allCountryCorporateTaxRatesCsv.edges
+    .filter(edge => !Number.isNaN(+edge.node.rate))
+    .map(edge => ({
+      year: +edge.node.year,
+      rate: +edge.node.rate,
+    }));
+  const worldwide = data.allWorldwideCorporateTaxRatesCsv.edges.map(
+    edge => edge.node
+  );
   const tabOptions = [
     {
       name: 'Corporate Tax Time Series',
@@ -35,28 +37,7 @@ const CorporateTax = ({
     // },
   ];
   return (
-    <div id={id}>
-      <h2>{`Corporate Taxation in${
-        countryArticle ? ' ' + countryArticle : ''
-      } ${countryName}`}</h2>
-      <p>
-        The corporate income tax is a tax on the profits of corporations. All
-        OECD countries levy a tax on corporate profits, but the rates and bases
-        vary widely from country to country. Corporate income taxes are the most
-        harmful tax for economic growth, but countries can mitigate those harms
-        with lower corporate tax rates and generous capital allowances.
-      </p>
-      <p>
-        Capital allowances directly impact business incentives for new
-        investments. In most countries, businesses are generally not allowed to
-        immediately deduct the cost of capital investments. Instead, they are
-        required to deduct these costs over several years, increasing the tax
-        burden on new investments. This can be measured by calculating the
-        percent of the present value cost that a business can deduct over the
-        life of an asset. Countries with more generous capital allowances have
-        tax systems that are more supportive to business investment, which
-        underpins economic growth.
-      </p>
+    <div>
       <ChartTabs>
         {tabOptions.map(choice => (
           <ChartTab
@@ -73,9 +54,9 @@ const CorporateTax = ({
         <React.Fragment>
           <CorpTaxChart
             title={`${
-              countryArticle ? capitalize(countryArticle) + ' ' : ''
-            }${countryName}`}
-            data={data
+              country.article ? capitalize(country.article) + ' ' : ''
+            }${country.name}`}
+            data={theData
               .map(entry => {
                 return { year: +entry.year, rate: +entry.rate };
               })
@@ -96,13 +77,42 @@ const CorporateTax = ({
   );
 };
 
+const query = graphql`
+  query($iso3: String!, $name: String) {
+    countriesCsv(iso3: { eq: $iso3 }) {
+      iso2
+      iso3
+      name
+      adjective
+      article
+    }
+    allCountryCorporateTaxRatesCsv(
+      filter: { iso_3: { eq: $iso3 } }
+      sort: { fields: year, order: ASC }
+    ) {
+      edges {
+        node {
+          year
+          rate
+        }
+      }
+    }
+    allWorldwideCorporateTaxRatesCsv {
+      edges {
+        node {
+          average
+          year
+          weighted {
+            average
+          }
+        }
+      }
+    }
+  }
+`;
+
 CorporateTax.propTypes = {
-  countryName: PropTypes.string,
-  countryAdjective: PropTypes.string,
-  countryArticle: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.object),
-  worldwide: PropTypes.arrayOf(PropTypes.object),
-  id: PropTypes.string,
+  data: PropTypes.object.isRequired,
 };
 
 export default CorporateTax;

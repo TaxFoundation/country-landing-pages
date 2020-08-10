@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
 
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import TaxTreatiesChart from '../charts/TaxTreatiesChart';
 
-const International = ({
-  countryID,
-  countryName,
-  countryArticle,
-  data,
-  id,
-}) => {
+const International = ({ data }) => {
   const [activeTab, setActiveTab] = useState('tax-treaties');
+  const country = { ...data.countriesCsv };
+  const itciMaxYear = Math.max(
+    ...data.allIndexRawDataCsv.edges.map(edge => +edge.node.year)
+  );
+  const theData = data.allIndexRawDataCsv.edges
+    .filter(edge => +edge.node.year === itciMaxYear)
+    .map(edge => {
+      return {
+        iso3: edge.node.ISO_3,
+        taxTreaties: +edge.node.tax_treaties,
+      };
+    });
   const tabOptions = [
     {
       name: `Tax Treaties`,
@@ -19,26 +26,7 @@ const International = ({
     },
   ];
   return (
-    <div id={id}>
-      <h2>{`International Taxes in${
-        countryArticle ? ' ' + countryArticle : ''
-      } ${countryName}`}</h2>
-      <p>
-        In an increasingly globalized economy, businesses often expand beyond
-        the borders of their home countries to reach customers around the world.
-        As a result, countries need to define rules determining how, or if,
-        corporate income earned in foreign countries is taxed. International tax
-        rules deal with the systems and regulations that countries apply to
-        those business activities.
-      </p>
-      <p>
-        Tax treaties align many tax laws between two countries and attempt to
-        reduce double taxation, particularly by reducing or eliminating
-        withholding taxes between the countries. Countries with a greater number
-        of partners in their tax treaty network have more attractive tax regimes
-        for foreign investment and are more competitive than countries with
-        fewer treaties.
-      </p>
+    <div>
       <ChartTabs>
         {tabOptions.map(choice => (
           <ChartTab
@@ -54,27 +42,39 @@ const International = ({
       {activeTab === 'tax-treaties' && (
         <TaxTreatiesChart
           title={`Number of Tax Treaties  in ${
-            countryArticle ? countryArticle + ' ' : ''
-          }${countryName} vs. the OECD`}
-          data={data}
-          countryID={countryID}
+            country.article ? country.article + ' ' : ''
+          }${country.name} vs. the OECD`}
+          data={theData}
+          countryID={country.id}
         />
       )}
     </div>
   );
 };
 
+export const query = graphql`
+  query($iso3: String!, $name: String) {
+    countriesCsv(iso3: { eq: $iso3 }) {
+      iso2
+      iso3
+      name
+      adjective
+      article
+    }
+    allIndexRawDataCsv {
+      edges {
+        node {
+          ISO_3
+          year
+          tax_treaties
+        }
+      }
+    }
+  }
+`;
+
 International.propTypes = {
-  countryName: PropTypes.string,
-  countryID: PropTypes.string,
-  countryArticle: PropTypes.string,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      iso3: PropTypes.string,
-      taxTreaties: PropTypes.number,
-    })
-  ),
-  id: PropTypes.string,
+  data: PropTypes.object.isRequired,
 };
 
 export default International;

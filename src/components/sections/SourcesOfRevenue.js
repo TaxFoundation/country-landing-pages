@@ -1,40 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
 
 import SourcesOfRevenueChart from '../charts/SourcesOfRevenueChart';
 
-const SourcesOfRevenue = ({ countryName, countryArticle, data, id }) => {
+const SourcesOfRevenue = ({ data }) => {
+  const country = { ...data.countriesCsv };
+  const theData = {
+    country: data.allSourceRevenueByCountryCsv.edges[0].node,
+    oecd: data.sourceRevenueByCountryCsv,
+  };
   return (
-    <div id={id}>
-      <h2>{`Sources of Revenue in${
-        countryArticle ? ' ' + countryArticle : ''
-      } ${countryName}`}</h2>
-      <p>
-        Countries raise tax revenue through a mix of individual income taxes,
-        corporate income taxes, social insurance taxes, taxes on goods and
-        services, and property taxes. The mix of tax policies can influence how
-        distortionary or neutral a tax system is. Taxes on income can create
-        more economic harm than taxes on consumption and property. However, the
-        extent to which an individual country relies on any of these taxes can
-        differ substantially.
-      </p>
-
+    <div>
       <SourcesOfRevenueChart
-        country={countryName}
-        title={`How Does${
-          countryArticle ? ' ' + countryArticle : ''
-        } ${countryName} Raise Revenue?`}
-        data={data}
+        country={country.name}
+        title={`How Does${country.article ? ' ' + country.article : ''} ${
+          country.name
+        } Raise Revenue?`}
+        data={theData}
       />
     </div>
   );
 };
 
+export const query = graphql`
+  query($iso3: String!, $name: String) {
+    countriesCsv(iso3: { eq: $iso3 }) {
+      iso2
+      iso3
+      name
+      adjective
+      article
+    }
+    allSourceRevenueByCountryCsv(filter: { iso_3: { eq: $iso3 } }) {
+      edges {
+        node {
+          Consumption_Taxes
+          Corporate_Taxes
+          Individual_Taxes
+          Property_Taxes
+          Social_Insurance_Taxes
+          Other
+        }
+      }
+    }
+    sourceRevenueByCountryCsv(iso_3: { eq: "NA" }) {
+      Consumption_Taxes
+      Corporate_Taxes
+      Individual_Taxes
+      Property_Taxes
+      Social_Insurance_Taxes
+      Other
+    }
+  }
+`;
+
 SourcesOfRevenue.propTypes = {
-  countryName: PropTypes.string,
-  countryArticle: PropTypes.string,
-  data: PropTypes.object,
-  id: PropTypes.string,
+  data: PropTypes.object.isRequired,
 };
 
 export default SourcesOfRevenue;
