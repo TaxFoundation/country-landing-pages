@@ -59,7 +59,7 @@ exports.createPages = async ({ graphql, actions }) => {
     });
     createPage({
       path: path.join('sources-of-revenue', _.kebabCase(node.name)),
-      component: path.resolve('./src/components/sections/SourceOfRevenue.js'),
+      component: path.resolve('./src/components/sections/SourcesOfRevenue.js'),
       context: {
         iso3: node.iso3,
         name: node.name,

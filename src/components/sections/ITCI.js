@@ -11,13 +11,9 @@ const ITCI = ({ data }) => {
   const country = { ...data.countriesCsv };
   const theData = data.allIndexRanksCsv.edges.map(edge => edge.node);
   const [activeRank, setActiveRank] = useState('itci_final');
-  const currentYear = data.reduce((prev, curr) => {
-    if (+curr.year > +prev.year) {
-      return curr;
-    } else {
-      return prev;
-    }
-  });
+  const currentYear = Math.max(
+    ...data.allIndexRawDataCsv.edges.map(edge => +edge.node.year)
+  );
   const rankChoices = [
     {
       name: 'Overall Score',
@@ -78,7 +74,7 @@ const ITCI = ({ data }) => {
 };
 
 export const query = graphql`
-  query($iso3: String!, $name: String) {
+  query($iso3: String!) {
     countriesCsv(iso3: { eq: $iso3 }) {
       iso2
       iso3

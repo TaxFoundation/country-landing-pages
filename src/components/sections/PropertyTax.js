@@ -155,38 +155,38 @@ const PropertyTax = ({ data }) => {
 };
 
 export const query = graphql`
-         query($iso3: String!, $name: String) {
-           countriesCsv(iso3: { eq: $iso3 }) {
-             iso2
-             iso3
-             name
-             adjective
-             article
-           }
-           allIndexRawDataCsvfilter: { ISO_3: { eq: $iso3 } } {
-             edges {
-               node {
-                 ISO_3
-                 year
-                 net_wealth
-                 estate_or_inheritance_tax
-                 transfer_tax
-                 asset_tax
-                 capital_duties
-                 property_tax_collections
-                 financial_transaction_tax
-               }
-             }
-           }
-           allSourceRevenueByCountryCsv(filter: { iso_3: { eq: $iso3 } }) {
-             edges {
-               node {
-                 Property_Taxes
-               }
-             }
-           }
-         }
-       `;
+  query($iso3: String!) {
+    countriesCsv(iso3: { eq: $iso3 }) {
+      iso2
+      iso3
+      name
+      adjective
+      article
+    }
+    allIndexRawDataCsv(filter: { ISO_3: { eq: $iso3 } }) {
+      edges {
+        node {
+          ISO_3
+          year
+          net_wealth
+          estate_or_inheritance_tax
+          transfer_tax
+          asset_tax
+          capital_duties
+          property_tax_collections
+          financial_transaction_tax
+        }
+      }
+    }
+    allSourceRevenueByCountryCsv(filter: { iso_3: { eq: $iso3 } }) {
+      edges {
+        node {
+          Property_Taxes
+        }
+      }
+    }
+  }
+`;
 
 PropertyTax.propTypes = {
   data: PropTypes.object.isRequired,

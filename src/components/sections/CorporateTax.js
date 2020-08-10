@@ -77,8 +77,8 @@ const CorporateTax = ({ data }) => {
   );
 };
 
-const query = graphql`
-  query($iso3: String!, $name: String) {
+export const query = graphql`
+  query($iso3: String!) {
     countriesCsv(iso3: { eq: $iso3 }) {
       iso2
       iso3
