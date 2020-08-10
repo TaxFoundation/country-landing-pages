@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
+import Wrapper from './ui/Wrapper';
 import SourcesOfRevenueChart from './charts/SourcesOfRevenueChart';
 
 const SourcesOfRevenue = ({ data }) => {
@@ -11,7 +12,7 @@ const SourcesOfRevenue = ({ data }) => {
     oecd: data.sourceRevenueByCountryCsv,
   };
   return (
-    <div>
+    <Wrapper>
       <SourcesOfRevenueChart
         country={country.name}
         title={`How Does${country.article ? ' ' + country.article : ''} ${
@@ -19,7 +20,7 @@ const SourcesOfRevenue = ({ data }) => {
         } Raise Revenue?`}
         data={theData}
       />
-    </div>
+    </Wrapper>
   );
 };
 

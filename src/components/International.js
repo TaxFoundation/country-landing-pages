@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
+import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import TaxTreatiesChart from './charts/TaxTreatiesChart';
 
@@ -26,7 +27,7 @@ const International = ({ data }) => {
     },
   ];
   return (
-    <div>
+    <Wrapper>
       <ChartTabs>
         {tabOptions.map(choice => (
           <ChartTab
@@ -48,7 +49,7 @@ const International = ({ data }) => {
           countryID={country.id}
         />
       )}
-    </div>
+    </Wrapper>
   );
 };
 

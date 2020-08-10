@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
+import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import VATRatesChart from './charts/VATRatesChart';
 import VATBaseChart from './charts/VATBaseChart';
@@ -38,7 +39,7 @@ const Consumption = ({ data }) => {
   ];
   const tabOptions = tabOptionsFunc(country.iso3);
   return (
-    <div>
+    <Wrapper>
       <ChartTabs>
         {tabOptions.map(choice => (
           <ChartTab
@@ -73,7 +74,7 @@ const Consumption = ({ data }) => {
           countryID={country.iso3}
         />
       )}
-    </div>
+    </Wrapper>
   );
 };
 

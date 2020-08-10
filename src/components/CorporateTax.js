@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import { capitalize } from 'lodash';
 
+import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import CorpTaxChart from './charts/CorporateTax';
 
@@ -37,7 +38,7 @@ const CorporateTax = ({ data }) => {
     // },
   ];
   return (
-    <div>
+    <Wrapper>
       <ChartTabs>
         {tabOptions.map(choice => (
           <ChartTab
@@ -73,7 +74,7 @@ const CorporateTax = ({ data }) => {
           </p>
         </React.Fragment>
       )}
-    </div>
+    </Wrapper>
   );
 };
 

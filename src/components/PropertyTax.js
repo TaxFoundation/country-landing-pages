@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
 import styled from 'styled-components';
+
+import Wrapper from './ui/Wrapper';
 
 const PropTaxTable = styled.table`
   background-color: #fff;
@@ -119,7 +122,7 @@ const PropertyTax = ({ data }) => {
     },
   ];
   return (
-    <div>
+    <Wrapper>
       <PropTaxTable>
         <thead>
           <tr>
@@ -150,7 +153,7 @@ const PropertyTax = ({ data }) => {
           }%`}</div>
         </div>
       </KeyFigures>
-    </div>
+    </Wrapper>
   );
 };
 

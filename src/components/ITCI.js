@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 
+import Wrapper from './ui/Wrapper';
 import { numberRankString } from '../utilities';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import ITCIChart from './charts/ITCI';
@@ -41,7 +42,7 @@ const ITCI = ({ data }) => {
     },
   ];
   return (
-    <div>
+    <Wrapper>
       <h3>
         The {country.adjective} Tax System Ranks{' '}
         {numberRankString(+currentYear.itci_final_rank)} in the OECD
@@ -69,7 +70,7 @@ const ITCI = ({ data }) => {
           .sort((a, b) => a.year - b.year)}
       />
       {/* TODO add top and bottom ranked categories. Will require rearranging data. */}
-    </div>
+    </Wrapper>
   );
 };
 
