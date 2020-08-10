@@ -79,9 +79,9 @@ const Layout = ({ data }) => {
     edge => edge.node.ISO_3 === country.iso3
   );
   country.data['itciMain'] = data.allIndexRanksCsv.edges.map(edge => edge.node);
-  country.data['itciSubdata'] = data.allIndexSubranksCsv.edges.map(
-    edge => edge.node
-  );
+  // country.data['itciSubdata'] = data.allIndexSubranksCsv.edges.map(
+  //   edge => edge.node
+  // );
   country.data['sourcesOfRevenue'] = {
     country: data.allSourceRevenueByCountryCsv.edges[0].node,
     oecd: data.sourceRevenueByCountryCsv,
@@ -150,7 +150,6 @@ const Layout = ({ data }) => {
               countryAdjective={country.adjective}
               countryArticle={country.article}
               data={country.data.itciMain}
-              subdata={country.data.itciSubdata}
             />
             <hr />
             <SourcesOfRevenue
@@ -261,13 +260,13 @@ export const query = graphql`
       edges {
         node {
           year
-          rate
-          gdp
-          oecd
-          eu
-          gseven
-          gtwenty
-          brics
+          # rate
+          # gdp
+          # oecd
+          # eu
+          # gseven
+          # gtwenty
+          # brics
         }
       }
     }
@@ -293,46 +292,46 @@ export const query = graphql`
         }
       }
     }
-    allIndexSubranksCsv(
-      filter: { ISO_3: { eq: $iso3 } }
-      sort: { fields: year, order: ASC }
-    ) {
-      edges {
-        node {
-          year
-          capital_gains_and_dividends
-          capital_gains_and_dividends_rank
-          capital_taxes
-          capital_taxes_rank
-          consumption_tax_base
-          consumption_tax_base_rank
-          consumption_tax_complexity
-          consumption_tax_complexity_rank
-          consumption_tax_rate
-          consumption_tax_rate_rank
-          corporate_rate
-          corporate_rate_rank
-          cost_recovery
-          cost_recovery_rank
-          incentives
-          incentives_rank
-          income_tax
-          income_tax_rank
-          income_tax_complexity
-          income_tax_complexity_rank
-          international_regulations
-          international_regulations_rank
-          real_property_tax
-          real_property_tax_rank
-          territorial
-          territorial_rank
-          wealth_taxes
-          wealth_taxes_rank
-          withholding_taxes
-          withholding_taxes_rank
-        }
-      }
-    }
+    # allIndexSubranksCsv(
+    #   filter: { ISO_3: { eq: $iso3 } }
+    #   sort: { fields: year, order: ASC }
+    # ) {
+    #   edges {
+    #     node {
+    #       year
+    #       capital_gains_and_dividends
+    #       capital_gains_and_dividends_rank
+    #       capital_taxes
+    #       capital_taxes_rank
+    #       consumption_tax_base
+    #       consumption_tax_base_rank
+    #       consumption_tax_complexity
+    #       consumption_tax_complexity_rank
+    #       consumption_tax_rate
+    #       consumption_tax_rate_rank
+    #       corporate_rate
+    #       corporate_rate_rank
+    #       cost_recovery
+    #       cost_recovery_rank
+    #       incentives
+    #       incentives_rank
+    #       income_tax
+    #       income_tax_rank
+    #       income_tax_complexity
+    #       income_tax_complexity_rank
+    #       international_regulations
+    #       international_regulations_rank
+    #       real_property_tax
+    #       real_property_tax_rank
+    #       territorial
+    #       territorial_rank
+    #       wealth_taxes
+    #       wealth_taxes_rank
+    #       withholding_taxes
+    #       withholding_taxes_rank
+    #     }
+    #   }
+    # }
     allSourceRevenueByCountryCsv(filter: { iso_3: { eq: $iso3 } }) {
       edges {
         node {

@@ -21,18 +21,18 @@ const CorporateTax = ({
       name: 'Corporate Tax Time Series',
       id: 'corp-time-series',
     },
-    {
-      name: 'Corporate Tax Map',
-      id: 'corp-tax-map',
-    },
-    {
-      name: 'Cost Recovery Time Series',
-      id: 'cost-recovery-time-series',
-    },
-    {
-      name: 'Cost Recovery Map',
-      id: 'cost-recovery-map',
-    },
+    // {
+    //   name: 'Corporate Tax Map',
+    //   id: 'corp-tax-map',
+    // },
+    // {
+    //   name: 'Cost Recovery Time Series',
+    //   id: 'cost-recovery-time-series',
+    // },
+    // {
+    //   name: 'Cost Recovery Map',
+    //   id: 'cost-recovery-map',
+    // },
   ];
   return (
     <div id={id}>

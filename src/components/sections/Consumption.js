@@ -16,10 +16,10 @@ const Consumption = ({ countryID, countryName, countryArticle, data, id }) => {
       name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Base`,
       id: 'vat-base',
     },
-    {
-      name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Complexity Map`,
-      id: 'vat-complexity-map',
-    },
+    // {
+    //   name: `${countryID === 'USA' ? 'Sales / VAT' : 'VAT'} Complexity Map`,
+    //   id: 'vat-complexity-map',
+    // },
   ];
   const tabOptions = tabOptionsFunc(countryID);
   return (

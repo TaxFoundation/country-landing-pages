@@ -11,10 +11,10 @@ const TaxBurdenOnLabor = ({ countryName, countryArticle, data, id }) => {
       name: 'Tax Burden on Labor',
       id: 'tax-burden-on-labor',
     },
-    {
-      name: 'Income Tax Map',
-      id: 'income-tax-map',
-    },
+    // {
+    //   name: 'Income Tax Map',
+    //   id: 'income-tax-map',
+    // },
   ];
   return (
     <div id={id}>
