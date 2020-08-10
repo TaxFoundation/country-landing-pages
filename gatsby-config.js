@@ -19,9 +19,11 @@ module.exports = {
     },
     `gatsby-transformer-csv`,
     `gatsby-plugin-remove-fingerprints`,
+    'gatsby-plugin-no-sourcemaps',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    ,
   ],
   assetPrefix:
     // 'http://localhost/wp-content/themes/tf-wp-theme/templates/country-landing-pages',
