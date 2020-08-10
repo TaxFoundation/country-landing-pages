@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 
@@ -6,7 +7,9 @@ import { numberRankString } from '../../utilities';
 import { ChartTabs, ChartTab } from '../ui/ChartTabs';
 import ITCIChart from '../charts/ITCI';
 
-const ITCI = ({ countryName, countryAdjective, countryArticle, data, id }) => {
+const ITCI = ({ data }) => {
+  let country = { ...data.countriesCsv, data: {} };
+  const theData = data.allIndexRanksCsv.edges.map(edge => edge.node);
   const [activeRank, setActiveRank] = useState('itci_final');
   const currentYear = data.reduce((prev, curr) => {
     if (+curr.year > +prev.year) {
@@ -42,31 +45,9 @@ const ITCI = ({ countryName, countryAdjective, countryArticle, data, id }) => {
     },
   ];
   return (
-    <div id={id}>
-      <h2>International Tax Competitiveness Index</h2>
-      <p>
-        The Tax Foundation’ s{' '}
-        <a
-          href='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          International Tax Competitiveness Index (ITCI){' '}
-        </a>{' '}
-        measures the degree to which the 36 OECD countries’ tax systems promote
-        competitiveness through low tax burdens on business investment and
-        neutrality through a well-structured tax code. The <em>ITCI</em>{' '}
-        considers more than 40 variables across five categories: Corporate
-        Taxes, Individual Taxes, Consumption Taxes, Property Taxes, and
-        International Tax Rules.
-      </p>
-      <p>
-        The <em>ITCI</em> attempts to display not only which countries provide
-        the best tax environment for investment but also the best tax
-        environment for workers and businesses.
-      </p>
+    <div>
       <h3>
-        The {countryAdjective} Tax System Ranks{' '}
+        The {country.adjective} Tax System Ranks{' '}
         {numberRankString(+currentYear.itci_final_rank)} in the OECD
       </h3>
       <ChartTabs>
@@ -82,12 +63,10 @@ const ITCI = ({ countryName, countryAdjective, countryArticle, data, id }) => {
         ))}
       </ChartTabs>
       <ITCIChart
-        title={`${
-          countryArticle ? capitalize(countryArticle) + ' ' : ''
-        }${countryName}'s ${
-          rankChoices.find(c => c.id === activeRank).name
-        } (out of 100)`}
-        data={data
+        title={`${country.article ? capitalize(country.article) + ' ' : ''}${
+          country.name
+        }'s ${rankChoices.find(c => c.id === activeRank).name} (out of 100)`}
+        data={theData
           .map(entry => {
             return { year: +entry.year, score: +entry[activeRank] };
           })
@@ -98,28 +77,90 @@ const ITCI = ({ countryName, countryAdjective, countryArticle, data, id }) => {
   );
 };
 
+export const query = graphql`
+  query($iso3: String!, $name: String) {
+    countriesCsv(iso3: { eq: $iso3 }) {
+      iso2
+      iso3
+      name
+      adjective
+      article
+    }
+    allIndexRanksCsv(
+      filter: { ISO_3: { eq: $iso3 } }
+      sort: { fields: year, order: ASC }
+    ) {
+      edges {
+        node {
+          year
+          itci_final: final
+          itci_final_rank: final_rank
+          property
+          property_rank
+          consumption
+          consumption_rank
+          corporate
+          corporate_rank
+          income
+          income_rank
+          international
+          international_rank
+        }
+      }
+    }
+    allIndexRawDataCsv {
+      edges {
+        node {
+          ISO_3
+          year
+          asset_tax
+          buildings_cost_recovery
+          capital_duties
+          capital_gains_exemption
+          capital_gains_rate
+          cfc_rules
+          consumption_time
+          corporate_rate
+          corporate_time
+          country_limitations
+          dividends_exemption
+          dividends_rate
+          dividends_withholding_tax
+          estate_or_inheritance_tax
+          financial_transaction_tax
+          index_capital_gains
+          intangibles_cost_recovery
+          interest_withholding_tax
+          inventory
+          labor_payments
+          labor_time
+          loss_carryback
+          loss_carryforward
+          machines_cost_recovery
+          net_wealth
+          other_payments
+          patent_box
+          profit_payments
+          property_tax
+          property_tax_collections
+          r_and_d_credit
+          royalties_withholding_tax
+          tax_treaties
+          tax_wedge
+          thin_capitalization_rules
+          threshold_top_income_rate
+          top_income_rate
+          transfer_tax
+          vat_base
+          vat_rate
+          vat_threshold
+        }
+      }
+    }
+`;
+
 ITCI.propTypes = {
-  countryName: PropTypes.string,
-  countryAdjective: PropTypes.string,
-  countryArticle: PropTypes.string,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      year: PropTypes.string,
-      itci_final: PropTypes.string,
-      itci_final_rank: PropTypes.string,
-      property: PropTypes.string,
-      property_rank: PropTypes.string,
-      consumption: PropTypes.string,
-      consumption_rank: PropTypes.string,
-      corporate: PropTypes.string,
-      corporate_rank: PropTypes.string,
-      income: PropTypes.string,
-      income_rank: PropTypes.string,
-      international: PropTypes.string,
-      international_rank: PropTypes.string,
-    })
-  ),
-  id: PropTypes.string,
+  data: PropTypes.object.isRequired,
 };
 
 export default ITCI;
