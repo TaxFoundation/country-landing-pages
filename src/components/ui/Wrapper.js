@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createGlobalStyle } from 'styled-components';
 
-import usePym from '../../usePym';
-
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Lato', sans-serif;
@@ -34,8 +32,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = ({ children }) => {
-  usePym();
-
   return (
     <>
       <GlobalStyle />

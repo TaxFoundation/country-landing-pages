@@ -24,6 +24,21 @@ export default function HTML(props) {
           id='___gatsby'
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
+        <script src='/pym.js'></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if (typeof window !== undefined) {
+              console.log('Starting pym');
+
+              const pymChild = new pym.Child({
+                polling: 25,
+              });
+              pymChild.sendHeight();
+
+              console.log(pymChild);
+            }`,
+          }}
+        ></script>
         {props.postBodyComponents}
       </body>
     </html>
