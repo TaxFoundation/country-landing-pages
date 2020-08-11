@@ -144,12 +144,12 @@ const PropertyTax = ({ data }) => {
       <KeyFigures>
         <div>
           <h3>Share of Revenue from Property Taxes</h3>
-          <div>{`${data.property_tax_share_of_revenue}%`}</div>
+          <div>{`${theData.property_tax_share_of_revenue}%`}</div>
         </div>
         <div>
           <h3>Property Tax Revenue as a Share of Capital Stock</h3>
           <div>{`${
-            Math.round(+data.property_tax_collections * 100) / 100
+            Math.round(+theData.property_tax_collections * 100) / 100
           }%`}</div>
         </div>
       </KeyFigures>
