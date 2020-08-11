@@ -25,15 +25,6 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
-        <script type="text/javascript" src="/pym.js"></script>
-        <script>
-          window.addEventListener('load', function () {
-            var pymChild = new pym.Child({
-              polling: 25
-            });
-            pymChild.sendHeight();
-          });
-        </script>
       </body>
     </html>
   );
