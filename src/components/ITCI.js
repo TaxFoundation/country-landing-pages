@@ -43,7 +43,7 @@ const ITCI = ({ data }) => {
   ];
   return (
     <Wrapper>
-      <h3>
+      <h3 style={{ margin: '0 0 1rem' }}>
         The {country.adjective} Tax System Ranks{' '}
         {numberRankString(+currentYear.itci_final_rank)} in the OECD
       </h3>
