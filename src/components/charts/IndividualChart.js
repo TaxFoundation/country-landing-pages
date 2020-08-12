@@ -156,16 +156,20 @@ const TaxBurdenChart = ({ data, title }) => {
               <g key={`individual-legend-${section.title}`}>
                 <rect
                   fill={section.fill}
-                  x={margin.left}
-                  width={width - margin.left - margin.right}
+                  x={(width - margin.left - margin.right) / 4 + margin.left}
+                  width={30}
                   y={i * spacer}
-                  height={spacer}
+                  height={30}
                 ></rect>
                 <text
-                  fill='#fff'
-                  x={(width - margin.left - margin.right) / 2 + margin.left}
-                  textAnchor='middle'
-                  y={i * spacer + 28}
+                  fill='#333'
+                  x={
+                    (width - margin.left - margin.right) / 4 +
+                    margin.left +
+                    spacer +
+                    5
+                  }
+                  y={i * spacer + 24}
                   fontSize={18}
                 >{`${Number.parseFloat(section.percent).toFixed(1)}% ${
                   section.title
