@@ -9,9 +9,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    margin: 0 auto;
-    max-width: 960px;
+    margin: 0;
     padding: 0;
+
+    & > div {
+      margin: 0 auto;
+      max-width: 750px;
+      padding: 0;
+    }
   }
 
   h1,

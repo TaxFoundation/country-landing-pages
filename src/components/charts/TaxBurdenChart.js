@@ -16,8 +16,8 @@ const Container = styled.div`
 
 const TaxBurdenChart = ({ data, title }) => {
   const containerElement = useRef(null);
-  const [width, setWidth] = useState(800);
-  const [height, setHeight] = useState(500);
+  const width = 800;
+  const height = 500;
   const maxDollars =
     +data.Total_Average_Annual_Labor_Cost_per_Employee_in__ + 10000;
   const margin = { top: 30, left: 90, bottom: 120, right: 10 };
@@ -103,32 +103,11 @@ const TaxBurdenChart = ({ data, title }) => {
     },
   ];
 
-  useEffect(() => {
-    function handleResize() {
-      setWidth(containerElement.current.clientWidth);
-      setHeight(containerElement.current.clientWidth * (5 / 8));
-    }
-
-    if (!containerElement) {
-      return false;
-    }
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <Container ref={containerElement}>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
-        <text
-          x={width / 2}
-          y='16'
-          textAnchor='middle'
-          fontSize={16 * Math.max(width / 800, 0.7)}
-        >
+        <text x={width / 2} y='18' textAnchor='middle' fontSize={24}>
           {title}
         </text>
         <YAxis
@@ -136,6 +115,8 @@ const TaxBurdenChart = ({ data, title }) => {
           min={0}
           max={maxDollars}
           numTicks={10}
+          tickSize={14}
+          labelSize={18}
           height={height}
           width={width}
           margin={margin}
