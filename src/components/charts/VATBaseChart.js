@@ -9,7 +9,6 @@ import YAxis from '../ui/YAxis';
 
 const Container = styled.div`
   border: 1px solid #999;
-  border-top: 0;
   margin: 0;
   padding: 1rem;
 `;

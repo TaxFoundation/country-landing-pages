@@ -23,16 +23,17 @@ const TaxBurdenOnLabor = ({ data }) => {
   return (
     <Wrapper>
       <ChartTabs>
-        {tabOptions.map(choice => (
-          <ChartTab
-            key={`rank-choice-${choice.id}`}
-            active={activeTab === choice.id}
-          >
-            <button onClick={() => setActiveTab(choice.id)}>
-              {choice.name}
-            </button>
-          </ChartTab>
-        ))}
+        {tabOptions.length > 1 &&
+          tabOptions.map(choice => (
+            <ChartTab
+              key={`rank-choice-${choice.id}`}
+              active={activeTab === choice.id}
+            >
+              <button onClick={() => setActiveTab(choice.id)}>
+                {choice.name}
+              </button>
+            </ChartTab>
+          ))}
       </ChartTabs>
       {activeTab === 'tax-burden-on-labor' && (
         <IndividualChart

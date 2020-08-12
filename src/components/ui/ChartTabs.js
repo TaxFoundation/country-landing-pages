@@ -25,14 +25,10 @@ const ChartTab = styled.li`
   }
 
   @media screen and (min-width: 500px) {
-    border-top: ${props =>
-      props.active ? '2px solid #e0592a' : '2px solid transparent'};
-    border-left: ${props =>
-      props.active ? '1px solid #999' : '1px solid transparent'};
-    border-right: ${props =>
-      props.active ? '1px solid #999' : '1px solid transparent'};
-    border-bottom: ${props =>
-      props.active ? '1px solid transparent' : '1px solid #999'};
+    border-top: 2px solid ${props => (props.active ? '#e0592a' : 'transparent')};
+    border-left: 1px solid ${props => (props.active ? '#999' : 'transparent')};
+    border-right: 1px solid ${props => (props.active ? '#999' : 'transparent')};
+    border-bottom: 1px solid ${props => (props.active ? '#fff' : 'transparent')};
     flex: 1;
     margin: 0 -1px -1px 0;
 
