@@ -35,15 +35,15 @@ function downloadRawData() {
       url:
         'worldwide-corporate-tax-rates/master/final-data/final_data_long.csv',
     },
-    {
-      name: 'OECDCorporateTaxRates',
-      url:
-        'capital-cost-recovery/master/final-outputs/npv_weighted_timeseries.csv',
-    },
-    {
-      name: 'CountryCorporateNPVAllYears',
-      url: 'capital-cost-recovery/master/final-data/npv_all_years.csv',
-    },
+    // {
+    //   name: 'OECDCorporateTaxRates',
+    //   url:
+    //     'capital-cost-recovery/master/final-outputs/npv_weighted_timeseries.csv',
+    // },
+    // {
+    //   name: 'CountryCorporateNPVAllYears',
+    //   url: 'capital-cost-recovery/master/final-data/npv_all_years.csv',
+    // },
     {
       name: 'TaxBurdenOnLabor',
       url: 'tax-burden-on-labor/master/final-outputs/Table1.csv',

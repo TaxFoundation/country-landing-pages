@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
 import styled from 'styled-components';
+
+import Wrapper from './ui/Wrapper';
 
 const PropTaxTable = styled.table`
   background-color: #fff;
@@ -50,7 +53,36 @@ const KeyFigures = styled.div`
   }
 `;
 
-const PropertyTax = ({ countryName, countryArticle, data, id }) => {
+const PropertyTax = ({ data }) => {
+  const country = { ...data.countriesCsv };
+  const itciMaxYear = Math.max(
+    ...data.allIndexRawDataCsv.edges.map(edge => +edge.node.year)
+  );
+  const theData = {
+    net_wealth: data.allIndexRawDataCsv.edges.find(
+      edge => +edge.node.year === itciMaxYear
+    ).node.net_wealth,
+    estate_or_inheritance_tax: data.allIndexRawDataCsv.edges.find(
+      edge => +edge.node.year === itciMaxYear
+    ).node.estate_or_inheritance_tax,
+    transfer_tax: data.allIndexRawDataCsv.edges.find(
+      edge => +edge.node.year === itciMaxYear
+    ).node.transfer_tax,
+    asset_tax: data.allIndexRawDataCsv.edges.find(
+      edge => +edge.node.year === itciMaxYear
+    ).node.asset_tax,
+    capital_duties: data.allIndexRawDataCsv.edges.find(
+      edge => +edge.node.year === itciMaxYear
+    ).node.capital_duties,
+    financial_transaction_tax: data.allIndexRawDataCsv.edges.find(
+      edge => +edge.node.year === itciMaxYear
+    ).node.financial_transaction_tax,
+    property_tax_collections: data.allIndexRawDataCsv.edges.find(
+      edge => +edge.node.year === itciMaxYear
+    ).node.property_tax_collections,
+    property_tax_share_of_revenue:
+      data.allSourceRevenueByCountryCsv.edges[0].node.Property_Taxes,
+  };
   const rows = [
     {
       category: 'Net Wealth Tax',
@@ -90,32 +122,7 @@ const PropertyTax = ({ countryName, countryArticle, data, id }) => {
     },
   ];
   return (
-    <div id={id}>
-      <h2>{`Property Taxes in${
-        countryArticle ? ' ' + countryArticle : ''
-      } ${countryName}`}</h2>
-      <p>
-        Property taxes apply to assets of an individual or a business. Estate
-        and inheritance taxes, for example, are due upon the death of an
-        individual and the passing of his or her estate to an heir,
-        respectively. Taxes on real property, on the other hand, are paid at set
-        intervals—often annually—on the value of taxable property such as land
-        and houses.
-      </p>
-      <p>
-        Many property taxes are highly distortive and add significant complexity
-        to the life of a taxpayer or business. Estate and inheritance taxes
-        create disincentives against additional work and saving, which damages
-        productivity and output. Financial transaction taxes increase the cost
-        of capital, which limits the flow of investment capital to its most
-        efficient allocations. Taxes on wealth limit the capital available in
-        the economy, which damages long-term economic growth and innovation.
-      </p>
-      <p>
-        Sound tax policy minimizes economic distortions. With the exception of
-        taxes on land, most property taxes increase economic distortions and
-        have long-term negative effects on an economy and its productivity.
-      </p>
+    <Wrapper>
       <PropTaxTable>
         <thead>
           <tr>
@@ -129,7 +136,7 @@ const PropertyTax = ({ countryName, countryArticle, data, id }) => {
             <tr key={`prop-tax-${row.id}`}>
               <td>{row.category}</td>
               <td>{row.description}</td>
-              <td>{+data[row.id] === 1 ? 'Yes' : 'No'}</td>
+              <td>{+theData[row.id] === 1 ? 'Yes' : 'No'}</td>
             </tr>
           ))}
         </tbody>
@@ -137,24 +144,55 @@ const PropertyTax = ({ countryName, countryArticle, data, id }) => {
       <KeyFigures>
         <div>
           <h3>Share of Revenue from Property Taxes</h3>
-          <div>{`${data.property_tax_share_of_revenue}%`}</div>
+          <div>{`${theData.property_tax_share_of_revenue}%`}</div>
         </div>
         <div>
           <h3>Property Tax Revenue as a Share of Capital Stock</h3>
           <div>{`${
-            Math.round(+data.property_tax_collections * 100) / 100
+            Math.round(+theData.property_tax_collections * 100) / 100
           }%`}</div>
         </div>
       </KeyFigures>
-    </div>
+    </Wrapper>
   );
 };
 
+export const query = graphql`
+  query($iso3: String!) {
+    countriesCsv(iso3: { eq: $iso3 }) {
+      iso2
+      iso3
+      name
+      adjective
+      article
+    }
+    allIndexRawDataCsv(filter: { ISO_3: { eq: $iso3 } }) {
+      edges {
+        node {
+          ISO_3
+          year
+          net_wealth
+          estate_or_inheritance_tax
+          transfer_tax
+          asset_tax
+          capital_duties
+          property_tax_collections
+          financial_transaction_tax
+        }
+      }
+    }
+    allSourceRevenueByCountryCsv(filter: { iso_3: { eq: $iso3 } }) {
+      edges {
+        node {
+          Property_Taxes
+        }
+      }
+    }
+  }
+`;
+
 PropertyTax.propTypes = {
-  countryName: PropTypes.string,
-  countryArticle: PropTypes.string,
-  data: PropTypes.object,
-  id: PropTypes.string,
+  data: PropTypes.object.isRequired,
 };
 
 export default PropertyTax;
