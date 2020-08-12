@@ -16,10 +16,10 @@ const Container = styled.div`
 
 const TaxBurdenChart = ({ data, title }) => {
   const width = 800;
-  const height = 500;
+  const height = 700;
   const maxDollars =
     +data.Total_Average_Annual_Labor_Cost_per_Employee_in__ + 10000;
-  const margin = { top: 30, left: 90, bottom: 120, right: 10 };
+  const margin = { top: 30, left: 90, bottom: 180, right: 10 };
   const yScale = scaleLinear()
     .domain([0, maxDollars])
     .range([height - margin.bottom, margin.top]);
@@ -54,7 +54,7 @@ const TaxBurdenChart = ({ data, title }) => {
 
   const sections = [
     {
-      title: ['Employer Share of', 'Payroll Taxes'],
+      title: 'Employer Share of Payroll Taxes',
       y: rectCoords[0],
       height: heights[0],
       fill: 'rgb(73, 193, 279)',
@@ -64,7 +64,7 @@ const TaxBurdenChart = ({ data, title }) => {
         (data.Employer_Payroll_Taxes_in__ / 100),
     },
     {
-      title: ['Employee Share of', 'Payroll Taxes'],
+      title: 'Employee Share of Payroll Taxes',
       y: rectCoords[1],
       height: heights[1],
       fill: 'rgb(178, 217, 214)',
@@ -74,7 +74,7 @@ const TaxBurdenChart = ({ data, title }) => {
         (data.Employee_Payroll_Taxes_in__ / 100),
     },
     {
-      title: ['Income', 'Tax'],
+      title: 'Income Tax',
       y: rectCoords[2],
       height: heights[2],
       fill: 'rgb(103, 148, 253)',
@@ -84,7 +84,7 @@ const TaxBurdenChart = ({ data, title }) => {
         (data.Income_Tax_in__ / 100),
     },
     {
-      title: ['After-Tax', 'Income'],
+      title: 'After-Tax Income',
       y: rectCoords[3],
       height: heights[3],
       fill: 'rgb(165, 109, 235)',
@@ -149,67 +149,31 @@ const TaxBurdenChart = ({ data, title }) => {
           shapeRendering='crispEdges'
           vectorEffect='non-scaling-stroke'
         />
-        <g transform={`translate(0, ${height - margin.bottom / 2})`}>
-          <svg id='individual-legend' viewBox={`0 0 ${800} ${500}`}>
-            {sections.map((section, i) => {
-              const spacer =
-                (800 - margin.left - margin.right) / sections.length;
-              return (
-                <React.Fragment key={`individual-legend-${section.title}`}>
-                  <rect
-                    x={margin.left + i * spacer}
-                    width={spacer}
-                    height={40}
-                    fill={section.fill}
-                  ></rect>
-                  <text
-                    key={`${section.title}-value`}
-                    x={margin.left + i * spacer + 45}
-                    fill='rgba(0,0,0,0.2)'
-                    stroke='rgba(0,0,0,0.2)'
-                    strokeWidth='3'
-                    y={25}
-                    fontSize={14}
-                    textAnchor='end'
-                  >
-                    {Number.parseFloat(section.percent).toFixed(1) + '%'}
-                  </text>
-                  <text
-                    key={`${section.title}-value`}
-                    x={margin.left + i * spacer + 45}
-                    fill='#fff'
-                    y={25}
-                    fontSize={14}
-                    textAnchor='end'
-                  >
-                    {Number.parseFloat(section.percent).toFixed(1) + '%'}
-                  </text>
-                  {section.title.map((word, j) => (
-                    <React.Fragment key={`${section.title}-word-${word}`}>
-                      <text
-                        x={margin.left + 55 + i * spacer}
-                        fill='rgba(0,0,0,0.2)'
-                        stroke='rgba(0,0,0,0.2)'
-                        strokeWidth='3'
-                        y={18 + j * 15}
-                        fontSize={13}
-                      >
-                        {word}
-                      </text>
-                      <text
-                        x={margin.left + 55 + i * spacer}
-                        fill='#fff'
-                        y={18 + j * 15}
-                        fontSize={13}
-                      >
-                        {word}
-                      </text>
-                    </React.Fragment>
-                  ))}
-                </React.Fragment>
-              );
-            })}
-          </svg>
+        <g transform={`translate(0, ${height - margin.bottom + 20})`}>
+          {sections.map((section, i) => {
+            const spacer = 40;
+
+            return (
+              <g key={`individual-legend-${section.title}`}>
+                <rect
+                  fill={section.fill}
+                  x={margin.left}
+                  width={width - margin.left - margin.right}
+                  y={i * spacer}
+                  height={spacer}
+                ></rect>
+                <text
+                  fill='#fff'
+                  x={(width - margin.left - margin.right) / 2 + margin.left}
+                  textAnchor='middle'
+                  y={i * spacer + 28}
+                  fontSize={18}
+                >{`${Number.parseFloat(section.percent).toFixed(1)}% ${
+                  section.title
+                }`}</text>
+              </g>
+            );
+          })}
         </g>
       </svg>
     </Container>
