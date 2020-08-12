@@ -184,7 +184,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
         />
         <g>
           <text
-            transform={`translate(35, ${
+            transform={`translate(40, ${
               yScale(country) + yScale.bandwidth() / 2
             }) rotate(-90)`}
             textAnchor='middle'
@@ -193,7 +193,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
             {country}
           </text>
           <text
-            transform={`translate(35, ${
+            transform={`translate(40, ${
               yScale('OECD Average') + yScale.bandwidth() / 2
             }) rotate(-90)`}
             textAnchor='middle'
@@ -226,36 +226,31 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
             </React.Fragment>
           ))}
         </g>
-        <g transform={`translate(0, ${initialHeight - margin.bottom / 2})`}>
-          <svg
-            id='sources-of-reveneue-legend'
-            viewBox={`0 0 ${initialWidth} ${initialHeight}`}
-          >
-            {sections.map((section, i) => {
-              const spacer = initialWidth / 6;
-              return (
-                <React.Fragment key={`sources-legend-${section.title}`}>
-                  <rect
-                    x={margin.left + i * spacer}
-                    width={25}
-                    height={25}
+        <g transform={`translate(0, ${initialHeight - margin.bottom / 2 + 5})`}>
+          {sections.map((section, i) => {
+            const spacer = initialWidth / 6;
+            return (
+              <React.Fragment key={`sources-legend-${section.title}`}>
+                <rect
+                  x={margin.left + i * spacer}
+                  width={25}
+                  height={25}
+                  fill={section.fill}
+                ></rect>
+                {section.title.split(' ').map((word, j) => (
+                  <text
+                    key={`${section.title}-word-${word}`}
+                    x={margin.left + 35 + i * spacer}
                     fill={section.fill}
-                  ></rect>
-                  {section.title.split(' ').map((word, j) => (
-                    <text
-                      key={`${section.title}-word-${word}`}
-                      x={margin.left + 35 + i * spacer}
-                      fill={section.fill}
-                      y={10 + j * 14}
-                      fontSize={14}
-                    >
-                      {word}
-                    </text>
-                  ))}
-                </React.Fragment>
-              );
-            })}
-          </svg>
+                    y={10 + j * 14}
+                    fontSize={14}
+                  >
+                    {word}
+                  </text>
+                ))}
+              </React.Fragment>
+            );
+          })}
         </g>
       </svg>
     </Container>

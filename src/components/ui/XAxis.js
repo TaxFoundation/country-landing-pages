@@ -24,7 +24,7 @@ const XAxis = ({
     >
       <text
         x={margin.left + (width - margin.left - margin.right) / 2}
-        y={tickSize + labelSize + 3}
+        y={tickSize + labelSize + 5}
         fontSize={labelSize}
         textAnchor='middle'
       >
@@ -55,7 +55,7 @@ const XAxis = ({
             />
             <text
               x={xScale(value)}
-              y={15}
+              y={tickSize + 3}
               textAnchor='middle'
               fontSize={tickSize}
             >
