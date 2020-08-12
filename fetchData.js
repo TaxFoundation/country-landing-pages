@@ -56,7 +56,7 @@ function downloadRawData() {
   ];
 
   files.forEach(f => {
-    const dest = path.resolve(__dirname, `src/data/${f.name}.csv`);
+    const dest = path.resolve(__dirname, `static/data/${f.name}.csv`);
 
     fs.access(dest, err => {
       if (!err) {
