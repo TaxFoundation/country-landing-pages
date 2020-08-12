@@ -21,7 +21,7 @@ const CorporateTax = ({ data }) => {
   );
   const tabOptions = [
     {
-      name: 'Corporate Tax Time Series',
+      name: 'Corporate Tax Rate',
       id: 'corp-time-series',
     },
     // {
@@ -29,7 +29,7 @@ const CorporateTax = ({ data }) => {
     //   id: 'corp-tax-map',
     // },
     // {
-    //   name: 'Cost Recovery Time Series',
+    //   name: 'Cost Recovery',
     //   id: 'cost-recovery-time-series',
     // },
     // {
