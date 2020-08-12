@@ -70,8 +70,8 @@ const VATRatesChart = ({ data, countryID, title }) => {
                 <rect
                   fill={
                     country.iso3 === countryID
-                      ? 'rgb(217, 93, 107)'
-                      : 'rgb(144, 0, 58)'
+                      ? 'rgb(14, 119, 94)'
+                      : 'rgb(57, 194, 146)'
                   }
                   x={xScale(country.iso3)}
                   width={xScale.bandwidth()}

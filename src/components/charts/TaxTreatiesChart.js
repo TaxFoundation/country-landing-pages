@@ -62,14 +62,15 @@ const TaxTreatiesChart = ({ data, countryID, title }) => {
         />
         <g id='tax-treaties-bar-chart'>
           {data.map(country => {
+            console.log(country.iso3, countryID);
             return (
               <g key={`tax-treaties-${country.iso3}`}>
                 <title>{`${country.taxTreaties} Tax Treaties`}</title>
                 <rect
                   fill={
                     country.iso3 === countryID
-                      ? 'rgb(165, 109, 235)'
-                      : 'rgb(103, 148, 252)'
+                      ? 'rgb(224, 89, 42)'
+                      : 'rgb(255, 143, 125)'
                   }
                   x={xScale(country.iso3)}
                   width={xScale.bandwidth()}
@@ -100,9 +101,7 @@ TaxTreatiesChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       iso3: PropTypes.string,
-      vatBreadth: PropTypes.number,
-      vatRate: PropTypes.number,
-      vatThreshold: PropTypes.number,
+      taxTreaties: PropTypes.number,
     })
   ),
   countryID: PropTypes.string,

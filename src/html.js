@@ -28,14 +28,10 @@ export default function HTML(props) {
         <script
           dangerouslySetInnerHTML={{
             __html: `if (typeof window !== undefined) {
-              console.log('Starting pym');
-
               const pymChild = new pym.Child({
                 polling: 25,
               });
               pymChild.sendHeight();
-
-              console.log(pymChild);
             }`,
           }}
         ></script>

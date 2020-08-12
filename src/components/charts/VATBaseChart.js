@@ -71,8 +71,8 @@ const ConsumptionChart = ({ data, countryID, title }) => {
                 <rect
                   fill={
                     country.iso3 === countryID
-                      ? 'rgb(73, 193, 255)'
-                      : 'rgb(103, 148, 253)'
+                      ? 'rgb(14, 119, 94)'
+                      : 'rgb(57, 194, 146)'
                   }
                   x={xScale(country.iso3)}
                   width={xScale.bandwidth()}

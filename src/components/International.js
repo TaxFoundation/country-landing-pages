@@ -46,7 +46,7 @@ const International = ({ data }) => {
             country.article ? country.article + ' ' : ''
           }${country.name} vs. the OECD`}
           data={theData}
-          countryID={country.id}
+          countryID={country.iso3}
         />
       )}
     </Wrapper>
