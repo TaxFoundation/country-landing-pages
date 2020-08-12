@@ -21,7 +21,7 @@ const ITCI = ({ data, title }) => {
   const [height, setHeight] = useState(500);
   const minYear = Math.min(...data.map(d => d.year));
   const maxYear = Math.max(...data.map(d => d.year));
-  const margin = { top: 30, left: 50, bottom: 40, right: 10 };
+  const margin = { top: 30, left: 70, bottom: 40, right: 10 };
   const xScale = scaleLinear()
     .domain([minYear, maxYear])
     .range([20 + margin.left, width - margin.right - 20]);
@@ -49,7 +49,7 @@ const ITCI = ({ data, title }) => {
     <Container ref={containerElement}>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
-        <text x={width / 2} y='16' textAnchor='middle' fontSize={16}>
+        <text x={width / 2} y='16' textAnchor='middle' fontSize={20}>
           {title}
         </text>
         <YAxis
@@ -57,6 +57,8 @@ const ITCI = ({ data, title }) => {
           min={0}
           max={100}
           numTicks={10}
+          tickSize={16}
+          labelSize={18}
           height={height}
           width={width}
           margin={margin}
@@ -69,6 +71,8 @@ const ITCI = ({ data, title }) => {
           max={maxYear}
           min={minYear}
           numTicks={maxYear - minYear}
+          tickSize={16}
+          labelSize={18}
           width={width}
           xScale={xScale}
         />

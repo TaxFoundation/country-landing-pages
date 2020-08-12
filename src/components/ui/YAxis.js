@@ -8,8 +8,8 @@ const YAxis = ({
   max,
   min,
   numTicks,
-  tickSize = 12,
-  labelSize = 16,
+  tickSize = 16,
+  labelSize = 18,
   width,
   yScale,
   format = value => value,
@@ -24,7 +24,7 @@ const YAxis = ({
       <text
         textAnchor='middle'
         fontSize={labelSize}
-        transform={`translate(13 ${
+        transform={`translate(${labelSize} ${
           (height - margin.top - margin.bottom) / 2 + margin.top
         }) rotate(-90)`}
       >

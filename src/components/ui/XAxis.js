@@ -5,8 +5,8 @@ const XAxis = ({
   xScale,
   label,
   numTicks,
-  tickSize = 12,
-  labelSize = 16,
+  tickSize = 16,
+  labelSize = 18,
   min,
   max,
   height,
@@ -24,7 +24,7 @@ const XAxis = ({
     >
       <text
         x={margin.left + (width - margin.left - margin.right) / 2}
-        y={+35}
+        y={tickSize + labelSize + 3}
         fontSize={labelSize}
         textAnchor='middle'
       >

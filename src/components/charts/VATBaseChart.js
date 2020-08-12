@@ -17,7 +17,7 @@ const Container = styled.div`
 const ConsumptionChart = ({ data, countryID, title }) => {
   const width = 800;
   const height = 500;
-  const margin = { top: 30, left: 70, bottom: 40, right: 10 };
+  const margin = { top: 30, left: 70, bottom: 60, right: 10 };
   const countries = data.map(country => country.iso3).sort();
   const yScale = scaleLinear()
     .domain([0, 1])

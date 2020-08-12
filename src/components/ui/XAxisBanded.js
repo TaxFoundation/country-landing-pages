@@ -6,8 +6,8 @@ const XAxis = ({
   label,
   height,
   band,
-  tickSize = 12,
-  labelSize = 16,
+  tickSize = 15,
+  labelSize = 18,
   width,
   margin,
   format = value => value,
@@ -20,7 +20,7 @@ const XAxis = ({
     >
       <text
         x={margin.left + (width - margin.left - margin.right) / 2}
-        y={+35}
+        y={tickSize + labelSize + 15}
         fontSize={labelSize}
         textAnchor='middle'
       >
@@ -40,8 +40,8 @@ const XAxis = ({
         {band.map(value => (
           <g key={`x-tick-${value}`}>
             <line
-              x1={xScale(value)}
-              x2={xScale(value)}
+              x1={xScale(value) + xScale.bandwidth() / 2}
+              x2={xScale(value) + xScale.bandwidth() / 2}
               y1={0}
               y2={5}
               stroke='#333'
@@ -52,7 +52,9 @@ const XAxis = ({
             <text
               textAnchor='middle'
               fontSize={tickSize}
-              transform={`translate(${xScale(value) + 2} 16) rotate(-45)`}
+              transform={`translate(${
+                xScale(value) + xScale.bandwidth() / 2 - 3
+              } ${tickSize + 8}) rotate(-45)`}
             >
               {format(value)}
             </text>
