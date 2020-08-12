@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
-import TaxBurdenChart from './charts/TaxBurdenChart';
+import IndividualChart from './charts/IndividualChart';
 
 const TaxBurdenOnLabor = ({ data }) => {
   const [activeTab, setActiveTab] = useState('tax-burden-on-labor');
@@ -35,7 +35,7 @@ const TaxBurdenOnLabor = ({ data }) => {
         ))}
       </ChartTabs>
       {activeTab === 'tax-burden-on-labor' && (
-        <TaxBurdenChart
+        <IndividualChart
           title={`How Does${country.article ? ' ' + country.article : ''} ${
             country.name
           }'s Tax Burden on Individuals Compare?`}

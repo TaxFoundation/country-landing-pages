@@ -27,9 +27,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const sourcesOfRevenueTemplate = path.resolve(
     './src/components/SourcesOfRevenue.js'
   );
-  const individualTemplate = path.resolve(
-    './src/components/TaxBurdenOnLabor.js'
-  );
+  const individualTemplate = path.resolve('./src/components/Individual.js');
 
   result.data.allCountriesCsv.edges.forEach(({ node }) => {
     createPage({
