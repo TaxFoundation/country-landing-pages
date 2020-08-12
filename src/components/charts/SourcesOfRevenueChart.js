@@ -230,7 +230,6 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
           <svg
             id='sources-of-reveneue-legend'
             viewBox={`0 0 ${initialWidth} ${initialHeight}`}
-            transform={`translate(0, ${initialHeight - margin.bottom / 2})`}
           >
             {sections.map((section, i) => {
               const spacer = initialWidth / 6;

@@ -8,6 +8,12 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
+  body {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 0;
+  }
+
   h1,
   h2 {
     font-size: 2.4rem;

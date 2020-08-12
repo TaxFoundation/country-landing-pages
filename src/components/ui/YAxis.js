@@ -21,7 +21,7 @@ const YAxis = ({
     >
       <text
         textAnchor='middle'
-        fontSize={Math.min(14, (14 * width) / 700)}
+        fontSize={16}
         transform={`translate(13 ${
           (height - margin.top - margin.bottom) / 2 + margin.top
         }) rotate(-90)`}
@@ -55,7 +55,7 @@ const YAxis = ({
               x={margin.left - 8}
               y={yScale(value) + 3}
               textAnchor='end'
-              fontSize='10'
+              fontSize='12'
             >
               {format(value)}
             </text>

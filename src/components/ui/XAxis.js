@@ -51,7 +51,7 @@ const XAxis = ({
               shapeRendering='crispEdges'
               vectorEffect='non-scaling-stroke'
             />
-            <text x={xScale(value)} y={15} textAnchor='middle' fontSize='10'>
+            <text x={xScale(value)} y={15} textAnchor='middle' fontSize='12'>
               {format(value)}
             </text>
           </g>
