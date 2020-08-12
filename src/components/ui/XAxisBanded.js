@@ -6,6 +6,8 @@ const XAxis = ({
   label,
   height,
   band,
+  tickSize = 12,
+  labelSize = 16,
   width,
   margin,
   format = value => value,
@@ -19,7 +21,7 @@ const XAxis = ({
       <text
         x={margin.left + (width - margin.left - margin.right) / 2}
         y={+35}
-        fontSize='16'
+        fontSize={labelSize}
         textAnchor='middle'
       >
         {label}
@@ -49,7 +51,7 @@ const XAxis = ({
             />
             <text
               textAnchor='middle'
-              fontSize='10'
+              fontSize={tickSize}
               transform={`translate(${xScale(value) + 2} 16) rotate(-45)`}
             >
               {format(value)}
@@ -65,6 +67,8 @@ XAxis.propTypes = {
   xScale: PropTypes.func,
   label: PropTypes.string,
   band: PropTypes.arrayOf(PropTypes.string),
+  tickSize: PropTypes.number,
+  labelSize: PropTypes.number,
   height: PropTypes.number,
   width: PropTypes.number,
   margin: PropTypes.shape({

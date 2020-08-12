@@ -5,6 +5,8 @@ const XAxis = ({
   xScale,
   label,
   numTicks,
+  tickSize = 12,
+  labelSize = 16,
   min,
   max,
   height,
@@ -23,7 +25,7 @@ const XAxis = ({
       <text
         x={margin.left + (width - margin.left - margin.right) / 2}
         y={+35}
-        fontSize='16'
+        fontSize={labelSize}
         textAnchor='middle'
       >
         {label}
@@ -51,7 +53,12 @@ const XAxis = ({
               shapeRendering='crispEdges'
               vectorEffect='non-scaling-stroke'
             />
-            <text x={xScale(value)} y={15} textAnchor='middle' fontSize='12'>
+            <text
+              x={xScale(value)}
+              y={15}
+              textAnchor='middle'
+              fontSize={tickSize}
+            >
               {format(value)}
             </text>
           </g>
@@ -65,6 +72,8 @@ XAxis.propTypes = {
   xScale: PropTypes.func,
   label: PropTypes.string,
   numTicks: PropTypes.number,
+  tickSize: PropTypes.number,
+  labelSize: PropTypes.number,
   min: PropTypes.number,
   max: PropTypes.number,
   height: PropTypes.number,
