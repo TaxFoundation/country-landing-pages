@@ -91,14 +91,14 @@ Chunk.propTypes = {
 const SourcesOfRevenueChart = ({ country, data, title }) => {
   const containerElement = useRef(null);
   const initialWidth = 800;
-  const initialHeight = 500;
-  const margin = { top: 30, left: 50, bottom: 100, right: 20 };
+  const initialHeight = 450;
+  const margin = { top: 30, left: 50, bottom: 120, right: 20 };
   const yScale = scaleBand()
     .domain(['OECD Average', country])
     .range([initialHeight - margin.bottom, margin.top])
     .align(0.5)
-    .paddingOuter(0.35)
-    .paddingInner(0.35);
+    .paddingOuter(0.3)
+    .paddingInner(0.3);
   const xScale = scaleLinear()
     .domain([0, 100])
     .range([20 + margin.left, initialWidth - margin.right - 20]);
@@ -163,12 +163,7 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
         role='graphics-document'
       >
         <title>{title}</title>
-        <text
-          x={initialWidth / 2}
-          y='30'
-          textAnchor='middle'
-          fontSize={20 * Math.max(initialWidth / 800, 0.7)}
-        >
+        <text x={initialWidth / 2} y='30' textAnchor='middle' fontSize={20}>
           {title}
         </text>
         <XAxis

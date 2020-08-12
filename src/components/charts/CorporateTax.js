@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { scaleLinear } from 'd3-scale';
@@ -15,9 +15,8 @@ const Container = styled.div`
 `;
 
 const CorpTax = ({ data, worldwide, title }) => {
-  const containerElement = useRef(null);
-  const [width, setWidth] = useState(800);
-  const [height, setHeight] = useState(500);
+  const width = 800;
+  const height = 500;
   const minYear = Math.min(
     ...data.map(d => +d.year),
     ...worldwide.map(d => +d.year)
@@ -39,7 +38,7 @@ const CorpTax = ({ data, worldwide, title }) => {
       ...worldwide.map(d => +d.weighted.average)
     ) + 5
   );
-  const margin = { top: 30, left: 50, bottom: 90, right: 10 };
+  const margin = { top: 30, left: 70, bottom: 90, right: 10 };
   const xScale = scaleLinear()
     .domain([minYear, maxYear])
     .range([20 + margin.left, width - margin.right - 20]);
@@ -51,27 +50,11 @@ const CorpTax = ({ data, worldwide, title }) => {
   const worldwideColor = 'rgb(47, 129, 212)';
   const worldwideWeightedColor = 'rgb(75, 104, 171)';
 
-  useEffect(() => {
-    function handleResize() {
-      setWidth(containerElement.current.clientWidth);
-      setHeight(containerElement.current.clientWidth * (5 / 8));
-    }
-
-    if (!containerElement) {
-      return false;
-    }
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
-    <Container ref={containerElement}>
+    <Container>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
-        <text x={width / 2} y='16' textAnchor='middle' fontSize={16}>
+        <text x={width / 2} y='16' textAnchor='middle' fontSize={20}>
           {`${title} 's Top Corporate Tax Rate`}
         </text>
         <YAxis
@@ -191,7 +174,7 @@ const CorpTax = ({ data, worldwide, title }) => {
                       key={`${section.title}-word-${word}`}
                       x={margin.left + 35 + i * spacer}
                       fill={section.fill}
-                      y={13 + j * 14}
+                      y={13 + j * 16}
                       fontSize={16}
                     >
                       {word}

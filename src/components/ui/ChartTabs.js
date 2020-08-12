@@ -42,6 +42,7 @@ const ChartTab = styled.li`
     border: none;
     color: ${props => (props.active ? '#333' : '#999')};
     cursor: pointer;
+    font-size: 14px;
     padding: 0.5rem;
     width: 100%;
 

@@ -30,12 +30,7 @@ const VATRatesChart = ({ data, countryID, title }) => {
     <Container>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
-        <text
-          x={width / 2}
-          y='18'
-          textAnchor='middle'
-          fontSize={16 * Math.max(width / 800, 0.7)}
-        >
+        <text x={width / 2} y='18' textAnchor='middle' fontSize={20}>
           {title}
         </text>
         <YAxis
