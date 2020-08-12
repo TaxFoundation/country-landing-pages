@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { scaleLinear } from 'd3-scale';
@@ -15,7 +15,6 @@ const Container = styled.div`
 `;
 
 const TaxBurdenChart = ({ data, title }) => {
-  const containerElement = useRef(null);
   const width = 800;
   const height = 500;
   const maxDollars =
@@ -104,7 +103,7 @@ const TaxBurdenChart = ({ data, title }) => {
   ];
 
   return (
-    <Container ref={containerElement}>
+    <Container>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
         <text x={width / 2} y='18' textAnchor='middle' fontSize={24}>

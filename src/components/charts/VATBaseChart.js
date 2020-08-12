@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { scaleLinear, scaleBand } from 'd3-scale';
@@ -15,7 +15,6 @@ const Container = styled.div`
 `;
 
 const ConsumptionChart = ({ data, countryID, title }) => {
-  const containerElement = useRef(null);
   const width = 800;
   const height = 500;
   const margin = { top: 30, left: 70, bottom: 40, right: 10 };
@@ -29,7 +28,7 @@ const ConsumptionChart = ({ data, countryID, title }) => {
     .padding(0.2);
 
   return (
-    <Container ref={containerElement}>
+    <Container>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
         <text
