@@ -20,6 +20,17 @@ const SourcesOfRevenue = ({ data }) => {
         } Raise Revenue?`}
         data={theData}
       />
+      <p>
+        For more information, please see the Tax Foundation&apos;s{' '}
+        <a
+          href='https://taxfoundation.org/publications/sources-of-government-revenue-in-the-oecd/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Sources of Government Revenue in the OECD
+        </a>{' '}
+        report.
+      </p>
     </Wrapper>
   );
 };

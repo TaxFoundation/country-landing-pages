@@ -43,6 +43,17 @@ const TaxBurdenOnLabor = ({ data }) => {
           data={theData}
         />
       )}
+      <p>
+        For more information, please see the Tax Foundation&apos;s{' '}
+        <a
+          href='https://taxfoundation.org/publications/comparison-tax-burden-labor-oecd/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          A Comparison of the Tax Burden on Labor in the OECD
+        </a>{' '}
+        report.
+      </p>
     </Wrapper>
   );
 };

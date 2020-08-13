@@ -75,6 +75,17 @@ const Consumption = ({ data }) => {
           countryID={country.iso3}
         />
       )}
+      <p>
+        For more information, please see the Tax Foundation&apos;s{' '}
+        <a
+          href='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <em>International Tax Competitiveness Index</em>
+        </a>
+        .
+      </p>
     </Wrapper>
   );
 };
