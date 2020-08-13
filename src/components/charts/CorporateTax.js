@@ -55,7 +55,7 @@ const CorpTax = ({ data, worldwide, title }) => {
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
         <title>{title}</title>
         <text x={width / 2} y='16' textAnchor='middle' fontSize={20}>
-          {`${title} 's Top Corporate Tax Rate`}
+          {`${title}'s Top Corporate Tax Rate`}
         </text>
         <YAxis
           yScale={yScale}
