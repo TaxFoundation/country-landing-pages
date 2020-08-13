@@ -68,7 +68,11 @@ const CorporateTax = ({ data }) => {
           <p>
             Note: Data is unavailable for any years not graphed above. For more
             information, including original data sources, see our{' '}
-            <a href='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'>
+            <a
+              href='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
               detailed report
             </a>
             .

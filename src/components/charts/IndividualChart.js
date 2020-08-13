@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { scaleLinear } from 'd3-scale';
-import { line } from 'd3-shape';
 import { format } from 'd3-format';
 
 import YAxis from '../ui/YAxis';
