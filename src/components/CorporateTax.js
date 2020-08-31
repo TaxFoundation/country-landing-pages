@@ -11,15 +11,16 @@ import CorpTaxChart from './charts/CorporateTax';
 const CorporateTax = ({ data }) => {
   const [activeTab, setActiveTab] = useState('corp-time-series');
   const country = { ...data.countriesCsv };
-  const theData = data.allCountryCorporateTaxRatesCsv.edges
-    .filter(edge => !Number.isNaN(+edge.node.rate))
-    .map(edge => ({
-      year: +edge.node.year,
-      rate: +edge.node.rate,
+  const theData = data.allCountryCorporateTaxRatesCsv.nodes
+    .filter(node => !Number.isNaN(+node.rate))
+    .map(node => ({
+      year: +node.year,
+      rate: +node.rate,
     }));
-  const worldwide = data.allWorldwideCorporateTaxRatesCsv.edges.map(
-    edge => edge.node
+  const currentRate = theData.reduce((acc, curr) =>
+    curr.year > acc.year ? curr : acc
   );
+  const worldwide = data.allWorldwideCorporateTaxRatesCsv.nodes;
   const tabOptions = [
     {
       name: 'Corporate Tax Rate',
@@ -87,7 +88,7 @@ const CorporateTax = ({ data }) => {
         </KeyFigure>
         <KeyFigure>
           <h3>Top Corporate Income Tax Rate</h3>
-          <div>#</div>
+          <div>{currentRate.rate}%</div>
         </KeyFigure>
         <KeyFigure>
           <h3>Average Capital Allowance</h3>
@@ -111,21 +112,17 @@ export const query = graphql`
       filter: { iso_3: { eq: $iso3 } }
       sort: { fields: year, order: ASC }
     ) {
-      edges {
-        node {
-          year
-          rate
-        }
+      nodes {
+        year
+        rate
       }
     }
     allWorldwideCorporateTaxRatesCsv {
-      edges {
-        node {
+      nodes {
+        average
+        year
+        weighted {
           average
-          year
-          weighted {
-            average
-          }
         }
       }
     }
