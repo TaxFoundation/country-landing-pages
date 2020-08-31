@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Wrapper from './ui/Wrapper';
 import { KeyFigures, KeyFigure } from './ui/KeyFigures';
+import ReportsAndData from './ui/ReportsAndData';
 
 const PropTaxTable = styled.table`
   background-color: #fff;
@@ -124,6 +125,10 @@ const PropertyTax = ({ data }) => {
           ))}
         </tbody>
       </PropTaxTable>
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+      />
       <KeyFigures>
         <KeyFigure>
           <h3>Share of Revenue from Property Taxes</h3>
@@ -136,17 +141,6 @@ const PropertyTax = ({ data }) => {
           }%`}</div>
         </KeyFigure>
       </KeyFigures>
-      <p>
-        For more information, please see the Tax Foundation&apos;s{' '}
-        <a
-          href='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <em>International Tax Competitiveness Index</em>
-        </a>
-        .
-      </p>
     </Wrapper>
   );
 };

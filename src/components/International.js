@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import ReportsAndData from './ui/ReportsAndData';
 import TaxTreatiesChart from './charts/TaxTreatiesChart';
 
 const International = ({ data }) => {
@@ -50,17 +51,10 @@ const International = ({ data }) => {
           countryID={country.iso3}
         />
       )}
-      <p>
-        For more information, please see the Tax Foundation&apos;s{' '}
-        <a
-          href='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <em>International Tax Competitivenes Index</em>
-        </a>
-        .
-      </p>
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+      />
     </Wrapper>
   );
 };

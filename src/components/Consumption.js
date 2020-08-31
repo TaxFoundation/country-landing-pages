@@ -5,6 +5,7 @@ import { graphql } from 'gatsby';
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import { KeyFigures, KeyFigure } from './ui/KeyFigures';
+import ReportsAndData from './ui/ReportsAndData';
 import VATRatesChart from './charts/VATRatesChart';
 import VATBaseChart from './charts/VATBaseChart';
 
@@ -76,17 +77,10 @@ const Consumption = ({ data }) => {
           countryID={country.iso3}
         />
       )}
-      <p>
-        For more information, please see the Tax Foundation&apos;s{' '}
-        <a
-          href='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <em>International Tax Competitiveness Index</em>
-        </a>
-        .
-      </p>
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+      />
       <KeyFigures>
         <KeyFigure>
           <h3>Share of Revenue from Consumption Taxes</h3>
