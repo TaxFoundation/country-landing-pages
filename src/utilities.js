@@ -1,5 +1,5 @@
 const numberRankString = num => {
-  if (num === 11 || num === 12 || num === 13) {
+  if (+num === 11 || +num === 12 || +num === 13) {
     return `${num}th`;
   }
   const stringifyNum = num.toString();
