@@ -6,6 +6,7 @@ import { capitalize } from 'lodash';
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import { KeyFigures, KeyFigure } from './ui/KeyFigures';
+import ReportsAndData from './ui/ReportsAndData';
 import CorpTaxChart from './charts/CorporateTax';
 import CostRecovery from './charts/CostRecovery';
 
@@ -79,6 +80,10 @@ const CorporateTax = ({ data }) => {
               .sort((a, b) => a.year - b.year)}
             worldwide={worldwide}
           />
+          <ReportsAndData
+            report='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'
+            data='https://files.taxfoundation.org/20191210095630/Corporate-Tax-Rates-Data-1980-2019.xlsx'
+          />
         </React.Fragment>
       )}
       {activeTab === 'cost-recovery-time-series' && (
@@ -97,6 +102,10 @@ const CorporateTax = ({ data }) => {
                 };
               })
               .sort((a, b) => a.year - b.year)}
+          />
+          <ReportsAndData
+            report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+            data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_data'
           />
         </React.Fragment>
       )}
