@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
 import Wrapper from './ui/Wrapper';
+import { KeyFigures, KeyFigure } from './ui/KeyFigures';
 
 const PropTaxTable = styled.table`
   background-color: #fff;
@@ -33,30 +34,6 @@ const PropTaxTable = styled.table`
       text-align: center;
     }
   }
-`;
-
-const KeyFigures = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  grid-template: auto / 1fr;
-
-  @media (min-width: 600px) {
-    grid-template: auto / repeat(2, 1fr);
-  }
-
-  & > div > div {
-    border: 1px solid #333;
-    font-size: 2.4rem;
-    font-weight: 300;
-    padding: 2rem;
-    text-align: center;
-  }
-`;
-
-const KeyFigure = styled.div`
-  align-content: space-between;
-  align-items: end;
-  display: grid;
 `;
 
 const PropertyTax = ({ data }) => {
