@@ -5,6 +5,7 @@ import { capitalize } from 'lodash';
 
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import { KeyFigures, KeyFigure } from './ui/KeyFigures';
 import CorpTaxChart from './charts/CorporateTax';
 
 const CorporateTax = ({ data }) => {
@@ -79,6 +80,20 @@ const CorporateTax = ({ data }) => {
           </p>
         </React.Fragment>
       )}
+      <KeyFigures>
+        <KeyFigure>
+          <h3>Share of Revenue from Corporate Income Tax</h3>
+          <div>#</div>
+        </KeyFigure>
+        <KeyFigure>
+          <h3>Top Corporate Income Tax Rate</h3>
+          <div>#</div>
+        </KeyFigure>
+        <KeyFigure>
+          <h3>Average Capital Allowance</h3>
+          <div>#</div>
+        </KeyFigure>
+      </KeyFigures>
     </Wrapper>
   );
 };
