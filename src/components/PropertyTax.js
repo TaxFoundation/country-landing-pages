@@ -40,7 +40,7 @@ const KeyFigures = styled.div`
   grid-gap: 1rem;
   grid-template: auto / 1fr;
 
-  @media (min-width: 800px) {
+  @media (min-width: 600px) {
     grid-template: auto / repeat(2, 1fr);
   }
 
@@ -51,6 +51,12 @@ const KeyFigures = styled.div`
     padding: 2rem;
     text-align: center;
   }
+`;
+
+const KeyFigure = styled.div`
+  align-content: space-between;
+  align-items: end;
+  display: grid;
 `;
 
 const PropertyTax = ({ data }) => {
@@ -142,16 +148,16 @@ const PropertyTax = ({ data }) => {
         </tbody>
       </PropTaxTable>
       <KeyFigures>
-        <div>
+        <KeyFigure>
           <h3>Share of Revenue from Property Taxes</h3>
           <div>{`${theData.property_tax_share_of_revenue}%`}</div>
-        </div>
-        <div>
+        </KeyFigure>
+        <KeyFigure>
           <h3>Property Tax Revenue as a Share of Capital Stock</h3>
           <div>{`${
             Math.round(+theData.property_tax_collections * 100) / 100
           }%`}</div>
-        </div>
+        </KeyFigure>
       </KeyFigures>
       <p>
         For more information, please see the Tax Foundation&apos;s{' '}
