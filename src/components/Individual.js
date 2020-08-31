@@ -4,12 +4,13 @@ import { graphql } from 'gatsby';
 
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import { KeyFigures, KeyFigure } from './ui/KeyFigures';
 import IndividualChart from './charts/IndividualChart';
 
 const TaxBurdenOnLabor = ({ data }) => {
   const [activeTab, setActiveTab] = useState('tax-burden-on-labor');
   const country = { ...data.countriesCsv };
-  const theData = data.allTaxBurdenOnLaborCsv.edges[0].node;
+  const theData = data.taxBurdenOnLaborCsv;
   const tabOptions = [
     {
       name: 'Tax Burden on Labor',
@@ -54,6 +55,20 @@ const TaxBurdenOnLabor = ({ data }) => {
         </a>{' '}
         report.
       </p>
+      <KeyFigures>
+        <KeyFigure>
+          <h3>Share of Revenue from Individual Taxes</h3>
+          <div>{`${data.sourceRevenueByCountryCsv.Individual_Taxes}%`}</div>
+        </KeyFigure>
+        <KeyFigure>
+          <h3>Share of Revenue from Social Insurance Taxes</h3>
+          <div>{`${data.sourceRevenueByCountryCsv.Social_Insurance_Taxes}%`}</div>
+        </KeyFigure>
+        <KeyFigure>
+          <h3>Capital Gains Tax Rate</h3>
+          <div>{`${data.indexRawDataCsv.capital_gains_rate * 100}%`}</div>
+        </KeyFigure>
+      </KeyFigures>
     </Wrapper>
   );
 };
@@ -67,18 +82,20 @@ export const query = graphql`
       adjective
       article
     }
-    allTaxBurdenOnLaborCsv(filter: { Country: { eq: $name } }) {
-      edges {
-        node {
-          Country
-          Employee_Payroll_Taxes_in__
-          Employer_Payroll_Taxes_in__
-          Income_Tax_in__
-          Rank
-          Tax_Wedge_in____As_a_Share_of_Labor_Cost_
-          Total_Average_Annual_Labor_Cost_per_Employee_in__
-        }
-      }
+    taxBurdenOnLaborCsv(Country: { eq: $name }) {
+      Employee_Payroll_Taxes_in__
+      Employer_Payroll_Taxes_in__
+      Income_Tax_in__
+      Rank
+      Tax_Wedge_in____As_a_Share_of_Labor_Cost_
+      Total_Average_Annual_Labor_Cost_per_Employee_in__
+    }
+    sourceRevenueByCountryCsv(iso_3: { eq: $iso3 }) {
+      Individual_Taxes
+      Social_Insurance_Taxes
+    }
+    indexRawDataCsv(ISO_3: { eq: $iso3 }) {
+      capital_gains_rate
     }
   }
 `;
