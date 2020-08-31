@@ -72,6 +72,17 @@ const ITCI = ({ data }) => {
           })
           .sort((a, b) => a.year - b.year)}
       />
+      <p>
+        For more information, please see the Tax Foundation&apos;s{' '}
+        <a
+          href='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <em>International Tax Competitivenes Index</em>
+        </a>
+        .
+      </p>
       {/* TODO add top and bottom ranked categories. Will require rearranging data. */}
     </Wrapper>
   );
