@@ -21,6 +21,14 @@ const CorporateTax = ({ data }) => {
     curr.year > acc.year ? curr : acc
   );
   const worldwide = data.allWorldwideCorporateTaxRatesCsv.nodes;
+  const averageCapitalAllowance =
+    Math.round(
+      ((+data.indexRawDataCsv.buildings_cost_recovery +
+        +data.indexRawDataCsv.machines_cost_recovery +
+        +data.indexRawDataCsv.intangibles_cost_recovery) *
+        1000) /
+        3
+    ) / 10;
   const tabOptions = [
     {
       name: 'Corporate Tax Rate',
@@ -84,15 +92,15 @@ const CorporateTax = ({ data }) => {
       <KeyFigures>
         <KeyFigure>
           <h3>Share of Revenue from Corporate Income Tax</h3>
-          <div>#</div>
+          <div>{`${data.sourceRevenueByCountryCsv.Corporate_Taxes}%`}</div>
         </KeyFigure>
         <KeyFigure>
           <h3>Top Corporate Income Tax Rate</h3>
-          <div>{currentRate.rate}%</div>
+          <div>{`${Math.round(currentRate.rate * 10) / 10}%`}</div>
         </KeyFigure>
         <KeyFigure>
           <h3>Average Capital Allowance</h3>
-          <div>#</div>
+          <div>{`${averageCapitalAllowance}%`}</div>
         </KeyFigure>
       </KeyFigures>
     </Wrapper>
@@ -125,6 +133,14 @@ export const query = graphql`
           average
         }
       }
+    }
+    sourceRevenueByCountryCsv(iso_3: { eq: $iso3 }) {
+      Corporate_Taxes
+    }
+    indexRawDataCsv(ISO_3: { eq: $iso3 }) {
+      buildings_cost_recovery
+      machines_cost_recovery
+      intangibles_cost_recovery
     }
   }
 `;
