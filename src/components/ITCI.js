@@ -6,6 +6,7 @@ import { capitalize } from 'lodash';
 import Wrapper from './ui/Wrapper';
 import { numberRankString } from '../utilities';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import ReportsAndData from './ui/ReportsAndData';
 import ITCIChart from './charts/ITCI';
 
 const ITCI = ({ data }) => {
@@ -72,17 +73,10 @@ const ITCI = ({ data }) => {
           })
           .sort((a, b) => a.year - b.year)}
       />
-      <p>
-        For more information, please see the Tax Foundation&apos;s{' '}
-        <a
-          href='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <em>International Tax Competitivenes Index</em>
-        </a>
-        .
-      </p>
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+      />
       {/* TODO add top and bottom ranked categories. Will require rearranging data. */}
     </Wrapper>
   );

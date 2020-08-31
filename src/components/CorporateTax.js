@@ -105,7 +105,7 @@ const CorporateTax = ({ data }) => {
           />
           <ReportsAndData
             report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-            data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_data'
+            data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
           />
         </React.Fragment>
       )}

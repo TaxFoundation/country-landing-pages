@@ -5,6 +5,7 @@ import { graphql } from 'gatsby';
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import { KeyFigures, KeyFigure } from './ui/KeyFigures';
+import ReportsAndData from './ui/ReportsAndData';
 import IndividualChart from './charts/IndividualChart';
 
 const TaxBurdenOnLabor = ({ data }) => {
@@ -37,24 +38,19 @@ const TaxBurdenOnLabor = ({ data }) => {
           ))}
       </ChartTabs>
       {activeTab === 'tax-burden-on-labor' && (
-        <IndividualChart
-          title={`How Does${country.article ? ' ' + country.article : ''} ${
-            country.name
-          }'s Tax Burden on Individuals Compare?`}
-          data={theData}
-        />
+        <>
+          <IndividualChart
+            title={`How Does${country.article ? ' ' + country.article : ''} ${
+              country.name
+            }'s Tax Burden on Individuals Compare?`}
+            data={theData}
+          />
+          <ReportsAndData
+            report='https://taxfoundation.org/publications/comparison-tax-burden-labor-oecd/'
+            data='https://github.com/TaxFoundation/tax-burden-on-labor'
+          />
+        </>
       )}
-      <p>
-        For more information, please see the Tax Foundation&apos;s{' '}
-        <a
-          href='https://taxfoundation.org/publications/comparison-tax-burden-labor-oecd/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          A Comparison of the Tax Burden on Labor in the OECD
-        </a>{' '}
-        report.
-      </p>
       <KeyFigures>
         <KeyFigure>
           <h3>Share of Revenue from Individual Taxes</h3>
