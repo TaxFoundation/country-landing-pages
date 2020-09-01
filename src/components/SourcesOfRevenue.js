@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
 import Wrapper from './ui/Wrapper';
+import ReportsAndData from './ui/ReportsAndData';
 import SourcesOfRevenueChart from './charts/SourcesOfRevenueChart';
 
 const SourcesOfRevenue = ({ data }) => {
@@ -20,17 +21,10 @@ const SourcesOfRevenue = ({ data }) => {
         } Raise Revenue?`}
         data={theData}
       />
-      <p>
-        For more information, please see the Tax Foundation&apos;s{' '}
-        <a
-          href='https://taxfoundation.org/publications/sources-of-government-revenue-in-the-oecd/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Sources of Government Revenue in the OECD
-        </a>{' '}
-        report.
-      </p>
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/sources-of-government-revenue-in-the-oecd/'
+        data='https://github.com/TaxFoundation/sources-of-government-revenue'
+      />
     </Wrapper>
   );
 };

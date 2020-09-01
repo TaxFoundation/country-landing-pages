@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import ReportsAndData from './ui/ReportsAndData';
 import TaxTreatiesChart from './charts/TaxTreatiesChart';
 
 const International = ({ data }) => {
@@ -50,6 +51,10 @@ const International = ({ data }) => {
           countryID={country.iso3}
         />
       )}
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+      />
     </Wrapper>
   );
 };

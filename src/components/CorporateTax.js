@@ -5,20 +5,35 @@ import { capitalize } from 'lodash';
 
 import Wrapper from './ui/Wrapper';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
+import { KeyFigures, KeyFigure } from './ui/KeyFigures';
+import ReportsAndData from './ui/ReportsAndData';
 import CorpTaxChart from './charts/CorporateTax';
+import CostRecovery from './charts/CostRecovery';
 
 const CorporateTax = ({ data }) => {
   const [activeTab, setActiveTab] = useState('corp-time-series');
   const country = { ...data.countriesCsv };
-  const theData = data.allCountryCorporateTaxRatesCsv.edges
-    .filter(edge => !Number.isNaN(+edge.node.rate))
-    .map(edge => ({
-      year: +edge.node.year,
-      rate: +edge.node.rate,
+  const theData = data.allCountryCorporateTaxRatesCsv.nodes
+    .filter(node => !Number.isNaN(+node.rate))
+    .map(node => ({
+      year: +node.year,
+      rate: +node.rate,
     }));
-  const worldwide = data.allWorldwideCorporateTaxRatesCsv.edges.map(
-    edge => edge.node
+  const currentRate = theData.reduce((acc, curr) =>
+    curr.year > acc.year ? curr : acc
   );
+  const currentCostRecovery = data.allIndexRawDataCsv.nodes.reduce(
+    (acc, curr) => (curr.year > acc.year ? curr : acc)
+  );
+  const worldwide = data.allWorldwideCorporateTaxRatesCsv.nodes;
+  const averageCapitalAllowance =
+    Math.round(
+      ((+currentCostRecovery.buildings_cost_recovery +
+        +currentCostRecovery.machines_cost_recovery +
+        +currentCostRecovery.intangibles_cost_recovery) *
+        1000) /
+        3
+    ) / 10;
   const tabOptions = [
     {
       name: 'Corporate Tax Rate',
@@ -28,10 +43,10 @@ const CorporateTax = ({ data }) => {
     //   name: 'Corporate Tax Map',
     //   id: 'corp-tax-map',
     // },
-    // {
-    //   name: 'Cost Recovery',
-    //   id: 'cost-recovery-time-series',
-    // },
+    {
+      name: 'Cost Recovery',
+      id: 'cost-recovery-time-series',
+    },
     // {
     //   name: 'Cost Recovery Map',
     //   id: 'cost-recovery-map',
@@ -65,20 +80,61 @@ const CorporateTax = ({ data }) => {
               .sort((a, b) => a.year - b.year)}
             worldwide={worldwide}
           />
-          <p>
-            Note: Data is unavailable for any years not graphed above. For more
-            information, including original data sources, see our{' '}
-            <a
-              href='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              detailed report
-            </a>
-            .
-          </p>
+          <ReportsAndData
+            report='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'
+            data='https://files.taxfoundation.org/20191210095630/Corporate-Tax-Rates-Data-1980-2019.xlsx'
+          />
         </React.Fragment>
       )}
+      {activeTab === 'cost-recovery-time-series' && (
+        <React.Fragment>
+          <CostRecovery
+            title={`${
+              country.article ? capitalize(country.article) + ' ' : ''
+            }${country.name}`}
+            data={data.allIndexRawDataCsv.nodes
+              .map(entry => {
+                return {
+                  year: +entry.year,
+                  buildings: +entry.buildings_cost_recovery,
+                  machines: +entry.machines_cost_recovery,
+                  intangibles: +entry.intangibles_cost_recovery,
+                };
+              })
+              .sort((a, b) => a.year - b.year)}
+          />
+          <ReportsAndData
+            report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+            data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+          />
+        </React.Fragment>
+      )}
+      <p>
+        Note: Data is unavailable for any years not graphed above. For more
+        information, including original data sources, see our{' '}
+        <a
+          href='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          detailed report
+        </a>
+        .
+      </p>
+      <KeyFigures>
+        <KeyFigure>
+          <h3>Share of Revenue from Corporate Income Tax</h3>
+          <div>{`${data.sourceRevenueByCountryCsv.Corporate_Taxes}%`}</div>
+        </KeyFigure>
+        <KeyFigure>
+          <h3>Top Corporate Income Tax Rate</h3>
+          <div>{`${Math.round(currentRate.rate * 10) / 10}%`}</div>
+        </KeyFigure>
+        <KeyFigure>
+          <h3>Average Capital Allowance</h3>
+          <div>{`${averageCapitalAllowance}%`}</div>
+        </KeyFigure>
+      </KeyFigures>
     </Wrapper>
   );
 };
@@ -96,22 +152,32 @@ export const query = graphql`
       filter: { iso_3: { eq: $iso3 } }
       sort: { fields: year, order: ASC }
     ) {
-      edges {
-        node {
-          year
-          rate
-        }
+      nodes {
+        year
+        rate
       }
     }
     allWorldwideCorporateTaxRatesCsv {
-      edges {
-        node {
+      nodes {
+        average
+        year
+        weighted {
           average
-          year
-          weighted {
-            average
-          }
         }
+      }
+    }
+    sourceRevenueByCountryCsv(iso_3: { eq: $iso3 }) {
+      Corporate_Taxes
+    }
+    allIndexRawDataCsv(
+      filter: { ISO_3: { eq: $iso3 } }
+      sort: { fields: year, order: ASC }
+    ) {
+      nodes {
+        year
+        buildings_cost_recovery
+        machines_cost_recovery
+        intangibles_cost_recovery
       }
     }
   }
