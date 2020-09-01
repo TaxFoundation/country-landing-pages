@@ -125,10 +125,6 @@ const PropertyTax = ({ data }) => {
           ))}
         </tbody>
       </PropTaxTable>
-      <ReportsAndData
-        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
-      />
       <KeyFigures>
         <KeyFigure>
           <h3>Share of Revenue from Property Taxes</h3>
@@ -141,6 +137,10 @@ const PropertyTax = ({ data }) => {
           }%`}</div>
         </KeyFigure>
       </KeyFigures>
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+      />
     </Wrapper>
   );
 };

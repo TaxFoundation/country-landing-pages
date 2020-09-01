@@ -77,10 +77,6 @@ const Consumption = ({ data }) => {
           countryID={country.iso3}
         />
       )}
-      <ReportsAndData
-        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
-      />
       <KeyFigures>
         <KeyFigure>
           <h3>Share of Revenue from Consumption Taxes</h3>
@@ -101,6 +97,10 @@ const Consumption = ({ data }) => {
           }`}</div>
         </KeyFigure>
       </KeyFigures>
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+      />
     </Wrapper>
   );
 };

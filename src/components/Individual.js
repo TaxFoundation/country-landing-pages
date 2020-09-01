@@ -45,10 +45,6 @@ const TaxBurdenOnLabor = ({ data }) => {
             }'s Tax Burden on Individuals Compare?`}
             data={theData}
           />
-          <ReportsAndData
-            report='https://taxfoundation.org/publications/comparison-tax-burden-labor-oecd/'
-            data='https://github.com/TaxFoundation/tax-burden-on-labor'
-          />
         </>
       )}
       <KeyFigures>
@@ -65,6 +61,10 @@ const TaxBurdenOnLabor = ({ data }) => {
           <div>{`${data.indexRawDataCsv.capital_gains_rate * 100}%`}</div>
         </KeyFigure>
       </KeyFigures>
+      <ReportsAndData
+        report='https://taxfoundation.org/publications/comparison-tax-burden-labor-oecd/'
+        data='https://github.com/TaxFoundation/tax-burden-on-labor'
+      />
     </Wrapper>
   );
 };

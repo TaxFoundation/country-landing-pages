@@ -80,10 +80,6 @@ const CorporateTax = ({ data }) => {
               .sort((a, b) => a.year - b.year)}
             worldwide={worldwide}
           />
-          <ReportsAndData
-            report='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'
-            data='https://files.taxfoundation.org/20191210095630/Corporate-Tax-Rates-Data-1980-2019.xlsx'
-          />
         </React.Fragment>
       )}
       {activeTab === 'cost-recovery-time-series' && (
@@ -102,10 +98,6 @@ const CorporateTax = ({ data }) => {
                 };
               })
               .sort((a, b) => a.year - b.year)}
-          />
-          <ReportsAndData
-            report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-            data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
           />
         </React.Fragment>
       )}
@@ -135,6 +127,18 @@ const CorporateTax = ({ data }) => {
           <div>{`${averageCapitalAllowance}%`}</div>
         </KeyFigure>
       </KeyFigures>
+      {activeTab === 'corp-time-series' && (
+        <ReportsAndData
+          report='https://taxfoundation.org/publications/corporate-tax-rates-around-the-world/'
+          data='https://files.taxfoundation.org/20191210095630/Corporate-Tax-Rates-Data-1980-2019.xlsx'
+        />
+      )}
+      {activeTab === 'cost-recovery-time-series' && (
+        <ReportsAndData
+          report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
+          data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+        />
+      )}
     </Wrapper>
   );
 };
