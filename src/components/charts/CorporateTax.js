@@ -152,7 +152,7 @@ const CorpTax = ({ data, worldwide, title }) => {
                 words: ['Worldwide Weighted', 'Average'],
                 fill: worldwideWeightedColor,
               },
-              { words: ['Wordlwide Average'], fill: worldwideColor },
+              { words: ['Worldwide Average'], fill: worldwideColor },
               {
                 words: [`${title}`, `Top Marginal`, `Corporate Tax Rate`],
                 fill: countryColor,
