@@ -120,7 +120,7 @@ const PropertyTax = ({ data }) => {
             <tr key={`prop-tax-${row.id}`}>
               <td>{row.category}</td>
               <td>{row.description}</td>
-              <td>{+theData[row.id] === 1 ? 'Yes' : 'No'}</td>
+              <td>{+theData[row.id] === 0 ? 'Yes' : 'No'}</td>
             </tr>
           ))}
         </tbody>
