@@ -8,12 +8,12 @@ function downloadRawData() {
     {
       name: 'IndexRanks',
       url:
-        'international-tax-competitiveness-index/master/final_outputs/final_categories_2014_2019.csv',
+        'international-tax-competitiveness-index/master/final_outputs/final_categories.csv',
     },
     {
       name: 'IndexSubranks',
       url:
-        'international-tax-competitiveness-index/master/final_outputs/subcategories_2019.csv',
+        'international-tax-competitiveness-index/master/final_outputs/subcategories_2020.csv',
     },
     {
       name: 'SourceRevenueByCountry',
@@ -51,7 +51,7 @@ function downloadRawData() {
     {
       name: 'IndexRawData',
       url:
-        'international-tax-competitiveness-index/master/final_outputs/raw_data_2019.csv',
+        'international-tax-competitiveness-index/master/final_outputs/raw_data_2020.csv',
     },
   ];
 
