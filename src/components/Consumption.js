@@ -20,11 +20,14 @@ const Consumption = ({ data }) => {
     .map(node => {
       return {
         iso3: node.ISO_3,
+        year: +node.year,
         vatBreadth: +node.vat_base,
         vatRate: +node.vat_rate,
         vatThreshold: +node.vat_threshold,
+        consumptionTime: +node.consumption_time,
       };
     });
+  const thisCountry = theData.find(d => d.iso3 === country.iso3);
   const tabOptionsFunc = countryId => [
     {
       name: `${countryId === 'USA' ? 'Sales / VAT' : 'VAT'} Rates`,
@@ -84,17 +87,11 @@ const Consumption = ({ data }) => {
         </KeyFigure>
         <KeyFigure>
           <h3>Average VAT Rate</h3>
-          <div>{`${
-            data.allIndexRawDataCsv.nodes.find(d => d.ISO_3 === country.iso3)
-              .vat_rate
-          }%`}</div>
+          <div>{`${thisCountry.vatRate}%`}</div>
         </KeyFigure>
         <KeyFigure>
           <h3>Average Business Compliance Time in Hours</h3>
-          <div>{`${
-            data.allIndexRawDataCsv.nodes.find(d => d.ISO_3 === country.iso3)
-              .consumption_time
-          }`}</div>
+          <div>{`${thisCountry.consumptionTime}`}</div>
         </KeyFigure>
       </KeyFigures>
       <ReportsAndData
