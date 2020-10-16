@@ -58,7 +58,9 @@ const TaxBurdenOnLabor = ({ data }) => {
         </KeyFigure>
         <KeyFigure>
           <h3>Capital Gains Tax Rate</h3>
-          <div>{`${data.indexRawDataCsv.capital_gains_rate * 100}%`}</div>
+          <div>{`${(data.indexRawDataCsv.capital_gains_rate * 100).toPrecision(
+            2
+          )}%`}</div>
         </KeyFigure>
       </KeyFigures>
       <ReportsAndData
