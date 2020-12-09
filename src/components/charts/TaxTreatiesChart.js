@@ -54,7 +54,6 @@ const TaxTreatiesChart = ({ data, countryID, title }) => {
         />
         <g id='tax-treaties-bar-chart'>
           {data.map(country => {
-            console.log(country.iso3, countryID);
             return (
               <g key={`tax-treaties-${country.iso3}`}>
                 <title>{`${country.taxTreaties} Tax Treaties`}</title>

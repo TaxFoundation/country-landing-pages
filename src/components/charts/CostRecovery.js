@@ -34,7 +34,6 @@ const CostRecovery = ({ data, title }) => {
     machines: 'rgb(47, 129, 212)',
     intangibles: 'rgb(92, 158, 170)',
   };
-  console.log(data);
   return (
     <Container>
       <svg viewBox={`0 0 ${width} ${height}`} role='graphics-document'>
