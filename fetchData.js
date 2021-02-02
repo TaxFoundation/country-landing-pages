@@ -53,6 +53,10 @@ function downloadRawData() {
       url:
         'international-tax-competitiveness-index/master/final_outputs/raw_data_2020.csv',
     },
+    {
+      name: 'ConsumptionRevenue',
+      url: 'consumption-taxes/main/final_outputs/revenue.csv'
+    }
   ];
 
   files.forEach(f => {

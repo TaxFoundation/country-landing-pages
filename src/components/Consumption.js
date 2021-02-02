@@ -8,6 +8,7 @@ import { KeyFigures, KeyFigure } from './ui/KeyFigures';
 import ReportsAndData from './ui/ReportsAndData';
 import VATRatesChart from './charts/VATRatesChart';
 import VATBaseChart from './charts/VATBaseChart';
+import VATRevenuesChart from './charts/VATRevenuesChart';
 
 const Consumption = ({ data }) => {
   const [activeTab, setActiveTab] = useState('vat-rates');
@@ -15,7 +16,10 @@ const Consumption = ({ data }) => {
   const itciMaxYear = Math.max(
     ...data.allIndexRawDataCsv.nodes.map(node => +node.year)
   );
-  const theData = data.allIndexRawDataCsv.nodes
+  const revMaxYear = Math.max(
+    ...data.allConsumptionRevenueCsv.nodes.map(node => +node.year)
+  );
+  const ratesAndBases = data.allIndexRawDataCsv.nodes
     .filter(node => +node.year === itciMaxYear)
     .map(node => {
       return {
@@ -26,8 +30,18 @@ const Consumption = ({ data }) => {
         vatThreshold: +node.vat_threshold,
         consumptionTime: +node.consumption_time,
       };
-    });
-  const thisCountry = theData.find(d => d.iso3 === country.iso3);
+    }
+  );
+  const revenues = data.allConsumptionRevenueCsv.nodes
+    .filter(node => +node.year === revMaxYear)
+    .map(node => {
+      return {
+        iso3: node.iso_3,
+        vatRevenue: +node._5000_consumption_pct_gdp,
+      }
+    }
+  );
+  const thisCountry = ratesAndBases.find(d => d.iso3 === country.iso3);
   const tabOptionsFunc = countryId => [
     {
       name: `${countryId === 'USA' ? 'Sales / VAT' : 'VAT'} Rates`,
@@ -37,12 +51,17 @@ const Consumption = ({ data }) => {
       name: `${countryId === 'USA' ? 'Sales / VAT' : 'VAT'} Base`,
       id: 'vat-base',
     },
+    {
+      name: `${countryId === 'USA' ? 'Sales / VAT' : 'VAT'} Revenues`,
+      id: 'vat-revenue',
+    },
     // {
     //   name: `${country.iso3 === 'USA' ? 'Sales / VAT' : 'VAT'} Complexity Map`,
     //   id: 'vat-complexity-map',
     // },
   ];
   const tabOptions = tabOptionsFunc(country.iso3);
+  console.log(revenues);
   return (
     <Wrapper>
       <ChartTabs>
@@ -65,7 +84,7 @@ const Consumption = ({ data }) => {
           } ${country.article ? country.article + ' ' : ''}${
             country.name
           } vs. ${country.iso3 === 'USA' ? 'VAT Rates in ' : ''}the OECD`}
-          data={theData}
+          data={ratesAndBases}
           countryID={country.iso3}
         />
       )}
@@ -76,7 +95,18 @@ const Consumption = ({ data }) => {
           } ${country.article ? country.article + ' ' : ''}${
             country.name
           } vs. the OECD`}
-          data={theData}
+          data={ratesAndBases}
+          countryID={country.iso3}
+        />
+      )}
+      {activeTab === 'vat-revenue' && (
+        <VATRevenuesChart
+          title={`${
+            country.iso3 === 'USA' ? 'Sales Tax Revenue in ' : 'VAT Revenue in '
+          } ${country.article ? country.article + ' ' : ''}${
+            country.name
+          } vs. the OECD`}
+          data={revenues}
           countryID={country.iso3}
         />
       )}
@@ -119,6 +149,13 @@ export const query = graphql`
         vat_base
         vat_rate
         vat_threshold
+      }
+    }
+    allConsumptionRevenueCsv {
+      nodes {
+        iso_3
+        year
+        _5000_consumption_pct_gdp
       }
     }
     sourceRevenueByCountryCsv(iso_3: { eq: $iso3 }) {
