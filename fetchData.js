@@ -55,8 +55,12 @@ function downloadRawData() {
     },
     {
       name: 'ConsumptionRevenue',
-      url: 'consumption-taxes/main/final_outputs/revenue.csv'
-    }
+      url: 'consumption-taxes/main/final_outputs/revenue.csv',
+    },
+    {
+      name: 'ConsumptionData',
+      url: 'consumption-taxes/main/intermediate_outputs/consumption_data.csv',
+    },
   ];
 
   files.forEach(f => {
