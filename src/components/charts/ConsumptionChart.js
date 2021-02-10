@@ -19,7 +19,7 @@ const exciseColor = 'rgb(92, 158, 170)';
 const ConsumptionChart = ({ data, title }) => {
   const width = 800;
   const height = 500;
-  const margin = { top: 30, left: 70, bottom: 60, right: 10 };
+  const margin = { top: 30, left: 70, bottom: 90, right: 10 };
   const countries = data.map(country => country.iso3).sort();
   const max = Math.max(
     ...data.map(country => country.vat + country.sales + country.excise)
@@ -117,6 +117,42 @@ const ConsumptionChart = ({ data, title }) => {
           shapeRendering='crispEdges'
           vectorEffect='non-scaling-stroke'
         />
+        <g transform={`translate(0, ${height - margin.bottom / 3})`}>
+          <svg id='consumption-mix-legend' viewBox={`0 0 800 500`}>
+            {[
+              {
+                word: 'VAT',
+                fill: vatColor,
+              },
+              { word: 'Sales Taxes', fill: salesColor },
+              {
+                word: 'Excise Taxes',
+                fill: exciseColor,
+              },
+            ].map((section, i) => {
+              const spacer = 800 / 3;
+              return (
+                <React.Fragment key={`corporate-legend-${section.word}`}>
+                  <rect
+                    x={margin.left + i * spacer}
+                    width={25}
+                    height={25}
+                    fill={section.fill}
+                  ></rect>
+                  <text
+                    key={`${section.title}-word-${section.word}`}
+                    x={margin.left + 35 + i * spacer}
+                    fill={section.fill}
+                    y={19}
+                    fontSize={16}
+                  >
+                    {section.word}
+                  </text>
+                </React.Fragment>
+              );
+            })}
+          </svg>
+        </g>
       </svg>
     </Container>
   );
