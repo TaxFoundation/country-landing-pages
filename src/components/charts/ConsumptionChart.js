@@ -16,7 +16,7 @@ const vatColor = 'rgb(75, 104, 171)';
 const salesColor = 'rgb(47, 129, 212)';
 const exciseColor = 'rgb(92, 158, 170)';
 
-const ConsumptionChart = ({ data, title }) => {
+const ConsumptionChart = ({ data, countryID, title }) => {
   const width = 800;
   const height = 500;
   const margin = { top: 30, left: 70, bottom: 90, right: 10 };
@@ -61,6 +61,23 @@ const ConsumptionChart = ({ data, title }) => {
           {data.map(country => {
             return (
               <g key={`consumption-mix-${country.iso3}`}>
+                {country.iso3 === countryID && (
+                  <g>
+                    <rect
+                      fill='rgb(217, 93, 107)'
+                      x={xScale(country.iso3) - 3}
+                      width={xScale.bandwidth() + 6}
+                      y={
+                        yScale(country.vat + country.sales + country.excise) - 3
+                      }
+                      height={
+                        yScale(0) -
+                        yScale(country.vat + country.sales + country.excise) +
+                        3
+                      }
+                    ></rect>
+                  </g>
+                )}
                 {country.vat > 0 && (
                   <g>
                     <title>{`VAT comprises ${country.vat}% of tax ${country.iso3} revenue`}</title>
