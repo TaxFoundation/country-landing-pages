@@ -241,7 +241,7 @@ const Consumption = ({ data }) => {
           </thead>
           <tbody>
             {data.allAlcoholCsv.nodes
-              .sort((a, b) => a.alcohol_type - b.alcohol_type)
+              .sort((a, b) => a.alcohol_type.localeCompare(b.alcohol_type))
               .map(node => (
                 <tr key={`alcohol-tax-${country.iso3}-${node.alcohol_type}`}>
                   <td>{alcoholTypes[node.alcohol_type]}</td>
@@ -260,17 +260,19 @@ const Consumption = ({ data }) => {
       )}
       {data.allTobaccoCsv.nodes.length > 0 && (
         <Table>
-          <caption>Excise Tax on Tobaco</caption>
+          <caption>Excise Tax on Tobacco</caption>
           <thead>
             <tr>
-              <th>Alcohol Type</th>
+              <th>Tobacco Type</th>
               <th>Excise Tax</th>
               <th>OECD Avg. Tax</th>
             </tr>
           </thead>
           <tbody>
             {data.allTobaccoCsv.nodes
-              .sort((a, b) => a.tobacco_excise_type - b.tobacco_excise_type)
+              .sort((a, b) =>
+                a.tobacco_excise_type.localeCompare(b.tobacco_excise_type)
+              )
               .map(node => (
                 <tr
                   key={`alcohol-tax-${country.iso3}-${node.tobacco_excise_type}`}
@@ -297,7 +299,7 @@ const Consumption = ({ data }) => {
       )}
       {data.allFuelCsv.nodes.length > 0 && (
         <Table>
-          <caption>Excise Tax on Feul</caption>
+          <caption>Excise Tax on Fuel</caption>
           <thead>
             <tr>
               <th>Fuel Type</th>
@@ -307,7 +309,7 @@ const Consumption = ({ data }) => {
           </thead>
           <tbody>
             {data.allFuelCsv.nodes.map(node => (
-              <tr>
+              <tr key={`fuel-${country.iso3}-${node.fuel_type}`}>
                 <td>{fuelTypes[node.fuel_type]}</td>
                 <td style={{ textAlign: 'right' }}>
                   {node.total_tax_pct ? percent(+node.total_tax_pct) : 'NA'}
