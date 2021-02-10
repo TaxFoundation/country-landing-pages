@@ -148,7 +148,11 @@ const Consumption = ({ data }) => {
           <div>{`${data.sourceRevenueByCountryCsv.Consumption_Taxes}%`}</div>
         </KeyFigure>
         <KeyFigure>
-          <h3>Average VAT Rate</h3>
+          <h3>
+            {country.iso3 === 'USA'
+              ? 'Average Sales Tax Rate'
+              : 'Standard VAT Rate'}
+          </h3>
           <div>{`${thisCountry.vatRate}%`}</div>
         </KeyFigure>
         <KeyFigure>
