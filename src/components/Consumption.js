@@ -126,11 +126,13 @@ const Consumption = ({ data }) => {
       id: 'vat-base',
     },
     {
-      name: `${countryId === 'USA' ? 'Sales / VAT' : 'VAT'} Revenues`,
+      name: `${
+        countryId === 'USA' ? 'Sales / VAT' : 'VAT'
+      } Revenues as a Percent of GDP`,
       id: 'vat-revenue',
     },
     {
-      name: `Share of Revenue from Consumption Tax`,
+      name: `Share of Tax Revenue from Consumption Tax`,
       id: 'consumption-mix',
     },
   ];
@@ -246,12 +248,30 @@ const Consumption = ({ data }) => {
                 <tr key={`alcohol-tax-${country.iso3}-${node.alcohol_type}`}>
                   <td>{alcoholTypes[node.alcohol_type]}</td>
                   <td style={{ textAlign: 'right' }}>
-                    {node.excise_liter_usd ? USD(+node.excise_liter_usd) : 'NA'}
+                    {node.excise_liter_usd ? (
+                      USD(+node.excise_liter_usd)
+                    ) : (
+                      <a
+                        href='https://www.oecd-ilibrary.org/sites/152def2d-en/1/3/3/index.html?itemId=/content/publication/152def2d-en&_csp_=c74456d46ecc7b2f6fd3352bb00363ec&itemIGO=oecd&itemContentType=book#boxsection-d1e35484'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        See Notes
+                      </a>
+                    )}
                   </td>
                   <td style={{ textAlign: 'right' }}>
-                    {node.oecd_avg_liter_usd
-                      ? USD(+node.oecd_avg_liter_usd)
-                      : 'NA'}
+                    {node.oecd_avg_liter_usd ? (
+                      USD(+node.oecd_avg_liter_usd)
+                    ) : (
+                      <a
+                        href='https://www.oecd-ilibrary.org/sites/152def2d-en/1/3/3/index.html?itemId=/content/publication/152def2d-en&_csp_=c74456d46ecc7b2f6fd3352bb00363ec&itemIGO=oecd&itemContentType=book#boxsection-d1e35484'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        See Notes
+                      </a>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -279,18 +299,34 @@ const Consumption = ({ data }) => {
                 >
                   <td>{tobaccoTypes[node.tobacco_excise_type].name}</td>
                   <td style={{ textAlign: 'right' }}>
-                    {node.tobacco_excise
-                      ? tobaccoTypes[node.tobacco_excise_type].format(
-                          +node.tobacco_excise
-                        )
-                      : 'NA'}
+                    {node.tobacco_excise ? (
+                      tobaccoTypes[node.tobacco_excise_type].format(
+                        +node.tobacco_excise
+                      )
+                    ) : (
+                      <a
+                        href='https://www.oecd-ilibrary.org/sites/152def2d-en/1/3/3/index.html?itemId=/content/publication/152def2d-en&_csp_=c74456d46ecc7b2f6fd3352bb00363ec&itemIGO=oecd&itemContentType=book#boxsection-d1e40865'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        See Notes
+                      </a>
+                    )}
                   </td>
                   <td style={{ textAlign: 'right' }}>
-                    {node.oecd_avg_excise
-                      ? tobaccoTypes[node.tobacco_excise_type].format(
-                          +node.oecd_avg_excise
-                        )
-                      : 'NA'}
+                    {node.oecd_avg_excise ? (
+                      tobaccoTypes[node.tobacco_excise_type].format(
+                        +node.oecd_avg_excise
+                      )
+                    ) : (
+                      <a
+                        href='https://www.oecd-ilibrary.org/sites/152def2d-en/1/3/3/index.html?itemId=/content/publication/152def2d-en&_csp_=c74456d46ecc7b2f6fd3352bb00363ec&itemIGO=oecd&itemContentType=book#boxsection-d1e40865'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        See Notes
+                      </a>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -312,12 +348,30 @@ const Consumption = ({ data }) => {
               <tr key={`fuel-${country.iso3}-${node.fuel_type}`}>
                 <td>{fuelTypes[node.fuel_type]}</td>
                 <td style={{ textAlign: 'right' }}>
-                  {node.total_tax_pct ? percent(+node.total_tax_pct) : 'NA'}
+                  {node.total_tax_pct ? (
+                    percent(+node.total_tax_pct)
+                  ) : (
+                    <a
+                      href='https://www.oecd-ilibrary.org/sites/152def2d-en/1/3/3/index.html?itemId=/content/publication/152def2d-en&_csp_=c74456d46ecc7b2f6fd3352bb00363ec&itemIGO=oecd&itemContentType=book#boxsection-d1e44320'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      See Notes
+                    </a>
+                  )}
                 </td>
                 <td style={{ textAlign: 'right' }}>
-                  {node.oecd_avg_total_tax_pct
-                    ? percent(+node.oecd_avg_total_tax_pct)
-                    : 'NA'}
+                  {node.oecd_avg_total_tax_pct ? (
+                    percent(+node.oecd_avg_total_tax_pct)
+                  ) : (
+                    <a
+                      href='https://www.oecd-ilibrary.org/sites/152def2d-en/1/3/3/index.html?itemId=/content/publication/152def2d-en&_csp_=c74456d46ecc7b2f6fd3352bb00363ec&itemIGO=oecd&itemContentType=book#boxsection-d1e44320'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      See Notes
+                    </a>
+                  )}
                 </td>
               </tr>
             ))}
