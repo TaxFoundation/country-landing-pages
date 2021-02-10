@@ -10,6 +10,56 @@ import VATRatesChart from './charts/VATRatesChart';
 import VATBaseChart from './charts/VATBaseChart';
 import VATRevenuesChart from './charts/VATRevenuesChart';
 import ConsumptionChart from './charts/ConsumptionChart';
+import Table from './ui/Table';
+
+const USD = number =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+    number
+  );
+const percent = number =>
+  `${new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(
+    number
+  )}%`;
+
+const alcoholTypes = {
+  beer: 'Beer',
+  wine_sparkling: 'Sparkling Wine',
+  spirits: 'Spirits',
+  wine_still: 'Wine',
+};
+
+const fuelTypes = {
+  diesel_total_tax_pct_price: 'Automtoive Diesel',
+  household_fuel_total_tax_pct_price: 'Household Light Fuel Oil',
+  unleaded_total_tax_pct_price: 'Unleaded Gasoline',
+};
+
+const tobaccoTypes = {
+  cigar_excise_1k_usd: {
+    name: 'Cigars - Specific Excise per 1,000 (in USD)',
+    format: USD,
+  },
+  cigar_excise_1k_pct_rsp: {
+    name: 'Cigars - Ad valorem excise as percent of retail sales price',
+    format: percent,
+  },
+  cigarette_excise_1k_usd: {
+    name: 'Cigarettes - Specific Excise per 1,000 (in USD)',
+    format: USD,
+  },
+  cigarette_excise_1k_pct_rsp: {
+    name: 'Cigarettes - Ad valorem excise as percent of retail sales price',
+    format: percent,
+  },
+  roll_tob_excise_1kg_usd: {
+    name: 'Rolled Tobaco - Specific Excise per 1,000 (in USD)',
+    format: USD,
+  },
+  roll_tob_excise_1kg_pct_rsp: {
+    name: 'Rolled Tobaco - Ad valorem excise as percent of retail sales price',
+    format: percent,
+  },
+};
 
 const Consumption = ({ data }) => {
   const [activeTab, setActiveTab] = useState('vat-rates');
@@ -160,6 +210,118 @@ const Consumption = ({ data }) => {
           <div>{`${thisCountry.consumptionTime}`}</div>
         </KeyFigure>
       </KeyFigures>
+      {data.allReducedRatesCsv.nodes.length > 0 && (
+        <Table>
+          <caption>Reduced Vat Rates</caption>
+          <thead>
+            <tr>
+              <th>Reduced Rate</th>
+              <th>Reduced Base</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.allReducedRatesCsv.nodes.map(node => (
+              <tr key={`${country.iso3}-${node.variable}`}>
+                <td>{+node.reduced_rate}%</td>
+                <td>{node.reduced_base}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      {data.allAlcoholCsv.nodes.length > 0 && (
+        <Table>
+          <caption>Excise Tax on Alcohol</caption>
+          <thead>
+            <tr>
+              <th>Alcohol Type</th>
+              <th>Excise Tax per Liter</th>
+              <th>OECD Avg. Tax per Liter</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.allAlcoholCsv.nodes
+              .sort((a, b) => a.alcohol_type - b.alcohol_type)
+              .map(node => (
+                <tr key={`alcohol-tax-${country.iso3}-${node.alcohol_type}`}>
+                  <td>{alcoholTypes[node.alcohol_type]}</td>
+                  <td style={{ textAlign: 'right' }}>
+                    {node.excise_liter_usd ? USD(+node.excise_liter_usd) : 'NA'}
+                  </td>
+                  <td style={{ textAlign: 'right' }}>
+                    {node.oecd_avg_liter_usd
+                      ? USD(+node.oecd_avg_liter_usd)
+                      : 'NA'}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+      )}
+      {data.allTobaccoCsv.nodes.length > 0 && (
+        <Table>
+          <caption>Excise Tax on Tobaco</caption>
+          <thead>
+            <tr>
+              <th>Alcohol Type</th>
+              <th>Excise Tax</th>
+              <th>OECD Avg. Tax</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.allTobaccoCsv.nodes
+              .sort((a, b) => a.tobacco_excise_type - b.tobacco_excise_type)
+              .map(node => (
+                <tr
+                  key={`alcohol-tax-${country.iso3}-${node.tobacco_excise_type}`}
+                >
+                  <td>{tobaccoTypes[node.tobacco_excise_type].name}</td>
+                  <td style={{ textAlign: 'right' }}>
+                    {node.tobacco_excise
+                      ? tobaccoTypes[node.tobacco_excise_type].format(
+                          +node.tobacco_excise
+                        )
+                      : 'NA'}
+                  </td>
+                  <td style={{ textAlign: 'right' }}>
+                    {node.oecd_avg_excise
+                      ? tobaccoTypes[node.tobacco_excise_type].format(
+                          +node.oecd_avg_excise
+                        )
+                      : 'NA'}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+      )}
+      {data.allFuelCsv.nodes.length > 0 && (
+        <Table>
+          <caption>Excise Tax on Feul</caption>
+          <thead>
+            <tr>
+              <th>Fuel Type</th>
+              <th>Total Tax as Percent of Price</th>
+              <th>OECD Avg. Total Tax as Percent of Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.allFuelCsv.nodes.map(node => (
+              <tr>
+                <td>{fuelTypes[node.fuel_type]}</td>
+                <td style={{ textAlign: 'right' }}>
+                  {node.total_tax_pct ? percent(+node.total_tax_pct) : 'NA'}
+                </td>
+                <td style={{ textAlign: 'right' }}>
+                  {node.oecd_avg_total_tax_pct
+                    ? percent(+node.oecd_avg_total_tax_pct)
+                    : 'NA'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
       <ReportsAndData
         report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
         data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
@@ -205,6 +367,41 @@ export const query = graphql`
     }
     sourceRevenueByCountryCsv(iso_3: { eq: $iso3 }) {
       Consumption_Taxes
+    }
+    allTobaccoCsv(filter: { iso_3: { eq: $iso3 } }) {
+      nodes {
+        iso_3
+        tobacco_excise
+        tobacco_excise_type
+        year
+        oecd_avg_excise
+      }
+    }
+    allAlcoholCsv(filter: { iso_3: { eq: $iso3 } }) {
+      nodes {
+        year
+        oecd_avg_liter_usd
+        iso_3
+        excise_liter_usd
+        alcohol_type
+      }
+    }
+    allFuelCsv(filter: { iso_3: { eq: $iso3 } }) {
+      nodes {
+        fuel_type
+        iso_3
+        oecd_avg_total_tax_pct
+        total_tax_pct
+        year
+      }
+    }
+    allReducedRatesCsv(filter: { iso_3: { eq: $iso3 } }) {
+      nodes {
+        iso_3
+        reduced_base
+        reduced_rate
+        variable
+      }
     }
   }
 `;
