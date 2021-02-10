@@ -9,6 +9,7 @@ import ReportsAndData from './ui/ReportsAndData';
 import VATRatesChart from './charts/VATRatesChart';
 import VATBaseChart from './charts/VATBaseChart';
 import VATRevenuesChart from './charts/VATRevenuesChart';
+import ConsumptionChart from './charts/ConsumptionChart';
 
 const Consumption = ({ data }) => {
   const [activeTab, setActiveTab] = useState('vat-rates');
@@ -19,6 +20,18 @@ const Consumption = ({ data }) => {
   const revMaxYear = Math.max(
     ...data.allConsumptionRevenueCsv.nodes.map(node => +node.year)
   );
+  const mixMaxYear = data.allConsumptionDataCsv.nodes.reduce((acc, curr) => {
+    if (
+      +curr.year > acc &&
+      !isNaN(+curr.vat_pct_total_5111) &&
+      !isNaN(+curr.sales_pct_total_5112) &&
+      !isNaN(+curr.excise_pct_total_5121)
+    ) {
+      return +curr.year;
+    }
+    return acc;
+  }, 0);
+
   const ratesAndBases = data.allIndexRawDataCsv.nodes
     .filter(node => +node.year === itciMaxYear)
     .map(node => {
@@ -30,17 +43,28 @@ const Consumption = ({ data }) => {
         vatThreshold: +node.vat_threshold,
         consumptionTime: +node.consumption_time,
       };
-    }
-  );
+    });
+
   const revenues = data.allConsumptionRevenueCsv.nodes
     .filter(node => +node.year === revMaxYear)
     .map(node => {
       return {
         iso3: node.iso_3,
         vatRevenue: +node._5000_consumption_pct_gdp,
-      }
-    }
-  );
+      };
+    });
+
+  const mix = data.allConsumptionDataCsv.nodes
+    .filter(node => +node.year === mixMaxYear)
+    .map(node => {
+      return {
+        iso3: node.iso_3,
+        vat: +node.vat_pct_total_5111,
+        sales: +node.sales_pct_total_5112,
+        excise: +node.excise_pct_total_5121,
+      };
+    });
+
   const thisCountry = ratesAndBases.find(d => d.iso3 === country.iso3);
   const tabOptionsFunc = countryId => [
     {
@@ -55,13 +79,12 @@ const Consumption = ({ data }) => {
       name: `${countryId === 'USA' ? 'Sales / VAT' : 'VAT'} Revenues`,
       id: 'vat-revenue',
     },
-    // {
-    //   name: `${country.iso3 === 'USA' ? 'Sales / VAT' : 'VAT'} Complexity Map`,
-    //   id: 'vat-complexity-map',
-    // },
+    {
+      name: `Share of Revenue from Consumption Tax`,
+      id: 'consumption-mix',
+    },
   ];
   const tabOptions = tabOptionsFunc(country.iso3);
-  console.log(revenues);
   return (
     <Wrapper>
       <ChartTabs>
@@ -107,6 +130,15 @@ const Consumption = ({ data }) => {
             country.name
           } vs. the OECD`}
           data={revenues}
+          countryID={country.iso3}
+        />
+      )}
+      {activeTab === 'consumption-mix' && (
+        <ConsumptionChart
+          title={`Mix of Consumption Taxes as Share of Total Tax in ${
+            country.article ? country.article + ' ' : ''
+          }${country.name} vs. the OECD`}
+          data={mix}
           countryID={country.iso3}
         />
       )}
@@ -156,6 +188,15 @@ export const query = graphql`
         iso_3
         year
         _5000_consumption_pct_gdp
+      }
+    }
+    allConsumptionDataCsv {
+      nodes {
+        iso_3
+        year
+        vat_pct_total_5111
+        sales_pct_total_5112
+        excise_pct_total_5121
       }
     }
     sourceRevenueByCountryCsv(iso_3: { eq: $iso3 }) {
