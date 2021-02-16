@@ -53,6 +53,30 @@ function downloadRawData() {
       url:
         'international-tax-competitiveness-index/master/final_outputs/raw_data_2020.csv',
     },
+    {
+      name: 'ConsumptionRevenue',
+      url: 'consumption-taxes/main/final_outputs/revenue.csv',
+    },
+    {
+      name: 'ReducedRates',
+      url: 'consumption-taxes/main/final_outputs/reduced_rates_base.csv',
+    },
+    {
+      name: 'Fuel',
+      url: 'consumption-taxes/main/final_outputs/fuel.csv',
+    },
+    {
+      name: 'Alcohol',
+      url: 'consumption-taxes/main/final_outputs/alcohol.csv',
+    },
+    {
+      name: 'Tobacco',
+      url: 'consumption-taxes/main/final_outputs/tobacco.csv',
+    },
+    {
+      name: 'ConsumptionData',
+      url: 'consumption-taxes/main/intermediate_outputs/consumption_data.csv',
+    },
   ];
 
   files.forEach(f => {
