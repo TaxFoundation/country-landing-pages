@@ -379,8 +379,8 @@ const Consumption = ({ data }) => {
         </Table>
       )}
       <ReportsAndData
-        report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
-        data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
+        report='https://taxfoundation.org/consumption-tax-policies/'
+        data='https://github.com/TaxFoundation/consumption-taxes'
       />
     </Wrapper>
   );
