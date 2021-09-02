@@ -10,5 +10,6 @@ module.exports = {
     },
     `gatsby-transformer-csv`,
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-netlify`,
   ],
 };
