@@ -38,8 +38,8 @@ const ITCI = ({ data }) => {
       id: 'property',
     },
     {
-      name: 'International Tax Score',
-      id: 'international',
+      name: 'Cross Border Tax Score',
+      id: 'cross_border',
     },
   ];
   return (
@@ -108,8 +108,8 @@ export const query = graphql`
           corporate_rank
           income
           income_rank
-          international
-          international_rank
+          cross_border
+          cross_border_rank
         }
       }
     }

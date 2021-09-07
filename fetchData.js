@@ -8,12 +8,12 @@ function downloadRawData() {
     {
       name: 'IndexRanks',
       url:
-        'international-tax-competitiveness-index/2021-index-updates/final_outputs/final_categories.csv',
+        'international-tax-competitiveness-index/2021-index-update/final_outputs/final_categories.csv',
     },
     {
       name: 'IndexSubranks',
       url:
-        'international-tax-competitiveness-index/2021-index-updates/final_outputs/subcategories_2020.csv',
+        'international-tax-competitiveness-index/2021-index-update/final_outputs/subcategories_2021.csv',
     },
     {
       name: 'SourceRevenueByCountry',
