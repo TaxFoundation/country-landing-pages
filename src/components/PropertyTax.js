@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
@@ -12,25 +13,20 @@ const PropTaxTable = styled.table`
   border: 1px solid #333;
   border-collapse: collapse;
   font-size: 0.8rem;
-
   thead tr {
     border-bottom: 1px solid #333;
   }
-
   th {
     font-weight: 700;
     text-align: center;
     padding: 0.8rem;
   }
-
   tbody tr:nth-of-type(even) {
     background-color: #eee;
   }
-
   td {
     font-family: 'Roboto Mono', monospace;
     padding: 0.8rem;
-
     &:nth-of-type(3) {
       text-align: center;
     }
@@ -45,22 +41,22 @@ const PropertyTax = ({ data }) => {
   const theData = {
     net_wealth: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.net_wealth,
+    ).node.net_wealth_str,
     estate_or_inheritance_tax: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.estate_or_inheritance_tax,
+    ).node.estate_or_inheritance_tax_str,
     transfer_tax: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.transfer_tax,
+    ).node.transfer_tax_str,
     asset_tax: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.asset_tax,
+    ).node.asset_tax_str,
     capital_duties: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.capital_duties,
+    ).node.capital_duties_str,
     financial_transaction_tax: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.financial_transaction_tax,
+    ).node.financial_transaction_tax_str,
     property_tax_collections: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
     ).node.property_tax_collections,
@@ -120,7 +116,7 @@ const PropertyTax = ({ data }) => {
             <tr key={`prop-tax-${row.id}`}>
               <td>{row.category}</td>
               <td>{row.description}</td>
-              <td>{+theData[row.id] === 0 ? 'Yes' : 'No'}</td>
+              <td>{theData[row.id]}</td>
             </tr>
           ))}
         </tbody>
@@ -132,9 +128,8 @@ const PropertyTax = ({ data }) => {
         </KeyFigure>
         <KeyFigure>
           <h3>Property Tax Revenue as a Share of Capital Stock</h3>
-          <div>{`${
-            Math.round(+theData.property_tax_collections * 100) / 100
-          }%`}</div>
+          <div>{`${Math.round(+theData.property_tax_collections * 100) / 100
+            }%`}</div>
         </KeyFigure>
       </KeyFigures>
       <ReportsAndData
@@ -159,13 +154,13 @@ export const query = graphql`
         node {
           ISO_3
           year
-          net_wealth
-          estate_or_inheritance_tax
-          transfer_tax
-          asset_tax
-          capital_duties
+          net_wealth_str
+          estate_or_inheritance_tax_str
+          transfer_tax_str
+          asset_tax_str
+          capital_duties_str
           property_tax_collections
-          financial_transaction_tax
+          financial_transaction_tax_str
         }
       }
     }

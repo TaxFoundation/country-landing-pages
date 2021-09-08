@@ -6,6 +6,11 @@ function downloadRawData() {
   const urlRoot = 'https://raw.githubusercontent.com/TaxFoundation/';
   const files = [
     {
+      name: 'TableD',
+      url:
+        'international-tax-competitiveness-index/2021-index-update/final_outputs/table_d_property.csv',
+    },
+    {
       name: 'IndexRanks',
       url:
         'international-tax-competitiveness-index/2021-index-update/final_outputs/final_categories.csv',
@@ -51,7 +56,7 @@ function downloadRawData() {
     {
       name: 'IndexRawData',
       url:
-        'international-tax-competitiveness-index/2021-index-update/final_outputs/raw_data_2021.csv',
+        'international-tax-competitiveness-index/test_bool_replace/final_outputs/raw_data_2021.csv',
     },
     {
       name: 'ConsumptionRevenue',
