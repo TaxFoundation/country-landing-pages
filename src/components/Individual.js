@@ -40,9 +40,8 @@ const TaxBurdenOnLabor = ({ data }) => {
       {activeTab === 'tax-burden-on-labor' && (
         <>
           <IndividualChart
-            title={`How Does${country.article ? ' ' + country.article : ''} ${
-              country.name
-            }'s Tax Burden on Individuals Compare?`}
+            title={`How Does${country.article ? ' ' + country.article : ''} ${country.name
+              }'s Tax Burden on Individuals Compare?`}
             data={theData}
           />
         </>
