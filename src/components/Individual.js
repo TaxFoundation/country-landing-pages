@@ -80,7 +80,7 @@ export const query = graphql`
       article
     }
     taxBurdenOnLaborCsv(Country: { eq: $name }) {
-      Employee_Payroll_Taxes_in_percentage
+      Employer_Payroll_Taxes_in_percentage
       Employee_Payroll_Taxes_in_percentage
       Income_Tax_in_percentage
       Rank
