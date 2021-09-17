@@ -46,7 +46,7 @@ function downloadRawData() {
     },
     {
       name: 'TaxBurdenOnLabor',
-      url: 'tax-burden-on-labor/master/final-outputs/Table1.csv',
+      url: 'tax-burden-on-labor/master/final-outputs/Table2.csv',
     },
     {
       name: 'IndexRawData',
