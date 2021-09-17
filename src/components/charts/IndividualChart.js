@@ -13,7 +13,6 @@ const Container = styled.div`
 `;
 
 const TaxBurdenChart = ({ data, title }) => {
-  console.log('THis is adsfadsf: ', data.Employee_Payroll_Taxes_in_percentage);
   const width = 800;
   const height = 700;
   const maxDollars =
