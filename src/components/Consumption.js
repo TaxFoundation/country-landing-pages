@@ -29,7 +29,7 @@ const alcoholTypes = {
 };
 
 const fuelTypes = {
-  diesel_total_tax_pct_price: 'Automtoive Diesel',
+  diesel_total_tax_pct_price: 'Automotive Diesel',
   household_fuel_total_tax_pct_price: 'Household Light Fuel Oil',
   unleaded_total_tax_pct_price: 'Unleaded Gasoline',
 };

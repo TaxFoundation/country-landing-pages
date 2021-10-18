@@ -13,7 +13,7 @@ function downloadRawData() {
     {
       name: 'IndexSubranks',
       url:
-        'international-tax-competitiveness-index/master/final_outputs/subcategories_2020.csv',
+        'international-tax-competitiveness-index/master/final_outputs/subcategories_2021.csv',
     },
     {
       name: 'SourceRevenueByCountry',
@@ -46,12 +46,12 @@ function downloadRawData() {
     },
     {
       name: 'TaxBurdenOnLabor',
-      url: 'tax-burden-on-labor/master/final-outputs/Table1.csv',
+      url: 'tax-burden-on-labor/master/final-outputs/Table2.csv',
     },
     {
       name: 'IndexRawData',
       url:
-        'international-tax-competitiveness-index/master/final_outputs/raw_data_2020.csv',
+        'international-tax-competitiveness-index/master/final_outputs/raw_data_2021.csv',
     },
     {
       name: 'ConsumptionRevenue',

@@ -26,20 +26,20 @@ const TaxBurdenChart = ({ data, title }) => {
     yScale(data.Total_Average_Annual_Labor_Cost_per_Employee_in__),
     yScale(
       data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
-        (1 - data.Employer_Payroll_Taxes_in__ / 100)
+      (1 - data.Employer_Payroll_Taxes_in_percentage / 100)
     ),
     yScale(
       data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
-        (1 -
-          data.Employer_Payroll_Taxes_in__ / 100 -
-          data.Employee_Payroll_Taxes_in__ / 100)
+      (1 -
+        data.Employer_Payroll_Taxes_in_percentage / 100 -
+        data.Employee_Payroll_Taxes_in_percentage / 100)
     ),
     yScale(
       data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
-        (1 -
-          data.Employer_Payroll_Taxes_in__ / 100 -
-          data.Employee_Payroll_Taxes_in__ / 100 -
-          data.Income_Tax_in__ / 100)
+      (1 -
+        data.Employer_Payroll_Taxes_in_percentage / 100 -
+        data.Employee_Payroll_Taxes_in_percentage / 100 -
+        data.Income_Tax_in_percentage / 100)
     ),
   ];
 
@@ -56,30 +56,30 @@ const TaxBurdenChart = ({ data, title }) => {
       y: rectCoords[0],
       height: heights[0],
       fill: 'rgb(73, 193, 279)',
-      percent: data.Employer_Payroll_Taxes_in__,
+      percent: data.Employer_Payroll_Taxes_in_percentage,
       value:
         data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
-        (data.Employer_Payroll_Taxes_in__ / 100),
+        (data.Employer_Payroll_Taxes_in_percentage / 100),
     },
     {
       title: 'Employee Share of Payroll Taxes',
       y: rectCoords[1],
       height: heights[1],
       fill: 'rgb(178, 217, 214)',
-      percent: data.Employee_Payroll_Taxes_in__,
+      percent: data.Employee_Payroll_Taxes_in_percentage,
       value:
         data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
-        (data.Employee_Payroll_Taxes_in__ / 100),
+        (data.Employee_Payroll_Taxes_in_percentage / 100),
     },
     {
       title: 'Income Tax',
       y: rectCoords[2],
       height: heights[2],
       fill: 'rgb(103, 148, 253)',
-      percent: data.Income_Tax_in__,
+      percent: data.Income_Tax_in_percentage,
       value:
         data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
-        (data.Income_Tax_in__ / 100),
+        (data.Income_Tax_in_percentage / 100),
     },
     {
       title: 'After-Tax Income',
@@ -88,15 +88,15 @@ const TaxBurdenChart = ({ data, title }) => {
       fill: 'rgb(165, 109, 235)',
       percent:
         100 -
-        data.Employer_Payroll_Taxes_in__ -
-        data.Employee_Payroll_Taxes_in__ -
-        data.Income_Tax_in__,
+        data.Employer_Payroll_Taxes_in_percentage -
+        data.Employee_Payroll_Taxes_in_percentage -
+        data.Income_Tax_in_percentage,
       value:
         data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
         (1 -
-          data.Employer_Payroll_Taxes_in__ / 100 -
-          data.Employee_Payroll_Taxes_in__ / 100 -
-          data.Income_Tax_in__ / 100),
+          data.Employer_Payroll_Taxes_in_percentage / 100 -
+          data.Employee_Payroll_Taxes_in_percentage / 100 -
+          data.Income_Tax_in_percentage / 100),
     },
   ];
 
@@ -170,9 +170,8 @@ const TaxBurdenChart = ({ data, title }) => {
                   }
                   y={i * spacer + 24}
                   fontSize={18}
-                >{`${Number.parseFloat(section.percent).toFixed(1)}% ${
-                  section.title
-                }`}</text>
+                >{`${Number.parseFloat(section.percent).toFixed(1)}% ${section.title
+                  }`}</text>
               </g>
             );
           })}
@@ -186,17 +185,17 @@ TaxBurdenChart.propTypes = {
   title: PropTypes.string,
   data: PropTypes.shape({
     Country: PropTypes.string,
-    Employee_Payroll_Taxes_in__: PropTypes.oneOfType([
+    Employee_Payroll_Taxes_in_percentage: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
-    Employer_Payroll_Taxes_in__: PropTypes.oneOfType([
+    Employer_Payroll_Taxes_in_percentage: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
-    Income_Tax_in__: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    Income_Tax_in_percentage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     Rank: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    Tax_Wedge_in____As_a_Share_of_Labor_Cost_: PropTypes.oneOfType([
+    Tax_Wedge_in_percentage__As_a_Share_of_Labor_Cost_: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),

@@ -40,9 +40,8 @@ const TaxBurdenOnLabor = ({ data }) => {
       {activeTab === 'tax-burden-on-labor' && (
         <>
           <IndividualChart
-            title={`How Does${country.article ? ' ' + country.article : ''} ${
-              country.name
-            }'s Tax Burden on Individuals Compare?`}
+            title={`How Does${country.article ? ' ' + country.article : ''} ${country.name
+              }'s Tax Burden on Individuals Compare?`}
             data={theData}
           />
         </>
@@ -81,11 +80,11 @@ export const query = graphql`
       article
     }
     taxBurdenOnLaborCsv(Country: { eq: $name }) {
-      Employee_Payroll_Taxes_in__
-      Employer_Payroll_Taxes_in__
-      Income_Tax_in__
+      Employer_Payroll_Taxes_in_percentage
+      Employee_Payroll_Taxes_in_percentage
+      Income_Tax_in_percentage
       Rank
-      Tax_Wedge_in____As_a_Share_of_Labor_Cost_
+      Tax_Wedge_in_percentage__As_a_Share_of_Labor_Cost_
       Total_Average_Annual_Labor_Cost_per_Employee_in__
     }
     sourceRevenueByCountryCsv(iso_3: { eq: $iso3 }) {
