@@ -28,17 +28,17 @@ function downloadRawData() {
     {
       name: 'WorldwideCorporateTaxRates',
       url:
-        'worldwide-corporate-tax-rates/master/final-outputs/rate_time_series.csv',
+        'worldwide-corporate-tax-rates/master/final_outputs/rate_time_series.csv',
     },
     {
       name: 'CountryCorporateTaxRates',
       url:
-        'worldwide-corporate-tax-rates/master/final-data/final_data_long.csv',
+        'worldwide-corporate-tax-rates/master/final_data/final_data_long.csv',
     },
     {
       name: 'OECDCorporateTaxRates',
       url:
-        'capital-cost-recovery/master/final-outputs/npv_weighted_timeseries.csv',
+        'capital-cost-recovery/master/final_outputs/npv_weighted_timeseries.csv',
     },
     {
       name: 'CountryCorporateNPVAllYears',
