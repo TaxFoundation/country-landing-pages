@@ -8,6 +8,7 @@ import { numberRankString } from '../utilities';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import ReportsAndData from './ui/ReportsAndData';
 import ITCIChart from './charts/ITCI';
+import StrengthsAndWeaknesses from './StrengthsAndWeaknesses';
 
 const ITCI = ({ data }) => {
   const country = { ...data.countriesCsv };
@@ -73,6 +74,7 @@ const ITCI = ({ data }) => {
           })
           .sort((a, b) => a.year - b.year)}
       />
+      <StrengthsAndWeaknesses profiles={ data.countryProfilesCsv } />
       <ReportsAndData
         report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
         data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
@@ -90,6 +92,15 @@ export const query = graphql`
       name
       adjective
       article
+    }
+    countryProfilesCsv(ISO_3: { eq: $iso3 }) {
+      ranking
+      strength_1
+      strength_2
+      strength_3
+      weakness_1
+      weakness_2
+      weakness_3
     }
     allIndexRanksCsv(
       filter: { ISO_3: { eq: $iso3 } }
