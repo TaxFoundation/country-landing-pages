@@ -135,9 +135,7 @@ export const query = graphql`
           capital_gains_exemption
           capital_gains_rate
           cfc_rules
-          consumption_time
           corporate_rate
-          corporate_time
           country_limitations
           dividends_exemption
           dividends_rate
@@ -148,15 +146,11 @@ export const query = graphql`
           intangibles_cost_recovery
           interest_withholding_tax
           inventory
-          labor_payments
-          labor_time
           loss_carryback
           loss_carryforward
           machines_cost_recovery
           net_wealth
-          other_payments
           patent_box
-          profit_payments
           property_tax
           property_tax_collections
           r_and_d_credit

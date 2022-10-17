@@ -91,7 +91,6 @@ const Consumption = ({ data }) => {
         vatBreadth: +node.vat_base,
         vatRate: +node.vat_rate,
         vatThreshold: +node.vat_threshold,
-        consumptionTime: +node.consumption_time,
       };
     });
 
@@ -206,10 +205,6 @@ const Consumption = ({ data }) => {
               : 'Standard VAT Rate'}
           </h3>
           <div>{`${thisCountry.vatRate}%`}</div>
-        </KeyFigure>
-        <KeyFigure>
-          <h3>Average Business Compliance Time in Hours</h3>
-          <div>{`${thisCountry.consumptionTime}`}</div>
         </KeyFigure>
       </KeyFigures>
       {data.allReducedRatesCsv.nodes.length > 0 && (
@@ -399,7 +394,6 @@ export const query = graphql`
       nodes {
         ISO_3
         year
-        consumption_time
         vat_base
         vat_rate
         vat_threshold
