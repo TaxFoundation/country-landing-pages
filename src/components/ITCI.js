@@ -8,6 +8,7 @@ import { numberRankString } from '../utilities';
 import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import ReportsAndData from './ui/ReportsAndData';
 import ITCIChart from './charts/ITCI';
+import StrengthsAndWeaknesses from './StrengthsAndWeaknesses';
 
 const ITCI = ({ data }) => {
   const country = { ...data.countriesCsv };
@@ -73,6 +74,7 @@ const ITCI = ({ data }) => {
           })
           .sort((a, b) => a.year - b.year)}
       />
+      <StrengthsAndWeaknesses profiles={ data.countryProfilesCsv } />
       <ReportsAndData
         report='https://taxfoundation.org/publications/international-tax-competitiveness-index/'
         data='https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs'
@@ -90,6 +92,15 @@ export const query = graphql`
       name
       adjective
       article
+    }
+    countryProfilesCsv(ISO_3: { eq: $iso3 }) {
+      ranking
+      strength_1
+      strength_2
+      strength_3
+      weakness_1
+      weakness_2
+      weakness_3
     }
     allIndexRanksCsv(
       filter: { ISO_3: { eq: $iso3 } }
@@ -124,9 +135,7 @@ export const query = graphql`
           capital_gains_exemption
           capital_gains_rate
           cfc_rules
-          consumption_time
           corporate_rate
-          corporate_time
           country_limitations
           dividends_exemption
           dividends_rate
@@ -137,15 +146,11 @@ export const query = graphql`
           intangibles_cost_recovery
           interest_withholding_tax
           inventory
-          labor_payments
-          labor_time
           loss_carryback
           loss_carryforward
           machines_cost_recovery
           net_wealth
-          other_payments
           patent_box
-          profit_payments
           property_tax
           property_tax_collections
           r_and_d_credit
