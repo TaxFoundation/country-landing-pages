@@ -18,14 +18,14 @@ const ChartTabs = styled.ul`
 
 const ChartTab = styled.li`
   @media screen and (max-width: 499px) {
-    background-color: ${props => (props.active ? '#e0592a' : '#fff')};
-    border: 1px solid ${props => (props.active ? '#e0592a' : '#ccc')};
+    background-color: ${props => (props.active ? '#235485' : '#fff')};
+    border: 1px solid ${props => (props.active ? '#235485' : '#ccc')};
     border-radius: 4px;
     color: ${props => (props.active ? '#fff' : '#333')};
   }
 
   @media screen and (min-width: 500px) {
-    border-top: 2px solid ${props => (props.active ? '#e0592a' : 'transparent')};
+    border-top: 4px solid ${props => (props.active ? '#235485' : 'transparent')};
     border-left: 1px solid ${props => (props.active ? '#999' : 'transparent')};
     border-right: 1px solid ${props => (props.active ? '#999' : 'transparent')};
     border-bottom: 1px solid ${props => (props.active ? '#fff' : 'transparent')};

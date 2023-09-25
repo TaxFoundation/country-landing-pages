@@ -4,7 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto Flex', sans-serif;
     font-weight: 400;
   }
 

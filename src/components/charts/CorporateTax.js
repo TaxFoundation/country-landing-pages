@@ -46,9 +46,9 @@ const CorpTax = ({ data, worldwide, title }) => {
     .domain([0, maxRate])
     .range([height - margin.bottom, margin.top]);
 
-  const countryColor = 'rgb(92, 158, 170)';
-  const worldwideColor = 'rgb(47, 129, 212)';
-  const worldwideWeightedColor = 'rgb(75, 104, 171)';
+  const countryColor = '#162127';
+  const worldwideColor = '#235485';
+  const worldwideWeightedColor = '#55D390';
 
   return (
     <Container>
