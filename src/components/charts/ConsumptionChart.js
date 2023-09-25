@@ -12,9 +12,9 @@ const Container = styled.div`
   padding: 1rem;
 `;
 
-const vatColor = 'rgb(75, 104, 171)';
-const salesColor = 'rgb(47, 129, 212)';
-const exciseColor = 'rgb(92, 158, 170)';
+const vatColor = '#16385A';
+const salesColor = '#235485';
+const exciseColor = '#55D390';
 
 const ConsumptionChart = ({ data, countryID, title }) => {
   const width = 800;

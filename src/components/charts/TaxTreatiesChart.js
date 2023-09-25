@@ -60,8 +60,8 @@ const TaxTreatiesChart = ({ data, countryID, title }) => {
                 <rect
                   fill={
                     country.iso3 === countryID
-                      ? 'rgb(224, 89, 42)'
-                      : 'rgb(255, 143, 125)'
+                      ? '#16385A'
+                      : '#235485'
                   }
                   x={xScale(country.iso3)}
                   width={xScale.bandwidth()}

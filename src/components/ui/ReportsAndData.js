@@ -7,6 +7,7 @@ const StyledReportsAndData = styled.div`
   grid-auto-columns: 1fr;
   grid-gap: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 
   @media (min-width: 600px) {
     grid-auto-flow: column;
@@ -14,19 +15,21 @@ const StyledReportsAndData = styled.div`
 `;
 
 const Button = styled.a`
-  background-color: #fff;
-  border: 1px solid #0094ff;
-  color: #0094ff;
+  background-color: #FFC800;
+  border: none;
+  color: #162127;
   display: block;
   font-size: 0.8rem;
+  font-weight: 800;
   padding: 0.5rem;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   text-align: center;
   text-decoration: none;
+  text-transform: uppercase;
 
   &:hover {
-    background-color: #0094ff;
-    color: #fff;
+    background-color: #CCA000;
+    color: #162127;
     text-decoration: none;
   }
 `;

@@ -87,7 +87,7 @@ const ITCI = ({ data, title }) => {
             >
               <title>{`Score of ${Math.round(d.score)} in ${d.year}`}</title>
               <circle
-                fill='#e0592a'
+                fill='#235485'
                 cx={xScale(+d.year)}
                 cy={yScale(+d.score)}
                 r='4'

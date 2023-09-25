@@ -55,7 +55,7 @@ const TaxBurdenChart = ({ data, title }) => {
       title: 'Employer Share of Payroll Taxes',
       y: rectCoords[0],
       height: heights[0],
-      fill: 'rgb(73, 193, 279)',
+      fill: '#55D390',
       percent: data.Employer_Payroll_Taxes_in_percentage,
       value:
         data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
@@ -65,7 +65,7 @@ const TaxBurdenChart = ({ data, title }) => {
       title: 'Employee Share of Payroll Taxes',
       y: rectCoords[1],
       height: heights[1],
-      fill: 'rgb(178, 217, 214)',
+      fill: '#235485',
       percent: data.Employee_Payroll_Taxes_in_percentage,
       value:
         data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
@@ -75,7 +75,7 @@ const TaxBurdenChart = ({ data, title }) => {
       title: 'Income Tax',
       y: rectCoords[2],
       height: heights[2],
-      fill: 'rgb(103, 148, 253)',
+      fill: '#16385A',
       percent: data.Income_Tax_in_percentage,
       value:
         data.Total_Average_Annual_Labor_Cost_per_Employee_in__ *
@@ -85,7 +85,7 @@ const TaxBurdenChart = ({ data, title }) => {
       title: 'After-Tax Income',
       y: rectCoords[3],
       height: heights[3],
-      fill: 'rgb(165, 109, 235)',
+      fill: '#162127',
       percent:
         100 -
         data.Employer_Payroll_Taxes_in_percentage -

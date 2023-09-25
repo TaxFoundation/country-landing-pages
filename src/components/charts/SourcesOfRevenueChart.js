@@ -106,32 +106,32 @@ const SourcesOfRevenueChart = ({ country, data, title }) => {
   const sections = [
     {
       title: 'Individual Taxes',
-      fill: 'rgb(13, 91, 115)',
+      fill: '#162127',
       id: 'Individual_Taxes',
     },
     {
       title: 'Corporate Taxes',
-      fill: 'rgb(71, 136, 151)',
+      fill: '#16385A',
       id: 'Corporate_Taxes',
     },
     {
       title: 'Social Insurance Taxes',
-      fill: 'rgb(203,125,167)',
+      fill: '#235485',
       id: 'Social_Insurance_Taxes',
     },
     {
       title: 'Property Taxes',
-      fill: 'rgb(201, 117, 116)',
+      fill: '#19633C',
       id: 'Property_Taxes',
     },
     {
       title: 'Consumption Taxes',
-      fill: 'rgb(217, 93, 107)',
+      fill: '#55D390',
       id: 'Consumption_Taxes',
     },
     {
       title: 'Other',
-      fill: 'rgb(144, 0, 58)',
+      fill: '#FFD53D',
       id: 'Other',
     },
   ];

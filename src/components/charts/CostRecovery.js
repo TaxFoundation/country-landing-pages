@@ -30,9 +30,9 @@ const CostRecovery = ({ data, title }) => {
     .range([height - margin.bottom, margin.top]);
 
   const colors = {
-    buildings: 'rgb(75, 104, 171)',
-    machines: 'rgb(47, 129, 212)',
-    intangibles: 'rgb(92, 158, 170)',
+    buildings: '#162127',
+    machines: '#235485',
+    intangibles: '#55D390',
   };
   return (
     <Container>
