@@ -20,7 +20,7 @@ const Button = styled.a`
   color: #162127;
   display: block;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
   padding: 0.5rem;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   text-align: center;
