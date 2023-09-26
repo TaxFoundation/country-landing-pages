@@ -142,7 +142,6 @@ export const query = graphql`
           dividends_withholding_tax
           estate_or_inheritance_tax
           financial_transaction_tax
-          index_capital_gains
           intangibles_cost_recovery
           interest_withholding_tax
           inventory
