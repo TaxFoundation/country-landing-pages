@@ -7,7 +7,7 @@ const StyledReportsAndData = styled.div`
   grid-auto-columns: 1fr;
   grid-gap: 1rem;
   margin-top: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 
   @media (min-width: 600px) {
     grid-auto-flow: column;
