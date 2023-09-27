@@ -7,7 +7,7 @@ const StyledReportsAndData = styled.div`
   grid-auto-columns: 1fr;
   grid-gap: 1rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 
   @media (min-width: 600px) {
     grid-auto-flow: column;
@@ -20,7 +20,7 @@ const Button = styled.a`
   color: #162127;
   display: block;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
   padding: 0.5rem;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   text-align: center;
