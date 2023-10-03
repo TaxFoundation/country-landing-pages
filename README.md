@@ -88,3 +88,42 @@ References
 
 - International Tax Rules
   - Number of tax treaties: https://github.com/TaxFoundation/international-tax-competitiveness-index/blob/master/final_outputs/table_e_international.csv (column “tax_treaties”)
+ 
+## Step-by-step Update Guide
+1. The global policy team updates data throughout the year in various Github repositories, which ultimately need to be mapped into this repository: https://github.com/TaxFoundation/country-landing-pages/tree/master/static/data
+    1. Note that the data needs to be in the same exact format as the prior year. Below is a table with mappings between the country page files and the original data sources in other repositories. 
+    2. To produce [IndexRawData.csv](https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/IndexRawData.csv), you will need to manually add the last 6 columns of [table_d_propety.csv](https://github.com/TaxFoundation/international-tax-competitiveness-index/blob/master/final_outputs/table_d_property.csv) (provided by the global team) to [raw_data_[CURRENT YEAR].csv](https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs). The data in [table_d_propety.csv](https://github.com/TaxFoundation/international-tax-competitiveness-index/blob/master/final_outputs/table_d_property.csv) corresponds to the table in the “Property Taxes” section of the country page interactive.
+        | Country Page Data File | Original Data Source |
+        | --- | --- |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/Alcohol.csv | https://github.com/TaxFoundation/consumption-taxes/blob/main/final_outputs/alcohol.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/ConsumptionData.csv | https://github.com/TaxFoundation/consumption-taxes/blob/main/intermediate_outputs/consumption_data.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/ConsumptionRevenue.csv | https://github.com/TaxFoundation/consumption-taxes/blob/main/final_outputs/revenue.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/CountryCorporateNPVAllYears.csv | https://github.com/TaxFoundation/capital-cost-recovery/blob/master/final-data/npv_all_years.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/CountryCorporateTaxRates.csv | https://github.com/TaxFoundation/worldwide-corporate-tax-rates/blob/master/final_data/final_data_long.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/Fuel.csv | https://github.com/TaxFoundation/consumption-taxes/blob/main/final_outputs/fuel.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/IndexRanks.csv | https://github.com/TaxFoundation/international-tax-competitiveness-index/blob/master/final_outputs/final_categories.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/IndexRawData.csv | https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs and https://github.com/TaxFoundation/international-tax-competitiveness-index/blob/master/final_outputs/table_d_property.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/IndexSubranks.csv | https://github.com/TaxFoundation/international-tax-competitiveness-index/tree/master/final_outputs |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/OECDCorporateTaxRates.csv | https://github.com/TaxFoundation/capital-cost-recovery/blob/master/final-outputs/cit_rates_timeseries.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/ReducedRates.csv | https://github.com/TaxFoundation/consumption-taxes/blob/main/final_outputs/reduced_rates_base.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/SourceRevenueByCountry.csv | https://github.com/TaxFoundation/sources-of-government-revenue/blob/master/final-outputs/oecd_by_country.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/SourceRevenueOECDAverage.csv | https://github.com/TaxFoundation/sources-of-government-revenue/blob/master/final-outputs/oecd_averages.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/TaxBurdenOnLabor.csv | https://github.com/TaxFoundation/tax-burden-on-labor/blob/master/final-outputs/Table1.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/Tobacco.csv | https://github.com/TaxFoundation/consumption-taxes/blob/main/final_outputs/tobacco.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/WorldwideCorporateTaxRates.csv | https://github.com/TaxFoundation/worldwide-corporate-tax-rates/blob/master/final_outputs/rate_time_series.csv |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/countries.csv | Current OECD countries list |
+        | https://github.com/TaxFoundation/country-landing-pages/blob/master/static/data/countryProfiles.csv | https://github.com/TaxFoundation/international-tax-competitiveness-index/blob/master/final_outputs/country_profiles.csv |
+2. Open the country data pages GitHub [repository](https://github.com/TaxFoundation/country-landing-pages/tree/master) and create new branch for the update.
+3. Upload new data to the following folder, following the mappings above: https://github.com/TaxFoundation/country-landing-pages/tree/master/static/data
+    1. If the original data source hasn’t been updated since the last time the country pages were updated, do not update/replace the corresponding .csv
+4. Open the directory in command line
+    1. Make sure latest version of node.js is installed
+    2. Run `npm install`
+    3. Make sure Gatsby command line is installed (`install -g gatsby-cli`)
+5. Run `gatsby build`
+6. Run `gatsby serve`
+    1. Site should be available at [http://localhost:9000/[chart]/[country]](http://localhost:9000/%5Bchart%5D/%5Bcountry%5D) (e.g. http://localhost:9000/itci/greece)
+    2. If you need to make any changes, you will have to do so in the codebase, rebuild project, and re-enter `gatsby serve` to preview each iteration
+7. If everything looks good, open a pull request
+    1. Github should automatically run checks and Netlify should automatically build deploy preview
+8. Double-check that everything looks correct in the Netlify deploy preview before publishing deploy
