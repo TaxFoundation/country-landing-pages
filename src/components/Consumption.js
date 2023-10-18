@@ -209,7 +209,7 @@ const Consumption = ({ data }) => {
       </KeyFigures>
       {data.allReducedRatesCsv.nodes.length > 0 && (
         <Table>
-          <caption>Reduced Vat Rates</caption>
+          <caption>Reduced VAT Rates</caption>
           <thead>
             <tr>
               <th>Reduced Rate</th>
