@@ -5221,16 +5221,16 @@ gatsby-plugin-page-creator@^4.25.0:
     lodash "^4.17.21"
 
 gatsby-plugin-react-helmet@^5.0.0:
-  version "5.20.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-react-helmet/-/gatsby-plugin-react-helmet-5.20.0.tgz"
-  integrity sha512-YFIphG9xWMv/hEGQHmiAVLAo3oPgeguYkRgOrVlqoz9+PNzPwVvDBVKl8ufeWM8cJL1bIlR0YQ1wU0KhPpP2aQ==
+  version "5.25.0"
+  resolved "https://registry.npmjs.org/gatsby-plugin-react-helmet/-/gatsby-plugin-react-helmet-5.25.0.tgz"
+  integrity sha512-sU/xae/sGuYFcFDpqUxwXnaOmx8xrU2Q+XSULqAapji0uTBhW6al6CJsaPFigi8IOG2bQX8ano2iWWcGF3/GHw==
   dependencies:
     "@babel/runtime" "^7.15.4"
 
 gatsby-plugin-styled-components@^5.0.0:
-  version "5.20.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-5.20.0.tgz"
-  integrity sha512-2wKR+4Y3dTcURf242YtXjyLRR8BelZilEptWculeaRLkKeUqiSMJjv/qNSriABwzAVUbqHw20A3Uk3S7nCiDhw==
+  version "5.25.0"
+  resolved "https://registry.npmjs.org/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-5.25.0.tgz"
+  integrity sha512-gBCgvLDz+X9Xq8BhroFWZTtURMycgARyly4SlidrPqcPtxWhJtas+gc01/uivHnjIUW6SAac8cpot3ld/PLdZA==
   dependencies:
     "@babel/runtime" "^7.15.4"
 
@@ -5318,9 +5318,9 @@ gatsby-telemetry@^3.25.0:
     node-fetch "^2.6.7"
 
 gatsby-transformer-csv@^4.0.0:
-  version "4.20.0"
-  resolved "https://registry.npmjs.org/gatsby-transformer-csv/-/gatsby-transformer-csv-4.20.0.tgz"
-  integrity sha512-yFJ0e6+gEllXzChdw5gfq+W4lJdKA68JV+y801cT58s3DG9zBsKjEUteFC4TN/DoQumAlEDV+yBOIR0x5zH1hA==
+  version "4.25.0"
+  resolved "https://registry.npmjs.org/gatsby-transformer-csv/-/gatsby-transformer-csv-4.25.0.tgz"
+  integrity sha512-rmajG4mrv+aLJUl/1JKr8uiRFgBESu6i0OwNLEHqGX9H4qwnhJV+Degmvh+bp0HC1UZeCUWongPv9/2QKLZorg==
   dependencies:
     "@babel/runtime" "^7.15.4"
     csvtojson "^2.0.10"
@@ -8038,7 +8038,7 @@ react-dev-utils@^12.0.1:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
-react-dom@^16.12.0, "react-dom@^16.9.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0", "react-dom@>= 16.8.0", "react-dom@15.x || 16.x || 17.x || 18.x":
+react-dom@^16.12.0, "react-dom@^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0", "react-dom@>= 16.8.0", "react-dom@15.x || 16.x || 17.x || 18.x":
   version "16.14.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
   integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
@@ -8107,7 +8107,7 @@ react-side-effect@^2.1.0:
   resolved "https://registry.npmjs.org/react-side-effect/-/react-side-effect-2.1.2.tgz"
   integrity sha512-PVjOcvVOyIILrYoyGEpDN3vmYNLdy1CajSFNt4TDsVQC5KpTijDvWVoR+/7Rz2xT978D8/ZtFceXxzsPwZEDvw==
 
-react@^16.12.0, react@^16.14.0, "react@^16.3.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0", "react@>= 16.8.0", react@>=16.3.0, react@0.0.0-experimental-c8b778b7f-20220825, "react@15.x || 16.x || 17.x || 18.x":
+react@^16.12.0, react@^16.14.0, "react@^16.3.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0", "react@>= 16.8.0", react@>=16.3.0, react@0.0.0-experimental-c8b778b7f-20220825, "react@15.x || 16.x || 17.x || 18.x":
   version "16.14.0"
   resolved "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
