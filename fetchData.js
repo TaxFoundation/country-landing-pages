@@ -28,12 +28,12 @@ function downloadRawData() {
     {
       name: 'WorldwideCorporateTaxRates',
       url:
-        'worldwide-corporate-tax-rates/master/final-outputs/rate_time_series.csv',
+        'worldwide-corporate-tax-rates/refs/heads/master/final_outputs/rate_time_series.csv',
     },
     {
       name: 'CountryCorporateTaxRates',
       url:
-        'worldwide-corporate-tax-rates/master/final-data/final_data_long.csv',
+        'worldwide-corporate-tax-rates/refs/heads/master/final_data/final_data_long.csv',
     },
     {
       name: 'OECDCorporateTaxRates',
@@ -46,7 +46,7 @@ function downloadRawData() {
     },
     {
       name: 'TaxBurdenOnLabor',
-      url: 'tax-burden-on-labor/master/final-outputs/Table2.csv',
+      url: 'tax-burden-on-labor/refs/heads/master/final-outputs/Table1.csv',
     },
     {
       name: 'IndexRawData',
