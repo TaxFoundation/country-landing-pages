@@ -6,3 +6,5 @@
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+    X-Frame-Options = "ALLOW-FROM taxfoundation.org"
+    Content-Security-Policy = "frame-ancestors 'self' https://*.taxfoundation.org"
