@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
@@ -41,22 +40,22 @@ const PropertyTax = ({ data }) => {
   const theData = {
     net_wealth: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.net_wealth_str,
+    ).node.net_wealth,
     estate_or_inheritance_tax: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.estate_or_inheritance_tax_str,
+    ).node.estate_or_inheritance_tax,
     transfer_tax: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.transfer_tax_str,
+    ).node.transfer_tax,
     asset_tax: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.asset_tax_str,
+    ).node.asset_tax,
     capital_duties: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.capital_duties_str,
+    ).node.capital_duties,
     financial_transaction_tax: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
-    ).node.financial_transaction_tax_str,
+    ).node.financial_transaction_tax,
     property_tax_collections: data.allIndexRawDataCsv.edges.find(
       edge => +edge.node.year === itciMaxYear
     ).node.property_tax_collections,
@@ -128,8 +127,9 @@ const PropertyTax = ({ data }) => {
         </KeyFigure>
         <KeyFigure>
           <h3>Property Tax Revenue as a Share of Capital Stock</h3>
-          <div>{`${Math.round(+theData.property_tax_collections * 100) / 100
-            }%`}</div>
+          <div>{`${
+            Math.round(+theData.property_tax_collections * 100) / 100
+          }%`}</div>
         </KeyFigure>
       </KeyFigures>
       <ReportsAndData
@@ -154,13 +154,13 @@ export const query = graphql`
         node {
           ISO_3
           year
-          net_wealth_str
-          estate_or_inheritance_tax_str
-          transfer_tax_str
-          asset_tax_str
-          capital_duties_str
+          net_wealth
+          estate_or_inheritance_tax
+          transfer_tax
+          asset_tax
+          capital_duties
           property_tax_collections
-          financial_transaction_tax_str
+          financial_transaction_tax
         }
       }
     }
