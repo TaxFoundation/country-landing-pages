@@ -31,9 +31,11 @@ const TaxBurdenOnLabor = ({ data }) => {
         </KeyFigure>
         <KeyFigure>
           <h3>Capital Gains Tax Rate</h3>
-          <div>{`${(data.indexRawDataCsv.capital_gains_rate * 100).toPrecision(
-            2
-          )}%`}</div>
+          <div>{`${
+            Math.round(
+              data.allIndexRawDataCsv.nodes[0].capital_gains_rate * 10000
+            ) / 100
+          }%`}</div>
         </KeyFigure>
       </KeyFigures>
       <ReportsAndData
@@ -65,9 +67,14 @@ export const query = graphql`
       Individual_Taxes
       Social_Insurance_Taxes
     }
-    indexRawDataCsv(ISO_3: { eq: $iso3 }) {
-      year
-      capital_gains_rate
+    allIndexRawDataCsv(
+      filter: { ISO_3: { eq: $iso3 } }
+      sort: { year: DESC }
+      limit: 1
+    ) {
+      nodes {
+        capital_gains_rate
+      }
     }
   }
 `;
