@@ -1,52 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
 import Wrapper from './ui/Wrapper';
-import { ChartTabs, ChartTab } from './ui/ChartTabs';
 import { KeyFigures, KeyFigure } from './ui/KeyFigures';
 import ReportsAndData from './ui/ReportsAndData';
 import IndividualChart from './charts/IndividualChart';
 
 const TaxBurdenOnLabor = ({ data }) => {
-  const [activeTab, setActiveTab] = useState('tax-burden-on-labor');
   const country = { ...data.countriesCsv };
   const theData = data.taxBurdenOnLaborCsv;
-  const tabOptions = [
-    {
-      name: 'Tax Burden on Labor',
-      id: 'tax-burden-on-labor',
-    },
-    // {
-    //   name: 'Income Tax Map',
-    //   id: 'income-tax-map',
-    // },
-  ];
+
   return (
     <Wrapper>
-      <ChartTabs>
-        {tabOptions.length > 1 &&
-          tabOptions.map(choice => (
-            <ChartTab
-              key={`rank-choice-${choice.id}`}
-              active={activeTab === choice.id}
-            >
-              <button onClick={() => setActiveTab(choice.id)}>
-                {choice.name}
-              </button>
-            </ChartTab>
-          ))}
-      </ChartTabs>
-      {activeTab === 'tax-burden-on-labor' && (
-        <>
-          <IndividualChart
-            title={`How Does${country.article ? ' ' + country.article : ''} ${
-              country.name
-            }'s Tax Burden on Individuals Compare?`}
-            data={theData}
-          />
-        </>
-      )}
+      <IndividualChart
+        title={`How Does${country.article ? ' ' + country.article : ''} ${
+          country.name
+        }'s Tax Burden on Individuals Compare?`}
+        data={theData}
+      />
+
       <KeyFigures>
         <KeyFigure>
           <h3>Share of Revenue from Individual Taxes</h3>
@@ -58,9 +31,11 @@ const TaxBurdenOnLabor = ({ data }) => {
         </KeyFigure>
         <KeyFigure>
           <h3>Capital Gains Tax Rate</h3>
-          <div>{`${(data.indexRawDataCsv.capital_gains_rate * 100).toPrecision(
-            2
-          )}%`}</div>
+          <div>{`${
+            Math.round(
+              data.allIndexRawDataCsv.nodes[0].capital_gains_rate * 10000
+            ) / 100
+          }%`}</div>
         </KeyFigure>
       </KeyFigures>
       <ReportsAndData
@@ -92,8 +67,14 @@ export const query = graphql`
       Individual_Taxes
       Social_Insurance_Taxes
     }
-    indexRawDataCsv(ISO_3: { eq: $iso3 }) {
-      capital_gains_rate
+    allIndexRawDataCsv(
+      filter: { ISO_3: { eq: $iso3 } }
+      sort: { year: DESC }
+      limit: 1
+    ) {
+      nodes {
+        capital_gains_rate
+      }
     }
   }
 `;
