@@ -38,7 +38,7 @@ function downloadRawData() {
     {
       name: 'OECDCorporateTaxRates',
       url:
-        'capital-cost-recovery/master/final-outputs/npv_weighted_timeseries.csv',
+        'capital-cost-recovery/master/final-outputs/cit_rates_timeseries.csv',
     },
     {
       name: 'CountryCorporateNPVAllYears',
